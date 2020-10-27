@@ -11,7 +11,7 @@ namespace TDSBridge
         Action<Result> callback;
 
         public BridgeCallback(Action<Result> action) :
-        base(new AndroidJavaClass("com.taptap.tds.engine.bridge.BridgeCallback"))
+        base(new AndroidJavaClass("com.tds.bridge.BridgeCallback"))
         {
             this.callback = action;
         }

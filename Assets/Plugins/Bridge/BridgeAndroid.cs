@@ -8,7 +8,7 @@ namespace TDSBridge
     public class BridgeAndroid : IBridge
     {
 
-        private string bridgeJavaClz = "com.taptap.tds.engine.bridge.Bridge";
+        private string bridgeJavaClz = "com.tds.bridge.Bridge";
 
         private string instanceMethod = "getInstance";
 
