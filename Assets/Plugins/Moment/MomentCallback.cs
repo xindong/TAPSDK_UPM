@@ -10,13 +10,13 @@ namespace TDSMoment
         
         void SetCallback(Action<int,string> callback);
 
-        void OpenMoment(int orientation);
+        void OpenMoment(Orientation orientation);
 
-        void PublishMoment(int orientation, string[] imagePaths, string content);
+        void PublishMoment(Orientation orientation, string[] imagePaths, string content);
 
-        void PublishVideoMoment(int orientation, string[] videoPaths, string[] imagePaths, string title, string desc);
+        void PublishVideoMoment(Orientation orientation, string[] videoPaths, string[] imagePaths, string title, string desc);
       
-        void PublishVideoMoment(int orientation, string[] videoPaths, string title, string desc);
+        void PublishVideoMoment(Orientation orientation, string[] videoPaths, string title, string desc);
 
         void GetNoticeData();
 

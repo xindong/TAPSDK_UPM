@@ -36,6 +36,6 @@ public class MainScene : MonoBehaviour
         if(GUI.Button(new Rect(50,250,300,100),"动态",myButtonStyle)){
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(2);
         }
-
+    
     }
 }

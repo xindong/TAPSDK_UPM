@@ -14,10 +14,6 @@ namespace TDSMoment
 
         private static string SERVICE_NAME = "TDSMomentService";
 
-        public const int ORIENTATION_DEFAULT = -1;
-        public const int ORIENTATION_LANDSCAPE = 0;
-        public const int ORIENTATION_PORTRAIT = 1;
-
         public ScreenOrientation requestOrientation = 0;
         public ScreenOrientation originOrientation = 0;
         public int autorotateToLandscapeLeft;
@@ -73,40 +69,44 @@ namespace TDSMoment
               });
         }
 
-        public void OpenMoment(int orientation)
+        public void OpenMoment(Orientation orientation)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("config", orientation);
+            dic.Add("config", (int)orientation);
+            InitOrientationSetting((int)orientation);
             TDSCommon.EngineBridge.GetInstance().CallHandler(ConstructorCommand("openTapMoment", dic, true));
         }
 
-        public void PublishMoment(int orientation, string[] imagePaths, string content)
+        public void PublishMoment(Orientation orientation, string[] imagePaths, string content)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("config", orientation);
+            dic.Add("config", (int)orientation);
             dic.Add("imagePaths", imagePaths);
             dic.Add("content", content);
+            InitOrientationSetting((int)orientation);
             TDSCommon.EngineBridge.GetInstance().CallHandler(ConstructorCommand("publishMoment", dic, true));
         }
 
-        public void PublishVideoMoment(int orientation, string[] videoPaths, string[] imagePaths, string title, string desc)
+        public void PublishVideoMoment(Orientation orientation, string[] videoPaths, string[] imagePaths, string title, string desc)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("config", orientation);
+            dic.Add("config", (int)orientation);
             dic.Add("imagePaths", imagePaths);
             dic.Add("videoPaths", videoPaths);
             dic.Add("title", title);
             dic.Add("desc", desc);
+            InitOrientationSetting((int)orientation);
             TDSCommon.EngineBridge.GetInstance().CallHandler(ConstructorCommand("publishVideoImageMoment", dic, true));
         }
 
-        public void PublishVideoMoment(int orientation, string[] videoPaths, string title, string desc)
+        public void PublishVideoMoment(Orientation orientation, string[] videoPaths, string title, string desc)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("config", orientation);
+            dic.Add("config", (int)orientation);
             dic.Add("videoPaths", videoPaths);
             dic.Add("title", title);
             dic.Add("desc", desc);
+            InitOrientationSetting((int)orientation);
             TDSCommon.EngineBridge.GetInstance().CallHandler(ConstructorCommand("publishVideoMoment", dic, true));
         }
 
@@ -192,13 +192,13 @@ namespace TDSMoment
             int orientation = config;
             switch (orientation)
             {
-                case ORIENTATION_DEFAULT:
+                case (int)Orientation.ORIENTATION_DEFAULT:
                     requestOrientation = ScreenOrientation.AutoRotation;
                     break;
-                case ORIENTATION_LANDSCAPE:
+                case (int)Orientation.ORIENTATION_LANDSCAPE:
                     requestOrientation = ScreenOrientation.LandscapeLeft;
                     break;
-                case ORIENTATION_PORTRAIT:
+                case (int)Orientation.ORIENTATION_PORTRAIT:
                     requestOrientation = ScreenOrientation.Portrait;
                     break;
             }
