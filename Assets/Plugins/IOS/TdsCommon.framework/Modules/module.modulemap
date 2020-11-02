@@ -1,6 +1,0 @@
-framework module TdsCommon {
-  umbrella header "TdsCommon.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,0 @@
-framework module TDSAchievement {
-  umbrella header "TDSAchievement.h"
-
-  export *
-  module * { export * }
-}

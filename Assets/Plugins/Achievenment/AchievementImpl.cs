@@ -2,7 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using TDSBridge;
+using TDSCommon;
 
 namespace TDSAchievement
 {
@@ -10,15 +10,15 @@ namespace TDSAchievement
     public class AchievementImpl : IAchievement
     {
 
-        private static string CLZ_NAME = "com.tds.achievement.wrapper.AchievementService";
+        private static string CLZ_NAME = "com.tds.achievement.wrapper.TDSAchievementService";
 
-        private static string IMP_NAME = "com.tds.achievement.wrapper.AchievementServiceImpl";
+        private static string IMP_NAME = "com.tds.achievement.wrapper.TDSAchievementServiceImpl";
 
-        private static string SERVICE_NAME = "AchievementService";
+        private static string SERVICE_NAME = "TDSAchievementService";
 
         private AchievementImpl()
         {
-            TDSBridge.EngineBridge.GetInstance().Register(CLZ_NAME, IMP_NAME);
+            TDSCommon.EngineBridge.GetInstance().Register(CLZ_NAME, IMP_NAME);
         }
 
         private volatile static AchievementImpl sInstance;
@@ -37,15 +37,15 @@ namespace TDSAchievement
             return sInstance;
         }
 
-
         public void registerCallback(AchievementCallback callback)
         {
             Command command = new Command();
             command.service = SERVICE_NAME;
-            command.method = "registerCallback";
+            command.method = "registerBridgeCallback";
             command.callback = true;
             command.callbackId = System.Guid.NewGuid().ToString();
-            TDSBridge.EngineBridge.GetInstance().RegisterCallback((result) =>
+
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 Debug.Log("AchievementSDKCallback:" + result.toJSON());
 
@@ -74,11 +74,8 @@ namespace TDSAchievement
                     return;
                 }
 
-                callback.onAchievementStatusUpdate((bean.wrapper !=null && bean.wrapper.Count > 0) ? bean.wrapper[0] : null, bean.achievementCode);
-
+                callback.onAchievementStatusUpdate((bean.wrapper != null && bean.wrapper.Count > 0) ? bean.wrapper[0] : null, bean.achievementCode);
             });
-
-            TDSBridge.EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void initWithTap(string appId, string token)
@@ -88,7 +85,7 @@ namespace TDSAchievement
             command.method = "initWithTap";
             command.args = "{\"appId\":\"" + appId + "\",\"tapToken\":\"" + token + "\"}";
             command.callback = true;
-            TDSBridge.EngineBridge.GetInstance().CallHandler(command);
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void initWithXD(string appId, string token)
@@ -98,7 +95,7 @@ namespace TDSAchievement
             command.method = "initWithXD";
             command.callback = true;
             command.args = "{\"appId\":\"" + appId + "\",\"xdToken\":\"" + token + "\"}";
-            TDSBridge.EngineBridge.GetInstance().CallHandler(command);
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void fetchAllAchievementList(GetAchievementCallback callback)
@@ -108,7 +105,7 @@ namespace TDSAchievement
             command.method = "fetchAllAchievementList";
             command.callback = true;
             command.callbackId = System.Guid.NewGuid().ToString();
-            TDSBridge.EngineBridge.GetInstance().CallHandler(command, (result) =>
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 handlerResult(callback, result);
             });
@@ -121,7 +118,7 @@ namespace TDSAchievement
             command.method = "getLocalAllAchievementList";
             command.callback = true;
             command.callbackId = System.Guid.NewGuid().ToString();
-            TDSBridge.EngineBridge.GetInstance().CallHandler(command, (result) =>
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 handlerResult(callback, result);
             });
@@ -134,7 +131,7 @@ namespace TDSAchievement
             command.method = "getLocalUserAchievementList";
             command.callback = true;
             command.callbackId = System.Guid.NewGuid().ToString();
-            TDSBridge.EngineBridge.GetInstance().CallHandler(command, (result) =>
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 handlerResult(callback, result);
             });
@@ -147,7 +144,7 @@ namespace TDSAchievement
             command.method = "fetchUserAchievementList";
             command.callback = true;
             command.callbackId = System.Guid.NewGuid().ToString();
-            TDSBridge.EngineBridge.GetInstance().CallHandler(command, (result) =>
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 handlerResult(callback, result);
             });
@@ -159,7 +156,7 @@ namespace TDSAchievement
             command.service = SERVICE_NAME;
             command.method = "reach";
             command.args = "{\"displayId\":\"" + id + "\"}";
-            TDSBridge.EngineBridge.GetInstance().CallHandler(command);
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void growSteps(string id, int step)
@@ -168,7 +165,7 @@ namespace TDSAchievement
             command.service = SERVICE_NAME;
             command.method = "growSteps";
             command.args = "{\"displayId\":\"" + id + "\",\"growStep\":" + step + "}";
-            TDSBridge.EngineBridge.GetInstance().CallHandler(command);
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void makeSteps(string id, int step)
@@ -177,7 +174,7 @@ namespace TDSAchievement
             command.service = SERVICE_NAME;
             command.method = "makeSteps";
             command.args = "{\"displayId\":\"" + id + "\",\"numStep\":" + step + "}";
-            TDSBridge.EngineBridge.GetInstance().CallHandler(command);
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command);
         }
 
         private void handlerResult(GetAchievementCallback callback, Result result)
@@ -190,16 +187,17 @@ namespace TDSAchievement
                 return;
             }
 
-            if(string.IsNullOrEmpty(result.content)){
+            if (string.IsNullOrEmpty(result.content))
+            {
                 return;
             }
-        
-            Dictionary<string,string> dic = JsonUtility.FromJson<Dictionary<string,string>>(result.content);
+
+            Dictionary<string, string> dic = JsonUtility.FromJson<Dictionary<string, string>>(result.content);
 
             AchievementWrapperBean<AchievementBean> wrapperBean = JsonUtility.FromJson<AchievementWrapperBean<AchievementBean>>(result.content);
 
             callback.GetAchievementCallback(wrapperBean.wrapper, wrapperBean.achievementCode);
-            
+
         }
 
     }
