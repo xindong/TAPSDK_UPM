@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TDSCommon;
 
 public class MainScene : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class MainScene : MonoBehaviour
         if (GUI.Button(new Rect(50, 100, 300, 100), "成就", myButtonStyle))
         {
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);
+        }
+
+
+        if(GUI.Button(new Rect(50,250,300,100),"动态",myButtonStyle)){
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(2);
         }
 
     }
