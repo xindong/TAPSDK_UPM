@@ -8,7 +8,7 @@ namespace TDSMoment
     public class MomentCallbackBean
     {
 
-        public int code;
+        public string code;
 
         public string message;
 

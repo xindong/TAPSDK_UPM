@@ -6,8 +6,8 @@ using TDSMoment;
 
 public class MomentScene : MonoBehaviour
 {
-    private string imagePath = "";
-    private string videoPath = "";
+    private string imagePath = "hello,world";
+    private string videoPath = "hello,world";
     private void OnGUI()
     {
         GUIStyle buttonStyle = new GUIStyle(GUI.skin.button)
@@ -45,7 +45,7 @@ public class MomentScene : MonoBehaviour
             //            com.xdsdk.xdtrafficcontrol.XDTrafficControlListener.Init();
             //#endif
 
-
+            TDSMoment.TDSMoment.InitSDK("dafdasfasdfasdfa");
         }
 
         if (GUI.Button(new Rect(50, 400, 300, 100), "登录", buttonStyle))
@@ -69,7 +69,6 @@ public class MomentScene : MonoBehaviour
 
         imagePath = GUI.TextArea(new Rect(500, 100, 380, 100), imagePath);
 
-
         videoPath = GUI.TextArea(new Rect(500, 250, 380, 100), videoPath);
 
         if (GUI.Button(new Rect(50, 550, 380, 100), "打开动态", buttonStyle))
@@ -77,9 +76,10 @@ public class MomentScene : MonoBehaviour
             TDSMoment.TDSMoment.OpenMoment(TDSMoment.Orientation.ORIENTATION_DEFAULT);
 
         }
+       
         if (GUI.Button(new Rect(50, 700, 380, 100), "登出", buttonStyle))
         {
-
+            
         }
 
         if (GUI.Button(new Rect(500, 400, 380, 100), "发布动态", buttonStyle))
@@ -97,11 +97,6 @@ public class MomentScene : MonoBehaviour
             TDSMoment.TDSMoment.GetNoticeData();
         }
 
-        if (GUI.Button(new Rect(500, 850, 380, 100), "用户中心", buttonStyle))
-        {
-
-        }
-
         if (GUI.Button(new Rect(1000, 100, 380, 100), "10s直接关闭", buttonStyle))
         {
             Invoke("closeMoment", 10.0f);
@@ -110,10 +105,6 @@ public class MomentScene : MonoBehaviour
         if (GUI.Button(new Rect(1000, 250, 380, 100), "10s弹窗关闭", buttonStyle))
         {
             Invoke("closeMomentWithDialog", 10.0f);
-        }
-
-        if (GUI.Button(new Rect(1000, 400, 380, 100), "论坛", buttonStyle))
-        {
         }
 
         //TapMomentSDK.TapMoment.PublishVideoMoment(momentConfig, videoPaths, title, desc);

@@ -8,9 +8,9 @@ namespace TDSMoment
 {
     public class MomentImpl : IMoment
     {
-        private static string CLZ_NAME = "com.taptap.sdk.ttos.moment.warpper.TDSMomentService";
+        private static string CLZ_NAME = "com.tds.moment.wrapper.TDSMomentService";
 
-        private static string IMP_NAME = "com.taptap.sdk.ttos.moment.warpper.TDSMomentServiceImpl";
+        private static string IMP_NAME = "com.tds.moment.wrapper.TDSMomentServiceImpl";
 
         private static string SERVICE_NAME = "TDSMomentService";
 
@@ -45,8 +45,11 @@ namespace TDSMoment
 
         public void SetCallback(Action<int, string> callback)
         {
-            TDSCommon.EngineBridge.GetInstance().CallHandler(ConstructorCommand("serCallback", null, true), (result) =>
+            TDSCommon.EngineBridge.GetInstance().CallHandler(ConstructorCommand("setMomentCallback", null, true), (result) =>
               {
+
+                  Debug.Log("result:" + result.toJSON());
+
                   if (result.code != Result.RESULT_SUCCESS)
                   {
                       return;
@@ -59,14 +62,28 @@ namespace TDSMoment
 
                   MomentCallbackBean bean = new MomentCallbackBean(result.content);
                   if (bean != null)
-                  {
+                  { 
                       if (TDSCommon.Platform.isAndroid())
-                      {
-                          AndroidOrientationInterceptor(bean.code);
+                      { 
+                          AndroidOrientationInterceptor(int.Parse(bean.code));
                       }
-                      callback(bean.code, bean.message);
+                      callback(int.Parse(bean.code), bean.message);
                   }
               });
+        }
+
+        public void InitSDK(string clientId)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("clientId", clientId);
+            TDSCommon.EngineBridge.GetInstance().CallHandler(ConstructorCommand("initSDK", dic, true));
+        }
+
+        public void SetLoginToken(string accessToken)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("accessToken", accessToken);
+            TDSCommon.EngineBridge.GetInstance().CallHandler(ConstructorCommand("setLoginToken", dic, true));
         }
 
         public void OpenMoment(Orientation orientation)

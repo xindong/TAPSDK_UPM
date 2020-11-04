@@ -34,6 +34,16 @@ namespace TDSMoment
             MomentImpl.GetInstance().SetCallback(callback);
         }
 
+        public static void InitSDK(string clientId)
+        {
+            MomentImpl.GetInstance().InitSDK(clientId);
+        }
+
+        public static void SetLoginToken(string accessToken)
+        {
+            MomentImpl.GetInstance().SetLoginToken(accessToken);
+        }
+
         public static void OpenMoment(Orientation config)
         {
             MomentImpl.GetInstance().OpenMoment(config);
