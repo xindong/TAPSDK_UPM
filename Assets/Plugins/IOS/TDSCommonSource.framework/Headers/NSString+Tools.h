@@ -26,4 +26,5 @@
 /// 是否是空字符串
 - (BOOL)tds_isBlank;
 
++ (BOOL)tds_isEmpty:(NSString *)string;
 @end

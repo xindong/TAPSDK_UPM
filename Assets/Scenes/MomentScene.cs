@@ -70,7 +70,7 @@ public class MomentScene
 
         if (GUI.Button(new Rect(50, 550, 380, 100), "打开动态", buttonStyle))
         {
-
+            
         }
         if (GUI.Button(new Rect(50, 700, 380, 100), "登出", buttonStyle))
         {

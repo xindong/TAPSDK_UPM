@@ -67,7 +67,9 @@ namespace TDSAchievement
             AchievementImpl.GetInstance().makeSteps(id, step);
         }
 
-
+        public static void showAchievementPage()
+        {
+            AchievementImpl.GetInstance().showAchievementPage();
+        }
     }
-
 }

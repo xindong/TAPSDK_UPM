@@ -1,0 +1,11 @@
+"achievement_unlocked" = "Unlocked";
+"achievement_locked" = "Revealed";
+"achievement_level_ordinary" = "Common";
+"achievement_level_unCommon" = "Uncommon";
+"achievement_level_rarity" = "Rare";
+"achievement_level_precious" = "Ultra rare";
+"achievement_secret" = "Secret";
+"achievement_keep_play" = "Keep playing to learn more";
+"achievement_prompt" = "{percent} of plays have this";
+"achievement_detail_description" = "{complete}/{total} Achievements";
+"achievement_complete" = "Achievement unlocked!";

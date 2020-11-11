@@ -22,9 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 @interface TDSLogModel : NSObject
-@property (nonatomic, copy) NSString *sdkName;
-@property (nonatomic, copy) NSString *sdkCode;
-@property (nonatomic, copy) NSString *sdkVersion;
+@property (nonatomic, copy, nonnull) NSString *sdkName;
+@property (nonatomic, copy, nonnull) NSString *sdkCode;
+@property (nonatomic, copy, nonnull) NSString *sdkVersion;
 @end
 
 @interface TDSLog : NSObject

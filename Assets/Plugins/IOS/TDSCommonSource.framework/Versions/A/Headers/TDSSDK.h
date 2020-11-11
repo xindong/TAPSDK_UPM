@@ -10,6 +10,10 @@
 #import "TDSAccountNotification.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef NSString *TDSLanguage NS_STRING_ENUM;
+
+FOUNDATION_EXPORT TDSLanguage const TDSLanguageCN;
+FOUNDATION_EXPORT TDSLanguage const TDSLanguageEN;
 
 @interface TDSSDK : NSObject
 
@@ -36,6 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
                        notification:(id<TDSAccountNotification>)notification;
 
 - (void)unRegisterAccountNotification:(NSString *)key;
+
+- (void)setLanguage:(NSString *)language;
+
+- (NSString *)getLanguage;
 @end
 
 NS_ASSUME_NONNULL_END

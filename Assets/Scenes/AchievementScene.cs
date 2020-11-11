@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TDSAchievement;
+using TDSCommon;
 
 public class AchievementScene : MonoBehaviour, AchievementCallback, GetAchievementCallback
 {
@@ -116,6 +117,22 @@ public class AchievementScene : MonoBehaviour, AchievementCallback, GetAchieveme
         if (GUI.Button(new Rect(400, 700, 400, 100), "到达指定成就：100", myButtonStyle))
         {
             TDSAchievement.TDSAchievement.makeSteps("C63",100);
+        }
+
+        if (GUI.Button(new Rect(400, 850, 300, 100), "弹窗", myButtonStyle))
+        {
+            TDSAchievement.TDSAchievement.showAchievementPage();
+        }
+
+
+        if (GUI.Button(new Rect(750, 100, 300, 100), "英文", myButtonStyle))
+        {
+            TDSCommon.TDSLanguage.GetInstance().SetLanguage("en_US");
+        }
+
+        if (GUI.Button(new Rect(750, 250, 300, 100), "中文", myButtonStyle))
+        {
+            TDSCommon.TDSLanguage.GetInstance().SetLanguage("zh_CN");
         }
 
     }

@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^TTAchievementRequestHandler)(NSArray<TDSAchievementModel *> *_Nullable result, NSError *_Nullable error);
 
 @interface TDSAchievement : NSObject
+
++ (instancetype)shareInstance;
 /**
  设置回调协议
  *
@@ -80,6 +82,11 @@ typedef void (^TTAchievementRequestHandler)(NSArray<TDSAchievementModel *> *_Nul
 * @brief 获取本地用户成就列表
  */
 + (NSArray<TDSAchievementModel *> *)getLocalUserAchievementList;
+
+/**
+* @brief 获取成就UI
+ */
+- (void)showAchievementPage;
 
 @end
 

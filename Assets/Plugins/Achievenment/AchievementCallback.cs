@@ -28,6 +28,8 @@ namespace TDSAchievement
 
         void makeSteps(string id,int step);
 
+        void showAchievementPage();
+
     }
 
     public interface AchievementCallback

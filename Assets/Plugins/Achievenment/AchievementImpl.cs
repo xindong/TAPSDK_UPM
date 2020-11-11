@@ -177,6 +177,13 @@ namespace TDSAchievement
             TDSCommon.EngineBridge.GetInstance().CallHandler(command);
         }
 
+        public void showAchievementPage(){
+            Command command = new Command();
+            command.service = SERVICE_NAME;
+            command.method = "showAchievementPage";
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command);
+        }
+
         private void handlerResult(GetAchievementCallback callback, Result result)
         {
 
