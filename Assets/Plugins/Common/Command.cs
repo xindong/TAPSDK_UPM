@@ -42,6 +42,7 @@ namespace TDSCommon
             this.method = method;
             this.callback = callback;
             this.callbackId = callbackId;
+            Debug.Log("Command constructor:" + toJSON());
         }
 
     }
