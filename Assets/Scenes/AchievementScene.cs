@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TDSAchievement;
-using TDSCommon;
 
 public class AchievementScene : MonoBehaviour, AchievementCallback, GetAchievementCallback
 {
     // Start is called before the first frame update
-
 
     void Start()
     {

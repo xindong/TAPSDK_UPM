@@ -1,0 +1,20 @@
+{
+    "name": "Scene",
+    "references": [
+        "TDSCommon",
+        "TDSAchievement",
+        "TDSMoment"
+    ],
+    "includePlatforms": [
+        "Android",
+        "iOS"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

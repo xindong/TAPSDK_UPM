@@ -1,0 +1,9 @@
+{
+    "name": "com.tds.sdk",
+    "displayName": "TDSSDK",
+    "description": "TapTap develop Service",
+    "version": "1.0.0",
+    "unity": "2020.1",
+    "author": "tds-develop",
+    "license": "MIT"
+}
