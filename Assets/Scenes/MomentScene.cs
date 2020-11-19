@@ -4,123 +4,101 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TDSMoment;
 
-public class MomentScene
+public class MomentScene : MonoBehaviour
 {
-     private string imagePath = "";
-    private string videoPath = "";
+    private string imagePath = "hello,world";
+    private string videoPath = "输入 VideoPath";
+
+    private string tapToken = "Please input tap token";
+
+    private string cliendId = "d4bjgwom9zk84wk";
+
     private void OnGUI()
     {
         GUIStyle buttonStyle = new GUIStyle(GUI.skin.button)
         {
-            fontSize = 50
+            fontSize = 30
         };
         GUIStyle labelStyle = new GUIStyle(GUI.skin.label)
         {
-            fontSize = 25
+            fontSize = 20
         };
         GUIStyle inputStyle = new GUIStyle(GUI.skin.textField)
         {
-            fontSize = 30
+            fontSize = 20
         };
-        
+
         string desc = "普通动态描述";
 
         string title = "title";
 
-        if (GUI.Button(new Rect(50, 100, 300, 100), "设置回调", buttonStyle))
+        if (GUI.Button(new Rect(50, 50, 250, 60), "设置回调", buttonStyle))
         {
-                
+            TDSMoment.TDSMoment.SetCallback((action, msg) =>
+            {
+                Debug.Log("GetMomentCallback action = " + action + " ,msg = " + msg);
+
+            });
         }
 
-        if (GUI.Button(new Rect(50, 250, 300, 100), "初始化", buttonStyle))
-        {
-            //d4bjgwom9zk84wk evnn72tle1sgkgo a4d6xky5gt4c80s
-            // xdsdk.XDSDK.InitSDK("2isp77irl1c0gc4", 1, "UnityXDSDK", "0.0.0", true);
+        tapToken = GUI.TextArea(new Rect(50, 150, 250, 60), tapToken, inputStyle);
 
-            //#if !UNITY_EDITOR && !UNITY_STANDALONE_OSX && !UNITY_STANDALONE_WIN
-            //            com.xdsdk.xdtrafficcontrol.XDTrafficControlListener.Init();
-            //#endif
+        if (GUI.Button(new Rect(50, 250, 250, 60), "设置Token", buttonStyle))
+        {
+            TDSMoment.TDSMoment.SetLoginToken(tapToken);
         }
 
-        if (GUI.Button(new Rect(50, 400, 300, 100), "登录", buttonStyle))
-        {
+        cliendId = GUI.TextArea(new Rect(50, 350, 250, 60), cliendId, inputStyle);
 
-            // com.xdsdk.xdlive.XDLiveListener.Init();
+        if (GUI.Button(new Rect(50, 450, 250, 60), "设置ClientId", buttonStyle))
+        {
+            TDSMoment.TDSMoment.InitSDK(cliendId);
         }
 
+        imagePath = GUI.TextArea(new Rect(400, 100, 250, 60), imagePath, inputStyle);
 
-        //if (GUI.Button(new Rect(50, 400, 380, 100), "设置动态回调", buttonStyle))
-        //{
-        //    TapMomentSDK.TapMoment.SetCallback((action, msg) =>
-        //    {
-        //        if (TapMomentSDK.CallbackCode.CALLBACK_CODE_MOMENT_APPEAR.Equals(action))
-        //        {
-
-        //        }
-        //    });
-        //}
-       
-
-        imagePath = GUI.TextArea(new Rect(500, 100, 380, 100),imagePath);
-
-      
-        videoPath = GUI.TextArea(new Rect(500, 250, 380, 100), videoPath);
-
-
-
-        if (GUI.Button(new Rect(50, 550, 380, 100), "打开动态", buttonStyle))
+        if (GUI.Button(new Rect(400, 200, 250, 60), "发布图片动态", buttonStyle))
         {
-            
-        }
-        if (GUI.Button(new Rect(50, 700, 380, 100), "登出", buttonStyle))
-        {
-
+            TDSMoment.TDSMoment.PublishMoment(TDSMoment.Orientation.ORIENTATION_DEFAULT, imagePath.Split(','), desc);
         }
 
-        if (GUI.Button(new Rect(500, 400, 380, 100), "发布动态", buttonStyle))
+        videoPath = GUI.TextArea(new Rect(400, 300, 250, 60), videoPath, inputStyle);
+
+        if (GUI.Button(new Rect(400, 400, 250, 60), "发布视频动态", buttonStyle))
         {
+            TDSMoment.TDSMoment.PublishVideoMoment(TDSMoment.Orientation.ORIENTATION_DEFAULT, videoPath.Split(','), imagePath.Split(','), title, desc);
         }
 
-        if (GUI.Button(new Rect(500, 550, 380, 100), "发布视频动态", buttonStyle))
+        if (GUI.Button(new Rect(50, 550, 250, 60), "打开动态", buttonStyle))
         {
-
-        }
-        if (GUI.Button(new Rect(500, 700, 380, 100), "获取通知", buttonStyle))
-        {
-
-        }
-        if (GUI.Button(new Rect(500, 850, 380, 100), "用户中心", buttonStyle))
-        {
-
-        }
-        if (GUI.Button(new Rect(1000, 100, 380, 100), "10s直接关闭", buttonStyle))
-        {
-
+            TDSMoment.TDSMoment.OpenMoment(TDSMoment.Orientation.ORIENTATION_DEFAULT);
         }
 
-        if (GUI.Button(new Rect(1000, 250, 380, 100), "10s弹窗关闭", buttonStyle))
+        if (GUI.Button(new Rect(700, 300, 250, 60), "获取通知", buttonStyle))
         {
-
+            TDSMoment.TDSMoment.GetNoticeData();
         }
 
-        if (GUI.Button(new Rect(1000, 400, 380, 100), "论坛", buttonStyle))
+        if (GUI.Button(new Rect(700, 100, 250, 60), "10s直接关闭", buttonStyle))
         {
+            Invoke("closeMoment", 10.0f);
         }
 
-
-
-        //TapMomentSDK.TapMoment.PublishVideoMoment(momentConfig, videoPaths, title, desc);
-
-
+        if (GUI.Button(new Rect(700, 200, 250, 60), "10s弹窗关闭", buttonStyle))
+        {
+            Invoke("closeMomentWithDialog", 10.0f);
+        }
 
     }
 
     void closeMoment()
     {
+        TDSMoment.TDSMoment.CloseMoment();
     }
 
     void closeMomentWithDialog()
     {
+        TDSMoment.TDSMoment.CloseMoment("标题", "内容");
     }
 
 }

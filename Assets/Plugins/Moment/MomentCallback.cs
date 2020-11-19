@@ -7,16 +7,20 @@ namespace TDSMoment
 {
     public interface IMoment
     {
-        
-        void SetCallback(Action<int,string> callback);
 
-        void OpenMoment(int orientation);
+        void SetCallback(Action<int, string> callback);
 
-        void PublishMoment(int orientation, string[] imagePaths, string content);
+        void InitSDK(string clientId);
 
-        void PublishVideoMoment(int orientation, string[] videoPaths, string[] imagePaths, string title, string desc);
-      
-        void PublishVideoMoment(int orientation, string[] videoPaths, string title, string desc);
+        void SetLoginToken(string accessToken);
+
+        void OpenMoment(Orientation orientation);
+
+        void PublishMoment(Orientation orientation, string[] imagePaths, string content);
+
+        void PublishVideoMoment(Orientation orientation, string[] videoPaths, string[] imagePaths, string title, string desc);
+
+        void PublishVideoMoment(Orientation orientation, string[] videoPaths, string title, string desc);
 
         void GetNoticeData();
 
@@ -24,7 +28,7 @@ namespace TDSMoment
 
         void CloseMoment(string title, string content);
 
-        void SetUseAutoRotate(bool useAuto); 
+        void SetUseAutoRotate(bool useAuto);
 
     }
 }
