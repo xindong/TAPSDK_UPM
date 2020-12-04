@@ -6,13 +6,14 @@ using UnityEngine;
 
 namespace TDSAchievement
 {
-    public interface IAchievement{
+    public interface IAchievement
+    {
 
         void registerCallback(AchievementCallback callback);
 
-        void initWithTap(string appid,string token);
+        void initWithTap(string appid, string token);
 
-        void initWithXD(string appid,string token);
+        void initWithXD(string appid, string token);
 
         void fetchAllAchievementList(GetAchievementCallback callback);
 
@@ -24,11 +25,13 @@ namespace TDSAchievement
 
         void reach(string id);
 
-        void growSteps(string id,int step);
+        void growSteps(string id, int step);
 
-        void makeSteps(string id,int step);
+        void makeSteps(string id, int step);
 
         void showAchievementPage();
+
+        void setShowToast(bool showToast);
 
     }
 
@@ -39,13 +42,14 @@ namespace TDSAchievement
 
         void onAchievementInitFail(int errrorCode);
 
-        void onAchievementStatusUpdate(AchievementBean achievement,int errorCode);
-        
+        void onAchievementStatusUpdate(AchievementBean achievement, int errorCode);
+
     }
 
-    public interface GetAchievementCallback{
-        
-        void GetAchievementCallback(List<AchievementBean> list ,int errorCode);
+    public interface GetAchievementCallback
+    {
+
+        void GetAchievementCallback(List<AchievementBean> list, int errorCode);
 
     }
 

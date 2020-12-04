@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "TDSAchievementDelegate.h"
 
+#define TDSAchievementVersionName @"1.1.0"
+#define TDSAchievementVersionCode @"3"
+
 NS_ASSUME_NONNULL_BEGIN
 typedef void (^TTAchievementRequestHandler)(NSArray<TDSAchievementModel *> *_Nullable result, NSError *_Nullable error);
 
@@ -72,6 +75,14 @@ typedef void (^TTAchievementRequestHandler)(NSArray<TDSAchievementModel *> *_Nul
 *  @param numSteps 总的步长
 */
 + (void)makeSteps:(NSString *)displayId numSteps:(NSInteger)numSteps;
+
+/**
+*  @brief  成就完成时是否显示Toast
+*
+*  @param showToast 成就完成是否toast
+*  默认是（YES）展示toast
+*/
++ (void)setShowToast:(BOOL)showToast;
 
 /**
 * @brief 获取本地所有成就列表

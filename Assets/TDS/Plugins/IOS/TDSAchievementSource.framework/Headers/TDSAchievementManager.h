@@ -44,6 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
                                      steps:(NSInteger)steps
                                  isAllStep:(BOOL)isAllStep;
 
+/**
+ 成就完成是否展示toast
+ */
+- (void)setShowToast:(BOOL)showToast;
+
 @end
 
 NS_ASSUME_NONNULL_END

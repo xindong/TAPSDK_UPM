@@ -71,5 +71,10 @@ namespace TDSAchievement
         {
             AchievementImpl.GetInstance().showAchievementPage();
         }
+
+        public static void SetShowToast(bool showToast)
+        {
+            AchievementImpl.GetInstance().setShowToast(showToast);
+        }
     }
 }

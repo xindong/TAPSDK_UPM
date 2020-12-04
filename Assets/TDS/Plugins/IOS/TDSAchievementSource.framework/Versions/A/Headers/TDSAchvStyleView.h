@@ -11,8 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TDSAchvStyleView : UIView
-@property (nonatomic, assign) BOOL isDetail;
+
+- (instancetype)initWithFrame:(CGRect)frame isDetail:(BOOL)isDetail;
 @property (nonatomic, strong) TDSAchievementModel *model;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,6 +12,7 @@ extern NSString *const TDS_TIMEOUTKEY;
 extern NSString *const TDS_HTTPMETHODKEY;
 extern NSString *const TDS_HTTPBODYKEY;
 extern NSString *const TDS_DATAFORMAT;
+extern NSString *const TDS_CACHE_POLICY_KEY;
 
 /**
  header

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TDSAchvUtil : NSObject
 + (UIViewController *)findTopViewController;
++ (BOOL)isPortrait;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)showAchievementPage;
 
++ (void)showToast:(BOOL)showToast;
+
 @end
 
 NS_ASSUME_NONNULL_END

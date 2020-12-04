@@ -3,7 +3,8 @@
     "references": [
         "GUID:ad7dd9ae37d78414d8fff82ae3ff855d",
         "GUID:c3aa43f4a24be4ccd88d8393d31461cc",
-        "GUID:c138c7c0c99a149d3b9f4733a125910c"
+        "GUID:c138c7c0c99a149d3b9f4733a125910c",
+        "GUID:45c4eaf159cde418ba5f0852c2851f0c"
     ],
     "includePlatforms": [
         "Android",

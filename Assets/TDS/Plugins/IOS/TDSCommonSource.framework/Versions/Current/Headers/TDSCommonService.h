@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TDSCommonService : NSObject
 + (void)language:(NSString *)language;
+
++ (void)getRegionCode:(void (^)(NSString *result))callback;
 @end
 
 NS_ASSUME_NONNULL_END

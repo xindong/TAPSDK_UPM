@@ -2,6 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.CompilerServices;
 
 namespace TDSCommon
 {
@@ -27,11 +28,11 @@ namespace TDSCommon
 
         private EngineBridge()
         {
-            if (TDSCommon.Platform.isAndroid())
+            if (Platform.isAndroid())
             {
                 bridge = BridgeAndroid.GetInstance();
             }
-            else if (TDSCommon.Platform.isIOS())
+            else if (Platform.isIOS())
             {
                 bridge = BridgeIOS.GetInstance();
             }
@@ -55,21 +56,30 @@ namespace TDSCommon
             bridge.Register(action);
         }
 
-        public void CallHandler(Command command)
+        public void CallHandler(Command command,[CallerMemberName] string memberName = "",
+                                                [CallerFilePath] string sourceFilePath = "",
+                                                [CallerLineNumber] int sourceLineNumber = 0)
         {
             if (bridge == null)
             {
                 return;
             }
+            command.callbackId = memberName + sourceFilePath + sourceLineNumber;
+            Debug.Log("callHandler CallbackId:" + command.callbackId);
             bridge.Call(command);
         }
 
-        public void CallHandler(Command command, Action<Result> action)
+        public void CallHandler(Command command, Action<Result> action,
+                                                [CallerMemberName] string memberName = "",
+                                                [CallerFilePath] string sourceFilePath = "",
+                                                [CallerLineNumber] int sourceLineNumber = 0)
         {
             if (bridge == null)
             {
                 return;
             }
+            command.callbackId = memberName + sourceFilePath + sourceLineNumber;
+            Debug.Log("callHandler CallbackId:" + command.callbackId);
             bridge.Call(command, action);
         }
 

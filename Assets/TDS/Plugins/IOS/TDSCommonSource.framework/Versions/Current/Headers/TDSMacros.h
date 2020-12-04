@@ -52,3 +52,12 @@ __strong __typeof__(VAR) VAR = metamacro_concat(VAR, _weak_);
 #else
 #define tds_keywordify try {} @catch (...) {}
 #endif
+
+#ifndef dispatch_main_async_safe
+#define dispatch_main_async_safe(block)\
+    if (dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL) == dispatch_queue_get_label(dispatch_get_main_queue())) {\
+        block();\
+    } else {\
+        dispatch_async(dispatch_get_main_queue(), block);\
+    }
+#endif

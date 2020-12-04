@@ -35,6 +35,16 @@ typedef NS_ENUM(NSInteger, AlertShowStyle) {
 
 - (void)tds_clearAnimation;
 
+@property (nonatomic, strong) NSArray *colors;
+
+@property (nonatomic, strong) NSArray<NSNumber *> *locations;
+
+@property (nonatomic, assign) CGPoint startPoint;
+
+@property (nonatomic, assign) CGPoint endPoint;
+
+- (void)setGradientBackgroundWithColors:(NSArray<UIColor *> *_Nullable)colors locations:(NSArray<NSNumber *> *_Nullable)locations startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
+
 @property (nonatomic, assign) CGFloat centerX;
 
 @property (nonatomic, assign) CGFloat centerY;

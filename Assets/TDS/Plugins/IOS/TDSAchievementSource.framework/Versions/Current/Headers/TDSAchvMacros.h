@@ -6,9 +6,8 @@
 //
 
 #import "TDSUIHelper.h"
-#import "TDSImagaTool.h"
-#import "TDSLanguageTool.h"
-#import <TDSCommonSource/NSBundle+TDSLocalizable.h>
+#import "TDSAchvUtil.h"
+#import <TDSCommonSource/NSBundle+Tools.h>
 
 ///-------------------------
 /// @name 变量-屏幕尺寸相关
@@ -76,6 +75,8 @@
 // iPhone4/4s
 #define TDSUI_IS_35INCH_SCREEN                  [TDSUIHelper is35InchScreen]
 
-#define TDS_LocalizationLanguage(key) [TDSLanguageTool tds_localizedStringForKey:key]
+#define TDS_LocalizationLanguage(key) [[NSBundle tds_bundleName:@"TDSAchvResource" aClass:[self class]] tds_localizedStringForKey:key]
+#define TDS_imageWithName(key) [[NSBundle tds_bundleName:@"TDSAchvResource" aClass:[self class]] tds_imageName:key]
+
 
 

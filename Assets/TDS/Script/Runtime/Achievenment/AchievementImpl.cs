@@ -177,10 +177,19 @@ namespace TDSAchievement
             TDSCommon.EngineBridge.GetInstance().CallHandler(command);
         }
 
-        public void showAchievementPage(){
+        public void showAchievementPage()
+        {
             Command command = new Command();
             command.service = SERVICE_NAME;
             command.method = "showAchievementPage";
+            TDSCommon.EngineBridge.GetInstance().CallHandler(command);
+        }
+
+        public void setShowToast(bool showToast)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("showToast", showToast);
+            Command command = new Command(SERVICE_NAME, "setShowToast", false, null, dic);
             TDSCommon.EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -198,8 +207,6 @@ namespace TDSAchievement
             {
                 return;
             }
-
-            Dictionary<string, string> dic = JsonUtility.FromJson<Dictionary<string, string>>(result.content);
 
             AchievementWrapperBean<AchievementBean> wrapperBean = JsonUtility.FromJson<AchievementWrapperBean<AchievementBean>>(result.content);
 
