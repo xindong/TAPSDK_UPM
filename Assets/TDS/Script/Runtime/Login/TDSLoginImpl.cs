@@ -34,7 +34,7 @@ namespace TDSLogin
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("clientID", clientId);
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "initWithClientID", true, null, dic);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "initWithClientID", false, null, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -44,7 +44,7 @@ namespace TDSLogin
             dic.Add("clientID", clientId);
             dic.Add("regionType", isCN);
             dic.Add("roundCorner", roundCorner);
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "initWithClientID", true, null, dic);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "initWithClientID", false, null, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -53,14 +53,14 @@ namespace TDSLogin
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("regionType", isCN);
             dic.Add("roundCorner", roundCorner);
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "changeConfig", true, null, dic);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "changeConfig", false, null, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void StartLogin(string[] permissions)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("permissons", permissions);
+            dic.Add("permissions", permissions);
             Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "startTapLogin", true, null, dic);
             TDSCommon.EngineBridge.GetInstance().CallHandler(command);
         }
@@ -71,6 +71,7 @@ namespace TDSLogin
             TDSCommon.EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 Debug.Log("loginCallback:" + result.toJSON());
+
                 if (result.code != Result.RESULT_SUCCESS)
                 {
                     callback.LoginError(result.message);
@@ -84,8 +85,12 @@ namespace TDSLogin
                 }
 
                 LoginWrapperBean<string> wrapperBean = new LoginWrapperBean<string>(result.content);
+
+                Debug.Log("loginWrapper:" + wrapperBean.toJSON());
+
                 if (wrapperBean.loginCallbackCode == 0)
                 {
+                    Debug.Log("loginCallback accessToken:" + wrapperBean.wrapper);
                     TDSAccessToken accessToken = new TDSAccessToken(wrapperBean.wrapper);
                     callback.LoginSuccess(accessToken);
                     return;

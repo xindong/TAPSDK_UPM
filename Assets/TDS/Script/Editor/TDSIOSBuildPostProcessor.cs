@@ -48,7 +48,6 @@ using UnityEngine;
                 // 编译配置
                 proj.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
                 proj.AddBuildProperty(unityFrameworkTarget, "OTHER_LDFLAGS", "-ObjC");
-
                 // Swift编译选项
                 proj.SetBuildProperty(target, "ENABLE_BITCODE", "NO"); //bitcode  NO
                 proj.SetBuildProperty(target,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","YES");
@@ -65,6 +64,7 @@ using UnityEngine;
                 proj.AddFrameworkToProject(unityFrameworkTarget, "QuartzCore.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "Security.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "WebKit.framework", false);
+                proj.AddFrameworkToProject(unityFrameworkTarget, "Photos.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AdSupport.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AssetsLibrary.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AVKit.framework", false);
@@ -87,21 +87,30 @@ using UnityEngine;
                 // 添加资源文件，注意文件路径
                 var resourcePath = Path.Combine(path, "TDSResource");
                 string parentFolder = Directory.GetParent(Application.dataPath).FullName;
+
+                Debug.Log("resourcePath:" + resourcePath);
+                Debug.Log("parentFolder:" + parentFolder);
+
                 if (Directory.Exists(resourcePath))
                 {
                     Directory.Delete(resourcePath);
                 }
+
                 Directory.CreateDirectory(resourcePath);
+
                 if(Directory.Exists(parentFolder + "/Assets/TDS/Plugins/IOS/Resource")){
                     //使用unitypackage接入
                     CopyAndReplaceDirectory(parentFolder + "/Assets/TDS/Plugins/IOS/Resource", resourcePath);
-                }else if(Directory.Exists(parentFolder + "/Library/PacakgeCache/com.tds.sdk@1.0.0/TDS/Plugins/IOS/Resource")){
+                }else if(Directory.Exists(parentFolder + "/Library/PacakgeCache/com.tds.sdk@0.0.1-SNAPSHOT/TDS/Plugins/IOS/Resource")){
                     //使用UPM接入
-                    CopyAndReplaceDirectory(parentFolder + "/Library/PacakgeCache/com.tds.sdk@1.0.0/TDS/Plugins/IOS/Resource", resourcePath);
+                    CopyAndReplaceDirectory(parentFolder + "/Library/PacakgeCache/com.tds.sdk@0.0.1-SNAPSHOT/TDS/Plugins/IOS/Resource", resourcePath);
                 }
                 // 复制资源文件夹到工程目录
                 // 复制Assets的plist到工程目录
-                File.Copy(parentFolder + "/Assets/Plugins/IOS/Resource/TDS-Info.plist",resourcePath + "/TDS-Info.plist");
+                if(File.Exists(parentFolder + "/Assets/Plugins/IOS/Resource/TDS-Info.plist")){
+                    Debug.Log("copy plist");
+                    File.Copy(parentFolder + "/Assets/Plugins/IOS/Resource/TDS-Info.plist",resourcePath + "/TDS-Info.plist");
+                }
 
                 List<string> names = new List<string>();    
                 names.Add("TDSAchvResource.bundle");
@@ -177,6 +186,8 @@ using UnityEngine;
                 _list.AddString(items[i]);
             }
             
+
+
             Dictionary<string, object> dic = (Dictionary<string, object>)TDSEditor.Plist.readPlist(infoPlistPath);
             
             string taptapId = null;
@@ -218,7 +229,10 @@ using UnityEngine;
         {
             string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
             TDSEditor.TDSScriptStreamWriterHelper UnityAppController = new TDSEditor.TDSScriptStreamWriterHelper(unityAppControllerPath);
-            UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TapTapSDK/TapTapSDK.h>");
+            UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TapTapLoginSource/TapTapSDK.h>");
+            UnityAppController.WriteBelow(@"id sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey], annotation = options[UIApplicationOpenURLOptionsAnnotationKey];",@"if(url){
+        return [[TTSDKApplicationDelegate sharedInstance] handleTapTapOpenURL:url];
+    }");
             Debug.Log("修改代码成功");
         }
     }

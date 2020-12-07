@@ -53,7 +53,7 @@ public class LoginScene : MonoBehaviour, TDSLogin.LoginCallback
             fontSize = 20
         };
 
-        GUI.Label(new Rect(400, 300, 200, 200), label, myLabelStyle);
+        GUI.Label(new Rect(400, 400, 400, 300), label, myLabelStyle);
 
         GUI.Toggle(new Rect(50, 50, 100, 30), isCN, "国内");
 
@@ -103,7 +103,23 @@ public class LoginScene : MonoBehaviour, TDSLogin.LoginCallback
             TDSLogin.TDSLogin.Logout();
         }
 
+        if (GUI.Button(new Rect(300, 250, 200, 60), "remote profile", myButtonStyle))
+        {
+            TDSLogin.TDSLogin.FetchProfileForCurrentAccessToken((profile) =>
+            {
+                Debug.Log("profile:" + profile.toJSON());
+                this.label = profile.toJSON();
+            }, (errorMsg) =>
+            {
+                this.label = errorMsg;
+            });
+        }
 
+        if(GUI.Button(new Rect(300,350,200,60),"返回",myButtonStyle))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(0);
+        }
+        
     }
 
 }
