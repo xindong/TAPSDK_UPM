@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TDSCommonHeader.h"
+#import "TDSAccount.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *baseUrl;
 @property (nonatomic, copy, nullable) NSDictionary *extensionHeader;
 @property (nonatomic, strong) TDSCommonHeader *commonHeader;
+@property (nonatomic, strong) TDSAccount *account;
 @end
 
 NS_ASSUME_NONNULL_END

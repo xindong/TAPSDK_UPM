@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TapSDK
 {
+    [Serializable]
     public class TDSAccessToken
     {
         public string kid;

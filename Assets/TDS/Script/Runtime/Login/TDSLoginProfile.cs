@@ -5,15 +5,15 @@ using UnityEngine;
 
 
 namespace TapSDK
-{
+{   
+    [Serializable]
     public class TDSLoginProfile
     {
         public string name;
         public string avatar;
         public string openid;
         public string unionid;
-        public int isCertified = -1;
-    
+
         public TDSLoginProfile(string json)
         {
             JsonUtility.FromJsonOverwrite(json, this);

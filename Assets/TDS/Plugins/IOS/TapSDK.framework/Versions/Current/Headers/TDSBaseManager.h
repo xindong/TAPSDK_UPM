@@ -21,29 +21,6 @@ FOUNDATION_EXPORT TDSLanguage const TDSLanguageEN;
 
 + (instancetype)shareInstance;
 
-@property (nonatomic, copy) NSString *clientId;
-
-- (void)initWithAppID:(NSString *)appid
-          accountType:(TDSAccountType)accountType
-                token:(NSString *)token;
-
-
-- (NSString *)getApppId;
-
-- (TDSAccount *)getAccont;
-
-- (BOOL)isLoggedin;
-
-- (void)setCurrentAccount:(TDSAccountType)accountType
-                    token:(NSString *)token;
-
-- (void)logout;
-
-- (void)registerAccountNotification:(NSString *)key
-                       notification:(id<TDSAccountNotification>)notification;
-
-- (void)unRegisterAccountNotification:(NSString *)key;
-
 - (void)setLanguage:(NSString *)language;
 
 - (NSString *)getLanguage;

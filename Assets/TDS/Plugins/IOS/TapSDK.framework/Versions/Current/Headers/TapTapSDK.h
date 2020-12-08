@@ -15,6 +15,7 @@
 #import "TTSDKAccessToken.h"
 #import "TTSDKLoginManager.h"
 #import "TTSDKProfile.h"
+#import "TTSDKProfileManager.h"
 #import "TTSDKConfig.h"
 
 @interface TapTapSDK : NSObject

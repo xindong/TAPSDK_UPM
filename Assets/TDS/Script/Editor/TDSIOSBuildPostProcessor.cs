@@ -186,10 +186,10 @@ using UnityEngine;
                 _list.AddString(items[i]);
             }
             
-            Dictionary<string, object> dic = (Dictionary<string, object>)TDSEditor.Plist.readPlist(infoPlistPath);
             
-            if(dic!=null)
+            if(!string.IsNullOrEmpty(infoPlistPath))
             {   
+                Dictionary<string, object> dic = (Dictionary<string, object>)TDSEditor.Plist.readPlist(infoPlistPath);
                 string taptapId = null;
                 foreach (var item in dic)
                 {

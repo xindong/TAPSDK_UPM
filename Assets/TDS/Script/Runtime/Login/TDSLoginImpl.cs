@@ -164,10 +164,11 @@ namespace TapSDK
                     errorCallback(result.message);
                     return;
                 }
-                LoginWrapperBean<string> wrapperBean = new LoginWrapperBean<string>();
+                LoginWrapperBean<string> wrapperBean = new LoginWrapperBean<string>(result.content);
                 if (wrapperBean.loginCallbackCode == 0)
                 {
-                    profileCallback(new TDSLoginProfile(wrapperBean.wrapper));
+                    TDSLoginProfile profile = new TDSLoginProfile(wrapperBean.wrapper);
+                    profileCallback(profile);
                     return;
                 }
                 errorCallback(wrapperBean.wrapper);
