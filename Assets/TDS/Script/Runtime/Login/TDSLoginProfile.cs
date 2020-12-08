@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace TDSLogin
+namespace TapSDK
 {
     public class TDSLoginProfile
     {

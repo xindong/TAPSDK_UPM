@@ -73,8 +73,9 @@ using UnityEngine;
                 proj.AddFrameworkToProject(unityFrameworkTarget, "SystemConfiguration.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "Accelerate.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "SafariServices.framework", false);
+                proj.AddFrameworkToProject(unityFrameworkTarget, "AVFoundation.framework", false);
+                proj.AddFrameworkToProject(unityFrameworkTarget, "MobileCoreServices.framework", false);
                 // 动态库
-                // AddFramework("TapFriends.framework", proj, target);
                 Debug.Log("添加framework成功");
 
                 // 添加 tbd
@@ -101,9 +102,9 @@ using UnityEngine;
                 if(Directory.Exists(parentFolder + "/Assets/TDS/Plugins/IOS/Resource")){
                     //使用unitypackage接入
                     CopyAndReplaceDirectory(parentFolder + "/Assets/TDS/Plugins/IOS/Resource", resourcePath);
-                }else if(Directory.Exists(parentFolder + "/Library/PacakgeCache/com.tds.sdk@0.0.1-SNAPSHOT/TDS/Plugins/IOS/Resource")){
+                }else if(Directory.Exists(parentFolder + "/Library/PacakgeCache/com.tds.sdk@0.0.1-alpha/TDS/Plugins/IOS/Resource")){
                     //使用UPM接入
-                    CopyAndReplaceDirectory(parentFolder + "/Library/PacakgeCache/com.tds.sdk@0.0.1-SNAPSHOT/TDS/Plugins/IOS/Resource", resourcePath);
+                    CopyAndReplaceDirectory(parentFolder + "/Library/PacakgeCache/com.tds.sdk@0.0.1-alpha/TDS/Plugins/IOS/Resource", resourcePath);
                 }
                 // 复制资源文件夹到工程目录
                 // 复制Assets的plist到工程目录
@@ -113,7 +114,6 @@ using UnityEngine;
                 }
 
                 List<string> names = new List<string>();    
-                names.Add("TDSAchvResource.bundle");
                 names.Add("TDS-Info.plist");
                 foreach (var name in names)
                 {
@@ -186,37 +186,34 @@ using UnityEngine;
                 _list.AddString(items[i]);
             }
             
-
-
             Dictionary<string, object> dic = (Dictionary<string, object>)TDSEditor.Plist.readPlist(infoPlistPath);
             
-            string taptapId = null;
-
-            foreach (var item in dic)
-            {
-                if(item.Key.Equals("taptap")){
-                    Dictionary<string,object> taptapDic = (Dictionary<string,object>) item.Value;
-                    foreach (var taptapItem in taptapDic)
-                    {
-                        if(taptapItem.Key.Equals("client_id")){
-                            taptapId = "tt" + (string) taptapItem.Value;
+            if(dic!=null)
+            {   
+                string taptapId = null;
+                foreach (var item in dic)
+                {
+                    if(item.Key.Equals("taptap")){
+                        Dictionary<string,object> taptapDic = (Dictionary<string,object>) item.Value;
+                        foreach (var taptapItem in taptapDic)
+                        {
+                            if(taptapItem.Key.Equals("client_id")){
+                                taptapId = "tt" + (string) taptapItem.Value;
+                            }
                         }
                     }
                 }
-            }
-
-            //添加url
-            PlistElementDict dict = _plist.root.AsDict();
-
-            PlistElementArray array = dict.CreateArray("CFBundleURLTypes");
-            PlistElementDict dict2 = array.AddDict();
-
-            if(taptapId!=null)
-            {
-                Debug.Log("修改TapTapClientId:" + taptapId + " 成功");
-                dict2.SetString("CFBundleURLName", "TapTap");
-                PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
-                array2.AddString(taptapId);
+                //添加url
+                PlistElementDict dict = _plist.root.AsDict();
+                PlistElementArray array = dict.CreateArray("CFBundleURLTypes");
+                PlistElementDict dict2 = array.AddDict();
+                if(taptapId!=null)
+                {
+                    Debug.Log("修改TapTapClientId:" + taptapId + " 成功");
+                    dict2.SetString("CFBundleURLName", "TapTap");
+                    PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+                    array2.AddString(taptapId);
+                }    
             }
 
             File.WriteAllText(_plistPath, _plist.WriteToString());
@@ -229,7 +226,7 @@ using UnityEngine;
         {
             string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
             TDSEditor.TDSScriptStreamWriterHelper UnityAppController = new TDSEditor.TDSScriptStreamWriterHelper(unityAppControllerPath);
-            UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TapTapLoginSource/TapTapSDK.h>");
+            UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TapSDk/TapTapSDK.h>");
             UnityAppController.WriteBelow(@"id sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey], annotation = options[UIApplicationOpenURLOptionsAnnotationKey];",@"if(url){
         return [[TTSDKApplicationDelegate sharedInstance] handleTapTapOpenURL:url];
     }");

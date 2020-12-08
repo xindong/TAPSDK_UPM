@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TDSCommon;
 
-namespace TDSLogin
+namespace TapSDK
 {
     public class TDSLoginImpl : ITDSLogin
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TDSCommon;
 
-namespace TDSMoment
+namespace TapSDK
 {
     public class MomentImpl : IMoment
     {

@@ -26,19 +26,24 @@ public class MainScene : MonoBehaviour
 
         GUI.depth = 0;
 
-        if (GUI.Button(new Rect(50, 100, 200, 60), "登陆", myButtonStyle))
+         if (GUI.Button(new Rect(50, 100, 200, 60), "Core", myButtonStyle))
         {
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(3);
         }
 
-        if (GUI.Button(new Rect(50, 300, 200, 60), "成就", myButtonStyle))
+        if (GUI.Button(new Rect(50, 200, 200, 60), "登陆", myButtonStyle))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(2);
+        }
+
+        if (GUI.Button(new Rect(50, 400, 200, 60), "动态", myButtonStyle))
         {
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);
         }
 
-
-        if(GUI.Button(new Rect(50,250,200,60),"动态",myButtonStyle)){
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(2);
+        if (GUI.Button(new Rect(50, 500, 200, 60), "TapDB", myButtonStyle))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(4);
         }
 
     }

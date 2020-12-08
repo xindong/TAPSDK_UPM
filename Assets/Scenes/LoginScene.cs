@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TDSLogin;
+using TapSDK;
 
-public class LoginScene : MonoBehaviour, TDSLogin.LoginCallback
+public class LoginScene : MonoBehaviour, TapSDK.LoginCallback
 {
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class LoginScene : MonoBehaviour, TDSLogin.LoginCallback
 
     private bool isCorner = true;
 
-    public void LoginSuccess(TDSLogin.TDSAccessToken accessToken)
+    public void LoginSuccess(TapSDK.TDSAccessToken accessToken)
     {
         this.label = accessToken.toJSON();
     }
@@ -61,28 +61,28 @@ public class LoginScene : MonoBehaviour, TDSLogin.LoginCallback
 
         if (GUI.Button(new Rect(50, 200, 200, 60), "初始化", myButtonStyle))
         {
-            TDSLogin.TDSLogin.Init("CqBgq73t1JdHFE3Rk3");
+            TapSDK.TDSLogin.Init("CqBgq73t1JdHFE3Rk3");
         }
 
         if (GUI.Button(new Rect(50, 300, 200, 60), "带参初始化", myButtonStyle))
         {
-            TDSLogin.TDSLogin.Init("CqBgq73t1JdHFE3Rk3", isCN, isCorner);
+            TapSDK.TDSLogin.Init("CqBgq73t1JdHFE3Rk3", isCN, isCorner);
         }
 
         if (GUI.Button(new Rect(50, 400, 200, 60), "注册回调", myButtonStyle))
         {
-            TDSLogin.TDSLogin.RegisterLoginCallback(this);
+            TapSDK.TDSLogin.RegisterLoginCallback(this);
         }
 
         if (GUI.Button(new Rect(50, 500, 200, 60), "开始登陆", myButtonStyle))
         {
             string[] permissions = { "public_profile" };
-            TDSLogin.TDSLogin.StartLogin(permissions);
+            TapSDK.TDSLogin.StartLogin(permissions);
         }
 
         if (GUI.Button(new Rect(50, 600, 200, 60), "获取token", myButtonStyle))
         {
-            TDSLogin.TDSLogin.GetCurrentAccessToken((accessToken) =>
+            TapSDK.TDSLogin.GetCurrentAccessToken((accessToken) =>
             {
                 Debug.Log("accessToken:" + accessToken.toJSON());
                 this.label = accessToken.toJSON();
@@ -91,7 +91,7 @@ public class LoginScene : MonoBehaviour, TDSLogin.LoginCallback
 
         if (GUI.Button(new Rect(300, 50, 200, 60), "获取profile", myButtonStyle))
         {
-            TDSLogin.TDSLogin.GetCurrentProfile((profile) =>
+            TapSDK.TDSLogin.GetCurrentProfile((profile) =>
             {
                 Debug.Log("profile:" + profile.toJSON());
                 this.label = profile.toJSON();
@@ -100,12 +100,12 @@ public class LoginScene : MonoBehaviour, TDSLogin.LoginCallback
 
         if (GUI.Button(new Rect(300, 150, 200, 60), "退出登录", myButtonStyle))
         {
-            TDSLogin.TDSLogin.Logout();
+            TapSDK.TDSLogin.Logout();
         }
 
         if (GUI.Button(new Rect(300, 250, 200, 60), "remote profile", myButtonStyle))
         {
-            TDSLogin.TDSLogin.FetchProfileForCurrentAccessToken((profile) =>
+            TapSDK.TDSLogin.FetchProfileForCurrentAccessToken((profile) =>
             {
                 Debug.Log("profile:" + profile.toJSON());
                 this.label = profile.toJSON();
