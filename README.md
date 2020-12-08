@@ -4,7 +4,7 @@
 
 ### 前提条件
 
-* 安装Unity **5.6.4**或更高版本
+* 安装Unity **Unity 2018.3**或更高版本
 
 * IOS **10**或更高版本
 
@@ -15,14 +15,41 @@
 * 使用Unity Pacakge Manager
 
 ```json
-//在{project.hold}/Packages/manifest.json中添加以下代码
+//在YourProjectPath/Packages/manifest.json中添加以下代码
 "dependencies":{
-        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#0.0.1-alpha"
+        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#0.0.2-alpha"
     }
 ```
-* 导入TapSDK.unitypackage
 
 ### 2.配置TapSDK
+
+#### 2.1 Android 配置
+
+编辑Assets/Plugins/Android/AndroidManifest.xml文件,在Application Tag下添加以下代码。
+```xml
+    <activity
+        android:name="com.taptap.sdk.TapTapActivity"
+        android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        android:exported="false"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+```
+
+#### 2.2 IOS 配置
+
+在Assets/Plugins/IOS/Resource目录下创建TDS-Info.plist文件,复制以下代码并且替换其中的ClientId。
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>taptap</key>
+    <dict>
+        <key>client_id</key>
+        <string>{Your-ClientId}</string>
+    </dict>
+</dict>
+</plist>
+```
 
 ### 3.接口描述
 
@@ -39,11 +66,11 @@ using TapSDK;
 {
     "name": "YourProject",
     "references": [
-        "TDSCommon",//基础
-        "TDSMoment",//动态
-        "TDSLogin",//登陆
-        "TDSCore",//基础
-        "TDSTapDB"//TapDB
+        "TDSCommon",
+        "TDSMoment",
+        "TDSLogin",
+        "TDSCore",
+        "TDSTapDB"
     ],
     "includePlatforms": [
         "Android",
@@ -54,38 +81,30 @@ using TapSDK;
 ```
 
 ##### 3.1.2 初始化
-
 ```c#
-// clientId 为 TapTap ClientId
+//TapTap ClientId
 TapSDK.TDSCore.Init(clientId);
 ```
 ##### 3.1.3 开启TapDB
 ```c#
-//开启TDSTapDB
 TapSDK.TDSCore.EnableTapDB(gameVersion,gameChannel);
 ```
 ##### 3.1.4 开启内嵌动态
 ```c#
-//开启TDS内嵌动态
 TapSDK.TDSCore.EnableMoment();
 ```
-
 #### 3.2 TapSDK 登陆
-
 ```c#
 //命名空间
 using TDSLogin;
 ```
-
 ##### 3.2.1 初始化
-
 ```c#
 /**
  *  TDSLogin初始化
  *  @param clientId TapTapId
  */
 TapSDK.TDSLogin.Init(clientId);
-
 /**
  *  TDSLogin初始化
  *  @param clientId TapTapId
