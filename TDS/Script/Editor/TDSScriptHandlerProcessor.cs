@@ -85,10 +85,10 @@ namespace TDSEditor
             }          
             foreach(var dir in Directory.GetDirectories(srcPath))
             {
-                Debug.Log("dirName:" + Path.Combine(srcPath, Path.GetFileName(dir)));
                 string fileName = Path.GetFileName(dir);
                 if (fileName.StartsWith(filterName))
-                {
+                {   
+                    Debug.Log("筛选到指定文件夹:" + Path.Combine(srcPath,Path.GetFileName(dir)));
                     return Path.Combine(srcPath,Path.GetFileName(dir));
                 }
             } 

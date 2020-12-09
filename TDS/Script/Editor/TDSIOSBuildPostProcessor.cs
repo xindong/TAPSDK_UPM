@@ -106,6 +106,8 @@ namespace TDSEditor
 
                 string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/TDS/Plugins/IOS/Resource" : localPacckagePath + "/Plugins/IOS/Resource";
 
+                Debug.Log("tdsResourcePath:" + tdsResourcePath);
+
                 if(Directory.Exists(tdsResourcePath)){
                     //使用UPM接入
                     CopyAndReplaceDirectory(tdsResourcePath, resourcePath);
