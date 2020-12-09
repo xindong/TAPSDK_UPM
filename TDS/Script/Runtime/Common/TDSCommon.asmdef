@@ -3,7 +3,8 @@
     "references": [],
     "includePlatforms": [
         "Android",
-        "iOS"
+        "iOS",
+        "Editor"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

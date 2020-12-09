@@ -1,10 +1,11 @@
 {
     "name": "TDSTapDB",
     "references": [
-		"TDSCommon"
-	],
+        "TDSCommon"
+    ],
     "includePlatforms": [
         "Android",
+        "Editor",
         "iOS"
     ],
     "excludePlatforms": [],

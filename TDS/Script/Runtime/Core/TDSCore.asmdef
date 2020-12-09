@@ -1,10 +1,11 @@
 {
     "name": "TDSCore",
     "references": [
-		"TDSCommon"
-	],
+        "TDSCommon"
+    ],
     "includePlatforms": [
         "Android",
+        "Editor",
         "iOS"
     ],
     "excludePlatforms": [],
