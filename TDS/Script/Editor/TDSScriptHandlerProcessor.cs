@@ -61,7 +61,7 @@ namespace TDSEditor
         }
     }
 
-    public class TDSGlobalFileHelper
+    public class TDSFileHelper
     {
         public static void CopyAndReplaceDirectory(string srcPath, string dstPath)
         {
@@ -78,6 +78,24 @@ namespace TDSEditor
             foreach (var dir in Directory.GetDirectories(srcPath))
                 CopyAndReplaceDirectory(dir, Path.Combine(dstPath, Path.GetFileName(dir)));
         }
+
+        public static string FilterFile(string srcPath,string filterName){
+            if(!Directory.Exists(srcPath)){
+                return null;
+            }          
+            foreach(var dir in Directory.GetDirectories(srcPath))
+            {
+                Debug.Log("dirName:" + Path.Combine(srcPath, Path.GetFileName(dir)));
+                string fileName = Path.GetFileName(dir);
+                if (fileName.StartsWith(filterName))
+                {
+                    return Path.Combine(srcPath,Path.GetFileName(dir));
+                }
+            } 
+            return null; 
+        }
+
     }
+
 
 }

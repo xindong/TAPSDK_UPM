@@ -1,15 +1,7 @@
 {
-    "name": "Demo",
-    "references": [
-        "TDSCommon",
-        "TDSLogin",
-        "TDSTapDB",
-        "TDSMoment",
-        "TDSCore"
-    ],
+    "name": "Unity.TDS.Editor",
     "includePlatforms": [
-        "Android",
-        "iOS"
+        "Editor"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

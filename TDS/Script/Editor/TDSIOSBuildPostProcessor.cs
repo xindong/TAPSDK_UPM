@@ -10,7 +10,8 @@ using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
 #endif
 using UnityEngine;
-
+namespace TDSEditor
+{
  public class TDSIOSPostBuildProcessor : MonoBehaviour
     {
 #if UNITY_IOS
@@ -99,15 +100,19 @@ using UnityEngine;
 
                 Directory.CreateDirectory(resourcePath);
 
-                if(Directory.Exists(parentFolder + "/Assets/TDS/Plugins/IOS/Resource")){
-                    //使用unitypackage接入
-                    CopyAndReplaceDirectory(parentFolder + "/Assets/TDS/Plugins/IOS/Resource", resourcePath);
-                }else if(Directory.Exists(parentFolder + "/Library/PacakgeCache/com.tds.sdk@0.0.1-alpha/TDS/Plugins/IOS/Resource")){
+                string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.sdk");
+
+                string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TDS");
+
+                string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/TDS/Plugins/IOS/Resource" : localPacckagePath + "/Plugins/IOS/Resource";
+
+                if(Directory.Exists(tdsResourcePath)){
                     //使用UPM接入
-                    CopyAndReplaceDirectory(parentFolder + "/Library/PacakgeCache/com.tds.sdk@0.0.1-alpha/TDS/Plugins/IOS/Resource", resourcePath);
+                    CopyAndReplaceDirectory(tdsResourcePath, resourcePath);
                 }
                 // 复制资源文件夹到工程目录
                 // 复制Assets的plist到工程目录
+
                 if(File.Exists(parentFolder + "/Assets/Plugins/IOS/Resource/TDS-Info.plist")){
                     Debug.Log("copy plist");
                     File.Copy(parentFolder + "/Assets/Plugins/IOS/Resource/TDS-Info.plist",resourcePath + "/TDS-Info.plist");
@@ -234,6 +239,6 @@ using UnityEngine;
         }
     }
 
-    
+}    
 #endif
 #endif

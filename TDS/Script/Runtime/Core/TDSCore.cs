@@ -1,3 +1,4 @@
+
 namespace TapSDK
 {
     public class TDSCore
@@ -12,9 +13,9 @@ namespace TapSDK
             TDSCoreImpl.GetInstance().EnableMoment();
         }
 
-        public static void EnableTapDB(string gameVersion,string channel)
+        public static void EnableTapDB(string gameVersion, string channel)
         {
-            TDSCoreImpl.GetInstance().EnableTapDB(gameVersion,channel);
+            TDSCoreImpl.GetInstance().EnableTapDB(gameVersion, channel);
         }
     }
 }

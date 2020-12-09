@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TapSDK;
 
-public class LoginScene : MonoBehaviour, TapSDK.LoginCallback
+public class LoginScene : MonoBehaviour, LoginCallback
 {
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class LoginScene : MonoBehaviour, TapSDK.LoginCallback
 
     private bool isCorner = true;
 
-    public void LoginSuccess(TapSDK.TDSAccessToken accessToken)
+    public void LoginSuccess(TDSAccessToken accessToken)
     {
         this.label = accessToken.toJSON();
     }
