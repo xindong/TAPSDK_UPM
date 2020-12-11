@@ -42,11 +42,6 @@ public class MomentScene : MonoBehaviour
 
         tapToken = GUI.TextArea(new Rect(50, 150, 250, 60), tapToken, inputStyle);
 
-        if (GUI.Button(new Rect(50, 250, 250, 60), "设置Token", buttonStyle))
-        {
-            TapSDK.TDSMoment.SetLoginToken(tapToken);
-        }
-
         cliendId = GUI.TextArea(new Rect(50, 350, 250, 60), cliendId, inputStyle);
 
         if (GUI.Button(new Rect(50, 450, 250, 60), "设置ClientId", buttonStyle))

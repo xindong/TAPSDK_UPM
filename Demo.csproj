@@ -585,6 +585,21 @@
     <Reference Include="mscorlib">
         <HintPath>/Applications/Unity/Hub/Editor/2020.1.5f1c1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
     </Reference>
+    <Reference Include="TDSCommon">
+        <HintPath>/Users/xiaoyi/Documents/UnityProject/TDSSDKAllUnity/Library/ScriptAssemblies/TDSCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="TDSLogin">
+        <HintPath>/Users/xiaoyi/Documents/UnityProject/TDSSDKAllUnity/Library/ScriptAssemblies/TDSLogin.dll</HintPath>
+    </Reference>
+    <Reference Include="TDSTapDB">
+        <HintPath>/Users/xiaoyi/Documents/UnityProject/TDSSDKAllUnity/Library/ScriptAssemblies/TDSTapDB.dll</HintPath>
+    </Reference>
+    <Reference Include="TDSMoment">
+        <HintPath>/Users/xiaoyi/Documents/UnityProject/TDSSDKAllUnity/Library/ScriptAssemblies/TDSMoment.dll</HintPath>
+    </Reference>
+    <Reference Include="TDSCore">
+        <HintPath>/Users/xiaoyi/Documents/UnityProject/TDSSDKAllUnity/Library/ScriptAssemblies/TDSCore.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>/Users/xiaoyi/Documents/UnityProject/TDSSDKAllUnity/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>

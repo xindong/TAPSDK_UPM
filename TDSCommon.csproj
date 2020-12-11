@@ -36,18 +36,19 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Common\Json.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Common\IBridge.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Common\Command.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Common\BridgeAndroid.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Common\Logger.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Common\BridgeCallback.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Common\Platform.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Common\Bridge.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Common\BridgeIOS.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Common\Result.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Common\Language.cs" />
-     <None Include="Assets\Plugins\TDS\Script\Runtime\Common\TDSCommon.asmdef" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\Json.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\IBridge.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\Command.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\BridgeAndroid.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\BridgeCallback.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\TDSCommon.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\Platform.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\Bridge.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\TDSCommonImpl.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\BridgeIOS.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\ITDSCommon.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Common\Result.cs" />
+     <None Include="Assets\TDS\Script\Runtime\Common\TDSCommon.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2020.1.5f1c1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

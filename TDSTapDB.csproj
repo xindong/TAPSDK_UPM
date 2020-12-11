@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\TDS\Script\Runtime\TapDB\TDSTapDB.cs" />
      <Compile Include="Assets\TDS\Script\Runtime\TapDB\TDSTapDBImpl.cs" />
      <Compile Include="Assets\TDS\Script\Runtime\TapDB\ITDSTapDB.cs" />
      <None Include="Assets\TDS\Script\Runtime\TapDB\TDSTapDB.asmdef" />
@@ -590,6 +591,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="TDSCommon.csproj">
+      <Project>{c198647a-bd98-c2bb-0ae7-420ae6ace8ea}</Project>
+      <Name>TDSCommon</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -28,7 +28,7 @@ public class TapDBScene : MonoBehaviour
 
         if (GUI.Button(new Rect(50, 100, 200, 60), "初始化", myButtonStyle))
         {
-            TapSDK.TDSTapDB.Init("appId", "cliendId", "channel", "gameVersion");
+            TapSDK.TDSTapDB.Init("cliendId", "channel", "gameVersion");
         }
         if (GUI.Button(new Rect(50, 200, 200, 60), "设置User", myButtonStyle))
         {

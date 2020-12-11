@@ -36,11 +36,11 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Moment\MomentImpl.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Moment\MomentCallback.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Moment\MomentCallbackBean.cs" />
-     <Compile Include="Assets\Plugins\TDS\Script\Runtime\Moment\TDSMoment.cs" />
-     <None Include="Assets\Plugins\TDS\Script\Runtime\Moment\TDSMoment.asmdef" />
+     <Compile Include="Assets\TDS\Script\Runtime\Moment\MomentImpl.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Moment\MomentCallback.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Moment\MomentCallbackBean.cs" />
+     <Compile Include="Assets\TDS\Script\Runtime\Moment\TDSMoment.cs" />
+     <None Include="Assets\TDS\Script\Runtime\Moment\TDSMoment.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2020.1.5f1c1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -592,6 +592,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="TDSCommon.csproj">
+      <Project>{c198647a-bd98-c2bb-0ae7-420ae6ace8ea}</Project>
+      <Name>TDSCommon</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
