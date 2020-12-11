@@ -72,7 +72,8 @@ using TapSDK;
     ],
     "includePlatforms": [
         "Android",
-        "iOS"
+        "iOS",
+        "Editor"
     ],
     ...
 }
