@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TDSCommon;
 
 namespace TapSDK
 {
@@ -14,7 +15,9 @@ namespace TapSDK
 
         public MomentCallbackBean(string json)
         {
-            JsonUtility.FromJsonOverwrite(json, this);
+            Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
+            this.code = dic["code"] as string;
+            this.message = dic["message"] as string;
         }
 
     }
