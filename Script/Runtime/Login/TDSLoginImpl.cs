@@ -90,9 +90,7 @@ namespace TapSDK
 
                 if (wrapperBean.loginCallbackCode == 0)
                 {
-                    Debug.Log("loginCallback accessToken:" + wrapperBean.wrapper);
                     TDSAccessToken accessToken = new TDSAccessToken(wrapperBean.wrapper);
-
                     callback.LoginSuccess(accessToken);
                     return;
                 }
@@ -121,8 +119,8 @@ namespace TapSDK
                 {
                     return;
                 }
-                TDSAccessToken accessToken = new TDSAccessToken(result.content);
-                Debug.Log("accessToken:" + accessToken.toJSON());
+                Debug.Log("content:" + result.content);
+                TDSAccessToken accessToken = JsonUtility.FromJson<TDSAccessToken>(result.content);
                 callback(accessToken);
             });
         }

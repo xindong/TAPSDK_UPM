@@ -2,7 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TDSCommon;
 
 namespace TapSDK
 {   
@@ -16,7 +16,11 @@ namespace TapSDK
 
         public TDSLoginProfile(string json)
         {
-            JsonUtility.FromJsonOverwrite(json, this);
+            Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
+            this.name = dic["name"] as string;
+            this.avatar = dic["avatar"] as string;
+            this.openid = dic["openid"] as string;
+            this.unionid = dic["unionid"] as string;
         }
 
         public string toJSON()
