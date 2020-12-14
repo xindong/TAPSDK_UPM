@@ -17,10 +17,10 @@ namespace TapSDK
         public TDSLoginProfile(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.name = dic["name"] as string;
-            this.avatar = dic["avatar"] as string;
-            this.openid = dic["openid"] as string;
-            this.unionid = dic["unionid"] as string;
+            this.name = SafeDictionary.SafeGetValueByKey(dic,"name") as string;
+            this.avatar = SafeDictionary.SafeGetValueByKey(dic,"avatar") as string;
+            this.openid = SafeDictionary.SafeGetValueByKey(dic,"openid") as string;
+            this.unionid = SafeDictionary.SafeGetValueByKey(dic,"unionid") as string;
         }
 
         public string toJSON()

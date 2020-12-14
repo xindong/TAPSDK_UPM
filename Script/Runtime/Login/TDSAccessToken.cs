@@ -11,10 +11,8 @@ namespace TapSDK
     {
         [SerializeField]
         public string kid;
-
         [SerializeField]
         public string access_token;
-        
         [SerializeField]
         public string token_type;
         [SerializeField]
@@ -25,11 +23,11 @@ namespace TapSDK
         public TDSAccessToken(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.kid = dic["kid"] as string;
-            this.access_token = dic["access_token"] as string;
-            this.token_type = dic["token_type"] as string;
-            this.mac_key = dic["mac_key"] as string;
-            this.mac_algorithm = dic["mac_algorithm"] as string;
+            this.kid = SafeDictionary.SafeGetValueByKey(dic,"kid") as string;
+            this.access_token = SafeDictionary.SafeGetValueByKey(dic,"access_token") as string;
+            this.token_type = SafeDictionary.SafeGetValueByKey(dic,"token_type") as string;
+            this.mac_key = SafeDictionary.SafeGetValueByKey(dic,"mac_key") as string;
+            this.mac_algorithm = SafeDictionary.SafeGetValueByKey(dic,"mac_algorithm") as string;
         }
 
         public string toJSON()
