@@ -15,7 +15,7 @@
 ```json
 //在YourProjectPath/Packages/manifest.json中添加以下代码
 "dependencies":{
-        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#0.0.4-alpha"
+        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#{version_name}"
     }
 ```
 
@@ -72,7 +72,8 @@ using TapSDK;
     ],
     "includePlatforms": [
         "Android",
-        "iOS"
+        "iOS",
+        "Editor"
     ],
     ...
 }
