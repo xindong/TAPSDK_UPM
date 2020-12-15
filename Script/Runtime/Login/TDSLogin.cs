@@ -27,6 +27,11 @@ namespace TapSDK
             TDSLoginImpl.GetInstance().RegisterLoginCallback(callback);
         }
 
+        public static void UnRegisterLoginCallback()
+        {
+            TDSLoginImpl.GetInstance().UnRegisterLoginCallback();
+        }
+
         public static void GetCurrentAccessToken(Action<TDSAccessToken> callback)
         {
             TDSLoginImpl.GetInstance().GetCurrentAccessToken(callback);

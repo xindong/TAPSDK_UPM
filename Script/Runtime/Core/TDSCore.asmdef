@@ -1,7 +1,8 @@
 {
     "name": "TDSCore",
     "references": [
-        "TDSCommon"
+        "TDSCommon",
+        "TDSLogin"
     ],
     "includePlatforms": [
         "Android",

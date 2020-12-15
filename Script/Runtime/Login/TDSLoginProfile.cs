@@ -23,7 +23,7 @@ namespace TapSDK
             this.unionid = SafeDictionary.SafeGetValueByKey(dic,"unionid") as string;
         }
 
-        public string toJSON()
+        public string ToJSON()
         {
             return JsonUtility.ToJson(this);
         }

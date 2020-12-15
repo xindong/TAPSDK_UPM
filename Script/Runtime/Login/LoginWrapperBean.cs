@@ -16,7 +16,7 @@ namespace TapSDK
             JsonUtility.FromJsonOverwrite(json, this);
         }
 
-        public string toJSON()
+        public string ToJSON()
         {
             return JsonUtility.ToJson(this);
         }

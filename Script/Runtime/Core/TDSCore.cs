@@ -17,5 +17,6 @@ namespace TapSDK
         {
             TDSCoreImpl.GetInstance().EnableTapDB(gameVersion, channel);
         }
+
     }
 }
