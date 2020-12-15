@@ -113,15 +113,21 @@ TapSDK.TDSLogin.Init(clientId);
 TapSDK.TDSLogin.Init(clientId,isCN,isRoundCorner);
 ```
 
-##### 3.2.2 注册LoginCallback回调
+##### 3.2.2 LoginCallback回调
 
 调用 **TDSLogin.RegisterLoginCallback()** 来处理登陆结果回调
+
+如果登陆成功，则会回调 **LoginCallback.LoginSuccess(TDSAccessToken)**,登陆取消以及登陆失败则会相应的回调对应接口。
 
 ```c#
 TapSDK.TDSLogin.RegisterLoginCallback(loginCallback);
 ```
 
-如果登陆成功，则会回调 **LoginCallback.LoginSuccess(TDSAccessToken)**,登陆取消以及登陆失败则会相应的回调对应接口。
+解绑LoginCallback回调
+
+```c#
+TapSDK.TDSLogin,UnRegisterLoginCallback();
+```
 
 ##### 3.2.3 开始登陆
 

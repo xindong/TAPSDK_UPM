@@ -30,7 +30,7 @@ namespace TapSDK
             this.mac_algorithm = SafeDictionary.SafeGetValueByKey(dic,"mac_algorithm") as string;
         }
 
-        public string toJSON()
+        public string ToJSON()
         {
             return JsonUtility.ToJson(this);
         }

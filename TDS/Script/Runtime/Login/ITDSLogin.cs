@@ -2,6 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TDSCommon;
 
 namespace TapSDK
 {
@@ -17,6 +18,8 @@ namespace TapSDK
         void StartLogin(string[] permissions);
 
         void RegisterLoginCallback(LoginCallback callback);
+
+        void UnRegisterLoginCallback();
 
         void GetCurrentAccessToken(Action<TDSAccessToken> token);
 
@@ -44,7 +47,7 @@ namespace TapSDK
 
         void LoginCancel();
 
-        void LoginError(string error);
+        void LoginError(TDSAccountError error);
     }
 
 }

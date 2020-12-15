@@ -25,7 +25,7 @@ public class LoginScene : MonoBehaviour, LoginCallback
 
     public void LoginSuccess(TDSAccessToken accessToken)
     {
-        this.label = accessToken.toJSON();
+        this.label = accessToken.ToJSON();
     }
 
     public void LoginCancel()
@@ -33,9 +33,9 @@ public class LoginScene : MonoBehaviour, LoginCallback
         this.label = "登陆取消";
     }
 
-    public void LoginError(string error)
+    public void LoginError(TDSAccountError error)
     {
-        this.label = error;
+        this.label = error.ToJSON();
     }
 
     private void OnGUI()
@@ -53,11 +53,16 @@ public class LoginScene : MonoBehaviour, LoginCallback
             fontSize = 20
         };
 
-        GUI.Label(new Rect(400, 400, 400, 300), label, myLabelStyle);
+        GUIStyle myToggleStyle = new GUIStyle(GUI.skin.toggle)
+        {
+            fontSize = 20
+        };
 
-        GUI.Toggle(new Rect(50, 50, 100, 30), isCN, "国内");
+        GUI.Label(new Rect(400, 600, 400, 300), label, myLabelStyle);
 
-        GUI.Toggle(new Rect(50, 100, 100, 30), isCorner, "圆角");
+        GUI.Toggle(new Rect(50, 50, 100, 30), isCN, "国内",myToggleStyle);
+
+        GUI.Toggle(new Rect(50, 100, 100, 30), isCorner, "圆角",myToggleStyle);
 
         if (GUI.Button(new Rect(50, 200, 200, 60), "初始化", myButtonStyle))
         {
@@ -84,17 +89,23 @@ public class LoginScene : MonoBehaviour, LoginCallback
         {
             TapSDK.TDSLogin.GetCurrentAccessToken((accessToken) =>
             {
-                Debug.Log("accessToken:" + accessToken.toJSON());
-                this.label = accessToken.toJSON();
+                Debug.Log("accessToken:" + accessToken.ToJSON());
+                this.label = accessToken.ToJSON();
             });
+        }
+
+        if (GUI.Button(new Rect(50, 700, 200, 60), "取消注册", myButtonStyle))
+        {
+            TapSDK.TDSLogin.UnRegisterLoginCallback();
+            this.label = "取消注册回调";
         }
 
         if (GUI.Button(new Rect(300, 50, 200, 60), "获取profile", myButtonStyle))
         {
             TapSDK.TDSLogin.GetCurrentProfile((profile) =>
             {
-                Debug.Log("profile:" + profile.toJSON());
-                this.label = profile.toJSON();
+                Debug.Log("profile:" + profile.ToJSON());
+                this.label = profile.ToJSON();
             });
         }
 
@@ -107,8 +118,8 @@ public class LoginScene : MonoBehaviour, LoginCallback
         {
             TapSDK.TDSLogin.FetchProfileForCurrentAccessToken((profile) =>
             {
-                Debug.Log("profile:" + profile.toJSON());
-                this.label = profile.toJSON();
+                Debug.Log("profile:" + profile.ToJSON());
+                this.label = profile.ToJSON();
             }, (errorMsg) =>
             {
                 this.label = errorMsg;

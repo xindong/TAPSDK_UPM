@@ -34,7 +34,7 @@ namespace TapSDK
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("clientID", clientId);
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "initWithClientID", false, null, dic);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "init", false, null, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -62,46 +62,22 @@ namespace TapSDK
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("permissions", permissions);
             Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "startTapLogin", true, null, dic);
-            TDSCommon.EngineBridge.GetInstance().CallHandler(command);
+            EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void RegisterLoginCallback(LoginCallback callback)
         {
             Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "registerLoginCallback", true, null, null);
-            TDSCommon.EngineBridge.GetInstance().CallHandler(command, (result) =>
+            EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
-                Debug.Log("loginCallback:" + result.toJSON());
-
-                if (result.code != Result.RESULT_SUCCESS)
-                {
-                    callback.LoginError(result.message);
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(result.content))
-                {
-                    callback.LoginError(result.message);
-                    return;
-                }
-
-                LoginWrapperBean<string> wrapperBean = new LoginWrapperBean<string>(result.content);
-
-                Debug.Log("loginWrapper:" + wrapperBean.toJSON());
-
-                if (wrapperBean.loginCallbackCode == 0)
-                {
-                    TDSAccessToken accessToken = new TDSAccessToken(wrapperBean.wrapper);
-                    callback.LoginSuccess(accessToken);
-                    return;
-                }
-
-                if (wrapperBean.loginCallbackCode == 1)
-                {
-                    callback.LoginCancel();
-                    return;
-                }
-                callback.LoginError(wrapperBean.wrapper);
+                TDSLoginResultHandler.HandlerLoginResult(callback,result);
             });
+        }
+
+        public void UnRegisterLoginCallback()
+        {
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE,"unregisterLoginCallback",false,null,null);
+            EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void GetCurrentAccessToken(Action<TDSAccessToken> callback)
@@ -120,7 +96,7 @@ namespace TapSDK
                     return;
                 }
                 Debug.Log("content:" + result.content);
-                TDSAccessToken accessToken = JsonUtility.FromJson<TDSAccessToken>(result.content);
+                TDSAccessToken accessToken = new TDSAccessToken(result.content);
                 callback(accessToken);
             });
         }
@@ -142,7 +118,7 @@ namespace TapSDK
                 }
 
                 TDSLoginProfile profile = new TDSLoginProfile(result.content);
-                Debug.Log("profile:" + profile.toJSON());
+                Debug.Log("profile:" + profile.ToJSON());
                 callback(profile);
             });
         }
@@ -152,7 +128,6 @@ namespace TapSDK
             Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "fetchProfileForCurrentAccessToken", true, null, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
-                Debug.Log("currentProfile:" + result.toJSON());
                 if (result.code != Result.RESULT_SUCCESS)
                 {
                     errorCallback(result.message);
@@ -168,7 +143,7 @@ namespace TapSDK
                 if (wrapperBean.loginCallbackCode == 0)
                 {
                     TDSLoginProfile profile = new TDSLoginProfile(wrapperBean.wrapper);
-                    Debug.Log("profile:" + profile.toJSON());
+                    Debug.Log("profile:" + profile.ToJSON());
                     profileCallback(profile);
                     return;
                 }
