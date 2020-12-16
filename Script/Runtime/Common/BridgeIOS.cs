@@ -68,17 +68,22 @@ namespace TDSCommon
 
         public void Register(Action<Result> action)
         {
+            #if UNITY_IOS
             this.callback = action;
             registerCallback(engineBridgeDelegate);
+            #endif
         }
 
         public void Call(Command command)
-        {
+        {   
+            #if UNITY_IOS
             callHandler(command.toJSON());
+            #endif
         }
 
         public void Call(Command command, Action<Result> action)
         {
+            #if UNITY_IOS
             if (command.callback && !string.IsNullOrEmpty(command.callbackId))
             {
                 if (!dic.ContainsKey(command.callbackId))
@@ -87,16 +92,17 @@ namespace TDSCommon
                 }
             }
             registerHandler(command.toJSON(), engineBridgeDelegate);
+            #endif
         }
-
+    #if UNITY_IOS
     [DllImport("__Internal")]
     private static extern void callHandler(string command);
 
     [DllImport("__Internal")]
     private static extern void registerCallback(EngineBridgeDelegate engineBridgeDelegate);
-
+    
     [DllImport("__Internal")]
     private static extern void registerHandler(string command,EngineBridgeDelegate engineBridgeDelegate);
-
+    #endif
     }
 }
