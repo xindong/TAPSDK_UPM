@@ -16,8 +16,6 @@ namespace TDSCommon
 
         private string callHandlerMethod = "callHandler";
         
-        private string registerCallback = "registerCallback";
-
         private string initMethod = "init";
 
         private string registerMethod = "register";
@@ -49,15 +47,6 @@ namespace TDSCommon
             AndroidJavaClass serviceClass = new AndroidJavaClass(serviceClzName);
             AndroidJavaObject serviceImpl = new AndroidJavaObject(serviceImplName);
             mAndroidBridge.Call(registerMethod, serviceClass, serviceImpl);
-        }
-
-        public void Register(Action<Result> action)
-        {
-            if (mAndroidBridge == null)
-            {
-                return;
-            }
-            mAndroidBridge.Call(registerCallback, new BridgeCallback(action));
         }
 
         public void Call(Command command, Action<Result> action)

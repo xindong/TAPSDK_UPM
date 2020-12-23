@@ -9,8 +9,6 @@
 #import "TDSPostMomentData.h"
 #import "TDSMomentResultCode.h"
 #import <Foundation/Foundation.h>
-#import "TDSMomentAccessToken.h"
-
 
 //#import "TapTapSDK.h"
 
@@ -20,10 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
  v1.2.0
  */
 
-typedef NS_ENUM(NSInteger,TDSMomentOrientation) {
-    TDSMomentOrientationDefault = -1,
+typedef NS_ENUM (NSInteger, TDSMomentOrientation) {
+    TDSMomentOrientationDefault   = -1,
     TDSMomentOrientationLandscape = 0,
-    TDSMomentOrientationPortrait = 1,
+    TDSMomentOrientationPortrait  = 1,
 };
 
 @protocol TDSMomentDelegate <NSObject>
@@ -34,31 +32,29 @@ typedef NS_ENUM(NSInteger,TDSMomentOrientation) {
 
 @end
 
-@interface TDSMomentConfig: NSObject
+@interface TDSMomentConfig : NSObject
 
 @property (nonatomic, assign) TDSMomentOrientation orientation;
 
-+ (TDSMomentConfig *) createWithOrientation:(TDSMomentOrientation)orientation;
++ (TDSMomentConfig *)createWithOrientation:(TDSMomentOrientation)orientation;
 @end
-
 
 @interface TDSMomentSdk : NSObject
 
 + (void)initSDKWithClientId:(NSString *)clientId;
+
 + (void)setDelegate:(id <TDSMomentDelegate>)delegate;
 
-+ (NSString *) getSdkVersion;
++ (NSString *)getSdkVersion;
 
 + (NSString *)getSdkVersionCode;
 
-+ (void)openTapMomentWithConfig:(TDSMomentConfig *) config;
-
++ (void)openTapMomentWithConfig:(TDSMomentConfig *)config;
 
 /// 打开好友个人中心
 /// @param config TDSMomentConfig
 /// @param userId openId
 + (void)openUserCenterWithConfig:(TDSMomentConfig *)config userId:(NSString *)userId;
-
 
 /// 关闭所有内嵌窗口
 /// @param title 弹框的 title
@@ -80,15 +76,8 @@ typedef NS_ENUM(NSInteger,TDSMomentOrientation) {
 /// @param content 发布的动态内容
 /// @param config 配置
 /// @warning `moment`参数：动态内容为视频请选择`TDSVideoMomentData`, 动态内容为图片时请选择 `TDSImageMomentData`。
-+ (void)openPostMomentPageWithContent:(TDSPostMomentData * _Nonnull)content
-                               config:(TDSMomentConfig * _Nonnull)config;
-
-
-
-/// 登录后处理逻辑完成后设置
-/// @param success 处理结果
-/// @warning 收到`TM_RESULT_CODE_MOMENT_LOGIN_SUCCEED`回调后调用
-+ (void)setHandleLoginResult:(BOOL)success;
++ (void)openPostMomentPageWithContent:(TDSPostMomentData *_Nonnull)content
+                               config:(TDSMomentConfig *_Nonnull)config;
 
 @end
 

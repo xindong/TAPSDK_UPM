@@ -17,9 +17,9 @@ namespace TapSDK
             TDSTapDBImpl.GetInstance().SetUser(userId);
         }
 
-        public static void SetUser(string userId, string openId, string loginType)
+        public static void SetUser(string userId, string loginType)
         {
-            TDSTapDBImpl.GetInstance().SetUser(userId, openId, loginType);
+            TDSTapDBImpl.GetInstance().SetUser(userId, loginType);
         }
 
         public static void SetName(string name)

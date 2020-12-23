@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger,TGTUserSex) {
  * channel: 分包渠道名称，可为空
  * gameVersion: 游戏版本，可为空，为空时，自动获取游戏安装包的版本（Xcode配置中的Version）
  */
-+ (void)onStart:(NSString *)appId channel:(nullable NSString *)channel version:(nullable NSString *)gameVersion;
++ (void)onStart:(NSString *)appId channel:(nullable NSString *)channel version:(nullable NSString *)gameVersion DEPRECATED_MSG_ATTRIBUTE("已弃用，直接调用 onStartWithClientId: 即可");
 
 /**
  * 初始化，尽早调用
@@ -80,9 +80,8 @@ typedef NS_ENUM(NSInteger,TGTUserSex) {
 
 /// 记录一个用户（不是游戏角色！！！！），需要保证唯一性
 /// @param userId 用户ID。不同用户需要保证ID的唯一性
-/// @param openId 通过第三方登录获取到的openId
 /// @param loginType 登录方式
-+ (void)setUser:(NSString *)userId openId:(NSString *)openId loginType:(TapDBLoginType)loginType;
++ (void)setUser:(NSString *)userId loginType:(TapDBLoginType)loginType;
 /**
  * 记录一个用户（注意是平台用户，不是游戏角色！！！！），需要保证唯一性
  * userId: 用户的ID（注意是平台用户ID，不是游戏角色ID！！！！），如果是匿名用户，由游戏生成，需要保证不同平台用户的唯一性

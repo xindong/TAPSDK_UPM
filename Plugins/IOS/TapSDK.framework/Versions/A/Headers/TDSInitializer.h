@@ -33,7 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 开启动态
 + (void)enableMoment;
 
-@property (nonatomic, weak) id<TDSErrorDelegate> delegate;
+///  事件代理
+@property (nonatomic, weak) id<TDSErrorDelegate> errorDelegate;
 
 @end
 

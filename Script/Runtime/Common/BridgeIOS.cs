@@ -13,8 +13,6 @@ namespace TDSCommon
 
         private Dictionary<string, Action<Result>> dic;
 
-        private Action<Result> callback;
-
         public static BridgeIOS GetInstance()
         {
             return sInstance;
@@ -28,11 +26,6 @@ namespace TDSCommon
         public Dictionary<string, Action<Result>> GetDictionary()
         {
             return dic;
-        }
-
-        public Action<Result> GetCallback()
-        {
-            return callback;
         }
 
         private delegate void EngineBridgeDelegate(string result);
@@ -51,10 +44,7 @@ namespace TDSCommon
             {
                 action = actionDic[result.callbackId];
             }
-            else
-            {
-                action = BridgeIOS.GetInstance().GetCallback();
-            }
+
             if (action != null)
             {
                 action(result);
@@ -64,14 +54,6 @@ namespace TDSCommon
         public void Register(string serviceClz, string serviceImp)
         {
             //IOS无需注册
-        }
-
-        public void Register(Action<Result> action)
-        {
-            #if UNITY_IOS
-            this.callback = action;
-            registerCallback(engineBridgeDelegate);
-            #endif
         }
 
         public void Call(Command command)
@@ -98,9 +80,6 @@ namespace TDSCommon
     [DllImport("__Internal")]
     private static extern void callHandler(string command);
 
-    [DllImport("__Internal")]
-    private static extern void registerCallback(EngineBridgeDelegate engineBridgeDelegate);
-    
     [DllImport("__Internal")]
     private static extern void registerHandler(string command,EngineBridgeDelegate engineBridgeDelegate);
     #endif

@@ -27,13 +27,11 @@ FOUNDATION_EXPORT const unsigned char bridgeVersionString[];
 
 @property (nonatomic, weak) id<TDSBridgeCallback>delegte;
 
-+(instancetype) instance;
++ (instancetype)instance;
 
--(void) callHandler:(NSString*) command;
+- (void)callHandler:(NSString*) command;
 
--(void) registerCallback:(id<TDSBridgeCallback>) callback;
-
--(void) registerHandler:(NSString*) command
+- (void)registerHandler:(NSString*) command
       bridgeCallback:(id<TDSBridgeCallback>) callback;
 
 @end
