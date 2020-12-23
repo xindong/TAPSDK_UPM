@@ -10,7 +10,7 @@ public class MomentScene : MonoBehaviour
 
     private string tapToken = "Please input tap token";
 
-    private string cliendId = "d4bjgwom9zk84wk";
+    private string cliendId = "FwFdCIr6u71WQDQwQN";
 
     private void OnGUI()
     {

@@ -66,12 +66,12 @@ public class LoginScene : MonoBehaviour, LoginCallback
 
         if (GUI.Button(new Rect(50, 200, 200, 60), "初始化", myButtonStyle))
         {
-            TapSDK.TDSLogin.Init("CqBgq73t1JdHFE3Rk3");
+            TapSDK.TDSLogin.Init("FwFdCIr6u71WQDQwQN");
         }
 
         if (GUI.Button(new Rect(50, 300, 200, 60), "带参初始化", myButtonStyle))
         {
-            TapSDK.TDSLogin.Init("CqBgq73t1JdHFE3Rk3", isCN, isCorner);
+            TapSDK.TDSLogin.Init("FwFdCIr6u71WQDQwQN", isCN, isCorner);
         }
 
         if (GUI.Button(new Rect(50, 400, 200, 60), "注册回调", myButtonStyle))

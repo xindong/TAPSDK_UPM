@@ -52,7 +52,7 @@ public class CoreScene : MonoBehaviour,LoginCallback
 
         if (GUI.Button(new Rect(50, 100, 200, 60), "初始化", myButtonStyle))
         {
-            TapSDK.TDSCore.Init("clientId");
+            TapSDK.TDSCore.Init("FwFdCIr6u71WQDQwQN");
         }
         if (GUI.Button(new Rect(50, 200, 200, 60), "开启TapDB", myButtonStyle))
         {
