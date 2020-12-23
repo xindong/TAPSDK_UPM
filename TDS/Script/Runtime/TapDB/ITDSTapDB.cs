@@ -11,7 +11,7 @@ namespace TapSDK
 
         void SetUser(string userId);
 
-        void SetUser(string userId, string openId, string loginType);
+        void SetUser(string userId, string loginType);
 
         void SetName(string name);
 

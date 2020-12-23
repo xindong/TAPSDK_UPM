@@ -36,7 +36,7 @@ public class TapDBScene : MonoBehaviour
         }
         if (GUI.Button(new Rect(50, 300, 200, 60), "设置UserParams", myButtonStyle))
         {
-            TapSDK.TDSTapDB.SetUser("userId", "openId", "loginType");
+            TapSDK.TDSTapDB.SetUser("userId","loginType");
         }
         if (GUI.Button(new Rect(50, 400, 200, 60), "设置名字", myButtonStyle))
         {

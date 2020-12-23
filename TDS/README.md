@@ -6,7 +6,7 @@
 
 * IOS **10**或更高版本
 
-* Android 目标为**API19**或更高版本
+* Android 目标为**API21**或更高版本
 
 ### 1.添加TapSDK
 
@@ -126,7 +126,7 @@ TapSDK.TDSLogin.RegisterLoginCallback(loginCallback);
 解绑LoginCallback回调
 
 ```c#
-TapSDK.TDSLogin,UnRegisterLoginCallback();
+TapSDK.TDSLogin.UnRegisterLoginCallback();
 ```
 
 ##### 3.2.3 开始登陆

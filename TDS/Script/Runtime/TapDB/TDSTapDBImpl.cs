@@ -47,11 +47,10 @@ namespace TapSDK
             EngineBridge.GetInstance().CallHandler(command);
         }
 
-        public void SetUser(string userId, string openId, string loginType)
+        public void SetUser(string userId, string loginType)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("userId", userId);
-            dic.Add("openId", openId);
             dic.Add("loginType", loginType);
             Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "setUserWithParams", false, null, dic);
             EngineBridge.GetInstance().CallHandler(command);

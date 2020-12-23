@@ -14,11 +14,9 @@ FOUNDATION_EXPORT const unsigned char TDSMomentVersionString[];
 #if __has_include(<TDSMoment/TDSMoment.h>)
 
 #import <TDSMoment/TDSMomentSdk.h>
-#import <TDSMoment/TDSMomentAccessToken.h>
 
 #else
 
 #import "TDSMomentSdk.h"
-#import "TDSMomentAccessToken.h"
 
 #endif

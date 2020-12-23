@@ -50,4 +50,6 @@
  */
 + (TTSDKAccessToken *)currentAccessToken;
 
++ (void)setCurrentToken:(TTSDKAccessToken *)token;
+
 @end

@@ -13,7 +13,6 @@ namespace TDSCommon
         void Call(Command command);
 
         void Call(Command command, Action<Result> action);
-
-        void Register(Action<Result> action);
+        
     }
 }

@@ -47,15 +47,6 @@ namespace TDSCommon
             bridge.Register(serviceClzName, serviceImplName);
         }
 
-        public void RegisterCallback(Action<Result> action)
-        {
-            if (bridge == null)
-            {
-                return;
-            }
-            bridge.Register(action);
-        }
-
         public void CallHandler(Command command,[CallerMemberName] string memberName = "",
                                                 [CallerFilePath] string sourceFilePath = "",
                                                 [CallerLineNumber] int sourceLineNumber = 0)

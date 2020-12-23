@@ -16,11 +16,13 @@ FOUNDATION_EXPORT const unsigned char TapSDKVersionString[];
 #import <TapSDK/TDSInitializer.h>
 #import <TapSDK/TDSConfig.h>
 #import <TapSDK/TDSErrorDelegate.h>
+#import <TapSDK/TapLoginHelper.h>
 
 #else
 
 #import "TDSInitializer.h"
 #import "TDSConfig.h"
 #import "TDSErrorDelegate.h"
+#import "TapLoginHelper.h"
 
 #endif

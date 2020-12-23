@@ -12,8 +12,8 @@
 
 @interface TDSBridgeProxy : NSObject<TDSBridgeCallback>
 
-+(TDSBridgeProxy *)shareInstance;
++ (TDSBridgeProxy *)shareInstance;
 
--(void) onResult:(NSString*) result;
+- (void)onResult:(NSString*) result;
 
 @end
