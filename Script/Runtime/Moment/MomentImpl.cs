@@ -62,18 +62,19 @@ namespace TapSDK
                   }
 
                   MomentCallbackBean bean = new MomentCallbackBean(result.content);
+                  Debug.Log("MomentCallback:" + bean.code + "  " + bean.message);
                   if (bean != null)
                   { 
                       if (TDSCommon.Platform.isAndroid())
                       { 
-                          if(AndroidOrientationInterceptor(int.Parse(bean.code)))
+                          if(AndroidOrientationInterceptor(bean.code))
                           {
-                            callback(int.Parse(bean.code), bean.message);
+                            callback(bean.code, bean.message);
                           }
                       }
                       else
                       {
-                          callback(int.Parse(bean.code), bean.message);
+                          callback(bean.code, bean.message);
                       }
                   }
               });
