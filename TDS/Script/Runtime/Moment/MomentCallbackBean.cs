@@ -9,15 +9,15 @@ namespace TapSDK
     public class MomentCallbackBean
     {
 
-        public string code;
+        public int code;
 
         public string message;
 
         public MomentCallbackBean(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.code = SafeDictionary.SafeGetValueByKey(dic,"code") as string;
-            this.message = SafeDictionary.SafeGetValueByKey(dic,"message") as string;
+            this.code = int.Parse(SafeDictionary.SafeGetValueByKey(dic, "code").ToString());
+            this.message = SafeDictionary.SafeGetValueByKey(dic,"message").ToString();
         }
 
     }
