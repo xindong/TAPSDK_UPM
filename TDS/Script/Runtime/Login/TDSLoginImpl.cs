@@ -115,6 +115,7 @@ namespace TapSDK
 
                 if (string.IsNullOrEmpty(result.content))
                 {
+                    callback(null);
                     return;
                 }
 
