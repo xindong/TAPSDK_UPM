@@ -34,7 +34,7 @@ namespace TapSDK
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("clientID", clientId);
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "init", false, null, dic);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "init", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -44,7 +44,7 @@ namespace TapSDK
             dic.Add("clientID", clientId);
             dic.Add("regionType", isCN);
             dic.Add("roundCorner", roundCorner);
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "initWithClientID", false, null, dic);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "initWithClientID", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -53,7 +53,7 @@ namespace TapSDK
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("regionType", isCN);
             dic.Add("roundCorner", roundCorner);
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "changeConfig", false, null, dic);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "changeConfig", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -61,13 +61,13 @@ namespace TapSDK
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("permissions", permissions);
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "startTapLogin", true, null, dic);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "startTapLogin", true, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void RegisterLoginCallback(LoginCallback callback)
         {
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "registerLoginCallback", true, null, null);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "registerLoginCallback", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 TDSLoginResultHandler.HandlerLoginResult(callback,result);
@@ -76,13 +76,13 @@ namespace TapSDK
 
         public void UnRegisterLoginCallback()
         {
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE,"unregisterLoginCallback",false,null,null);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE,"unregisterLoginCallback",false,null);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void GetCurrentAccessToken(Action<TDSAccessToken> callback)
         {
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "currentAccessToken", true, null, null);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "currentAccessToken", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 Debug.Log("accessToken:" + result.toJSON());
@@ -103,7 +103,7 @@ namespace TapSDK
 
         public void GetCurrentProfile(Action<TDSLoginProfile> callback)
         {
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "currentProfile", true, null, null);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "currentProfile", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 Debug.Log("currentProfile:" + result.toJSON());
@@ -118,14 +118,13 @@ namespace TapSDK
                 }
 
                 TDSLoginProfile profile = new TDSLoginProfile(result.content);
-                Debug.Log("profile:" + profile.ToJSON());
                 callback(profile);
             });
         }
 
         public void FetchProfileForCurrentAccessToken(Action<TDSLoginProfile> profileCallback, Action<string> errorCallback)
         {
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "fetchProfileForCurrentAccessToken", true, null, null);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "fetchProfileForCurrentAccessToken", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 if (result.code != Result.RESULT_SUCCESS)
@@ -143,7 +142,6 @@ namespace TapSDK
                 if (wrapperBean.loginCallbackCode == 0)
                 {
                     TDSLoginProfile profile = new TDSLoginProfile(wrapperBean.wrapper);
-                    Debug.Log("profile:" + profile.ToJSON());
                     profileCallback(profile);
                     return;
                 }
@@ -152,7 +150,7 @@ namespace TapSDK
         }
         public void Logout()
         {
-            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "logout", false, null, null);
+            Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "logout", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
 

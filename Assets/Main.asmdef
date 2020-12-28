@@ -1,5 +1,5 @@
-{
-    "name": "Demo",
+﻿{
+    "name": "Main",
     "references": [
         "TDSCommon",
         "TDSLogin",

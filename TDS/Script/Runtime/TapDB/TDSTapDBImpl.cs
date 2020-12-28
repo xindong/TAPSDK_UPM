@@ -35,7 +35,7 @@ namespace TapSDK
             dic.Add("clientId", clientId);
             dic.Add("channel", channel);
             dic.Add("gameVersion", gameVersion);
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "init", false, null, dic);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "init", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -43,7 +43,7 @@ namespace TapSDK
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("userId", userId);
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "setUser", false, null, dic);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "setUser", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -52,7 +52,7 @@ namespace TapSDK
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("userId", userId);
             dic.Add("loginType", loginType);
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "setUserWithParams", false, null, dic);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "setUserWithParams", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -60,7 +60,7 @@ namespace TapSDK
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("name", name);
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "setName", false, null, dic);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "setName", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -68,7 +68,7 @@ namespace TapSDK
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("level", level);
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "setLevel", false, null, dic);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "setLevel", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -76,7 +76,7 @@ namespace TapSDK
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("server", server);
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "setServer", false, null, dic);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "setServer", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -88,7 +88,7 @@ namespace TapSDK
             dic.Add("amount", amount);
             dic.Add("currencyType", currencyType);
             dic.Add("payment", payment);
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "onCharge", false, null, dic);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "onCharge", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -97,7 +97,7 @@ namespace TapSDK
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("eventCode", eventCode);
             dic.Add("properties", properties);
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "onEvent", false, null, dic);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "onEvent", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 

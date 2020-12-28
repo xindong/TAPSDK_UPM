@@ -32,7 +32,7 @@ namespace TDSCommon
         [AOT.MonoPInvokeCallbackAttribute(typeof(EngineBridgeDelegate))]
         static void engineBridgeDelegate(string resultJson)
         {
-            Debug.Log("resultJson:" + resultJson);
+            Debug.Log("resultJson From IOS:" + resultJson);
 
             Result result = new Result(resultJson);
 

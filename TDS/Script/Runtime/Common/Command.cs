@@ -35,16 +35,15 @@ namespace TDSCommon
             return JsonUtility.ToJson(this);
         }
 
-        public Command(string service, string method, bool callback, string callbackId, Dictionary<string, object> dic)
+        public Command(string service, string method, bool callback, Dictionary<string, object> dic)
         {
             this.args = dic == null ? null : Json.Serialize(dic);
             this.service = service;
             this.method = method;
             this.callback = callback;
-            this.callbackId = callbackId;
-            Debug.Log("Command constructor:" + toJSON());
+            this.callbackId = this.callback ? TDSUUID.UUID():null;
         }
-
+        
     }
 
 }
