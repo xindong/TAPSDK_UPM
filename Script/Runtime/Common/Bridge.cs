@@ -47,30 +47,21 @@ namespace TDSCommon
             bridge.Register(serviceClzName, serviceImplName);
         }
 
-        public void CallHandler(Command command,[CallerMemberName] string memberName = "",
-                                                [CallerFilePath] string sourceFilePath = "",
-                                                [CallerLineNumber] int sourceLineNumber = 0)
+        public void CallHandler(Command command)
         {
             if (bridge == null)
             {
                 return;
             }
-            command.callbackId = memberName + sourceFilePath + sourceLineNumber;
-            Debug.Log("callHandler CallbackId:" + command.callbackId);
             bridge.Call(command);
         }
 
-        public void CallHandler(Command command, Action<Result> action,
-                                                [CallerMemberName] string memberName = "",
-                                                [CallerFilePath] string sourceFilePath = "",
-                                                [CallerLineNumber] int sourceLineNumber = 0)
+        public void CallHandler(Command command, Action<Result> action)
         {
             if (bridge == null)
             {
                 return;
             }
-            command.callbackId = memberName + sourceFilePath + sourceLineNumber;
-            Debug.Log("callHandler CallbackId:" + command.callbackId);
             bridge.Call(command, action);
         }
 

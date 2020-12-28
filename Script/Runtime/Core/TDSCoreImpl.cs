@@ -35,13 +35,13 @@ namespace TapSDK
         {
             Dictionary<string,object> dic = new Dictionary<string, object>();
             dic.Add("clientID",clientId);
-            Command command = new Command(TDSCoreConstants.TDS_CORE_SERVICE, "init", true, null, dic);
+            Command command = new Command(TDSCoreConstants.TDS_CORE_SERVICE, "init", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void EnableMoment()
         {
-            Command command = new Command(TDSCoreConstants.TDS_CORE_SERVICE, "enableMoment", true, null, null);
+            Command command = new Command(TDSCoreConstants.TDS_CORE_SERVICE, "enableMoment", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -50,7 +50,7 @@ namespace TapSDK
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("gameVersion", gameVersion);
             dic.Add("gameChannel", gameChannel);
-            Command command = new Command(TDSCoreConstants.TDS_CORE_SERVICE, "enableTapDB", true, null, dic);
+            Command command = new Command(TDSCoreConstants.TDS_CORE_SERVICE, "enableTapDB", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 

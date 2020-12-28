@@ -304,7 +304,7 @@ namespace TapSDK
 
         private Command ConstructorCommand(string method, Dictionary<string, object> dic, bool callbackEnable)
         {
-            return new Command(SERVICE_NAME, method, callbackEnable, System.Guid.NewGuid().ToString(), dic);
+            return new Command(SERVICE_NAME, method, callbackEnable, dic);
         }
 
 

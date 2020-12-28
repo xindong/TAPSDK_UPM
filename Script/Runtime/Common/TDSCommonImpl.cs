@@ -23,13 +23,13 @@ namespace TDSCommon
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("language", language);
-            Command command = new Command("TDSCommonService", "setLanguage", false, null, dic);
+            Command command = new Command("TDSCommonService", "setLanguage", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void GetRegionCode(Action<bool> callback)
         {
-            Command command = new Command("TDSCommonService", "getRegionCode", true, System.Guid.NewGuid().ToString(), null);
+            Command command = new Command("TDSCommonService", "getRegionCode", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 if (result.code != Result.RESULT_SUCCESS)
