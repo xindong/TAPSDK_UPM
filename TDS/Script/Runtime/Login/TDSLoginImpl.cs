@@ -88,7 +88,6 @@ namespace TapSDK
                 Debug.Log("accessToken:" + result.toJSON());
                 if (result.code != Result.RESULT_SUCCESS)
                 {
-                    callback(null);
                     return;
                 }
 
@@ -111,7 +110,6 @@ namespace TapSDK
                 Debug.Log("currentProfile:" + result.toJSON());
                 if (result.code != Result.RESULT_SUCCESS)
                 {
-                    callback(null);
                     return;
                 }
 
