@@ -23,11 +23,11 @@ namespace TapSDK
         public TDSAccessToken(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.kid = SafeDictionary.SafeGetValueByKey(dic,"kid") as string;
-            this.access_token = SafeDictionary.SafeGetValueByKey(dic,"access_token") as string;
-            this.token_type = SafeDictionary.SafeGetValueByKey(dic,"token_type") as string;
-            this.mac_key = SafeDictionary.SafeGetValueByKey(dic,"mac_key") as string;
-            this.mac_algorithm = SafeDictionary.SafeGetValueByKey(dic,"mac_algorithm") as string;
+            this.kid = SafeDictionary.GetValue<string>(dic,"kid") as string;
+            this.access_token = SafeDictionary.GetValue<string>(dic,"access_token") as string;
+            this.token_type = SafeDictionary.GetValue<string>(dic,"token_type") as string;
+            this.mac_key = SafeDictionary.GetValue<string>(dic,"mac_key") as string;
+            this.mac_algorithm = SafeDictionary.GetValue<string>(dic,"mac_algorithm") as string;
         }
 
         public string ToJSON()

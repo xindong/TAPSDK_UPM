@@ -16,8 +16,9 @@ namespace TapSDK
         public MomentCallbackBean(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.code = int.Parse(SafeDictionary.SafeGetValueByKey(dic, "code").ToString());
-            this.message = SafeDictionary.SafeGetValueByKey(dic,"message").ToString();
+            Debug.Log("callbackCode:" + dic["code"] +   "  msg:" + dic["message"]);
+            this.code = SafeDictionary.GetValue<int>(dic, "code");
+            this.message = SafeDictionary.GetValue<string>(dic,"message");
         }
 
     }

@@ -49,8 +49,7 @@ namespace TapSDK
             TDSCommon.EngineBridge.GetInstance().CallHandler(ConstructorCommand("setMomentCallback", null, true), (result) =>
               {
 
-                  Debug.Log("result:" + result.toJSON());
-
+                  Debug.Log("Moment Callback:" + result.toJSON());
                   if (result.code != Result.RESULT_SUCCESS)
                   {
                       return;
@@ -62,7 +61,7 @@ namespace TapSDK
                   }
 
                   MomentCallbackBean bean = new MomentCallbackBean(result.content);
-                  Debug.Log("MomentCallback:" + bean.code + "  " + bean.message);
+
                   if (bean != null)
                   { 
                       if (TDSCommon.Platform.isAndroid())
