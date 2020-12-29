@@ -35,7 +35,8 @@ public class LoginScene : MonoBehaviour, LoginCallback
 
     public void LoginError(TDSAccountError error)
     {
-        this.label = error.ToJSON();
+        this.label = "账户报错:" + error.ToJSON();
+        Debug.Log("账户报错:" + error.ToJSON());
     }
 
     private void OnGUI()

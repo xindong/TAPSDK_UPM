@@ -73,6 +73,11 @@ public class MomentScene : MonoBehaviour
             TapSDK.TDSMoment.GetNoticeData();
         }
 
+        if (GUI.Button(new Rect(700, 400, 250, 60), "返回", buttonStyle))
+        {
+           UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(0);
+        }
+
         if (GUI.Button(new Rect(700, 100, 250, 60), "10s直接关闭", buttonStyle))
         {
             Invoke("closeMoment", 10.0f);

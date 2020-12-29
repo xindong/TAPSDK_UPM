@@ -2,19 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TapSDK;
 
-public class MainScene : MonoBehaviour
+public class MainScene : MonoBehaviour,LoginCallback
 {
     // Start is called before the first frame update
     void Start()
     {
-
+        TapSDK.TDSCore.Init("FwFdCIr6u71WQDQwQN");
+        TapSDK.TDSLogin.RegisterLoginCallback(this);
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void LoginSuccess(TDSAccessToken accessToken)
+    {
+        Debug.Log("登陆成功:" + accessToken.ToJSON());
+    }
+
+    public void LoginCancel()
+    {
+        Debug.Log("登陆取消");
+    }
+
+    public void LoginError(TDSAccountError error)
+    {
+        Debug.Log("账户报错:" + error.ToJSON());
     }
 
     private void OnGUI()
@@ -26,7 +43,7 @@ public class MainScene : MonoBehaviour
 
         GUI.depth = 0;
 
-         if (GUI.Button(new Rect(50, 100, 200, 60), "Core", myButtonStyle))
+        if (GUI.Button(new Rect(50, 100, 200, 60), "Core", myButtonStyle))
         {
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(3);
         }

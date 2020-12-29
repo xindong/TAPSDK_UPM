@@ -9,28 +9,39 @@ using TDSCommon;
 namespace TapSDK
 {
     public class TDSAccountError
-    {
+    {   
+
+        public static string LOGIN_ERROR_INVALID_GRANT = "invalid_grant";
+
+        public static string LOGIN_ERRROR_ACCESS_DENIED = "access_denied";
+
+        public static string LOGIN_ERROR_FORBIDDEN = "forbidden";
+
+        public static string LOGIN_ERROR_PERMISSION_RESULT="permission_result";
+
         public int code;
         public string msg;
         public string error;
         public string errorDescription;
+
         public TDSAccountError(Dictionary<string, object> dic)
         {
-            this.code = int.Parse(SafeDictionary.SafeGetValueByKey(dic, "code") as string);
-            this.msg = SafeDictionary.SafeGetValueByKey(dic, "msg") as string;
-            this.error = SafeDictionary.SafeGetValueByKey(dic, "error") as string;
-            this.errorDescription = SafeDictionary.SafeGetValueByKey(dic, "errorDescription") as string;
+            this.code = SafeDictionary.GetValue<int>(dic, "code");
+            this.msg = SafeDictionary.GetValue<string>(dic, "msg");
+            this.error = SafeDictionary.GetValue<string>(dic, "error");
+            this.errorDescription = SafeDictionary.GetValue<string>(dic, "errorDescription");
         }
         public TDSAccountError(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.code = int.Parse(SafeDictionary.SafeGetValueByKey(dic, "code") as string);
-            this.msg = SafeDictionary.SafeGetValueByKey(dic, "msg") as string;
-            this.error = SafeDictionary.SafeGetValueByKey(dic, "error") as string;
-            this.errorDescription = SafeDictionary.SafeGetValueByKey(dic, "errorDescription") as string;
+            this.code = SafeDictionary.GetValue<int>(dic, "code");
+            this.msg = SafeDictionary.GetValue<string>(dic, "msg");
+            this.error = SafeDictionary.GetValue<string>(dic, "error");
+            this.errorDescription = SafeDictionary.GetValue<string>(dic, "errorDescription");
         }
+        
         public string ToJSON(){
-            return Json.Serialize(this);
+            return JsonUtility.ToJson(this);
         }
 
     }

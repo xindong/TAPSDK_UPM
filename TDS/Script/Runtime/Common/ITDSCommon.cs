@@ -20,7 +20,7 @@ namespace TDSCommon
         public CommonRegionWrapper(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.isMainland = (bool)SafeDictionary.SafeGetValueByKey(dic,"isMainland");
+            this.isMainland = SafeDictionary.GetValue<bool>(dic,"isMainland");
         }
 
     }
