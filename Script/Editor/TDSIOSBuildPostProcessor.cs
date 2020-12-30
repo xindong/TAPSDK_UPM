@@ -121,6 +121,7 @@ namespace TDSEditor
 
                 List<string> names = new List<string>();    
                 names.Add("TDS-Info.plist");
+                names.Add("TDSMomentResource.bundle");
                 foreach (var name in names)
                 {
                     proj.AddFileToBuild(target, proj.AddFile(Path.Combine(resourcePath,name), Path.Combine(resourcePath,name), PBXSourceTree.Source));
@@ -180,7 +181,8 @@ namespace TDSEditor
             if(!string.IsNullOrEmpty(infoPlistPath))
             {   
                 Dictionary<string, object> dic = (Dictionary<string, object>)TDSEditor.Plist.readPlist(infoPlistPath);
-                string taptapId = null;
+                string taptapId = null; 
+
                 foreach (var item in dic)
                 {
                     if(item.Key.Equals("taptap")){
@@ -191,6 +193,9 @@ namespace TDSEditor
                                 taptapId = "tt" + (string) taptapItem.Value;
                             }
                         }
+                    } else {
+                        //Copy TDS-Info.plist中的数据
+                        _rootDic.SetString(item.Key.ToString(),item.Value.ToString());
                     }
                 }
                 //添加url
