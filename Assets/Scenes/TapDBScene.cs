@@ -52,7 +52,7 @@ public class TapDBScene : MonoBehaviour
         }
         if (GUI.Button(new Rect(300, 200, 200, 60), "onCharge", myButtonStyle))
         {
-            TapSDK.TDSTapDB.OnCharge("orderId", "productId", "amount", "currencyType", "payment");
+            TapSDK.TDSTapDB.OnCharge("orderId", "productId", 1000, "currencyType", "payment");
         }
         if (GUI.Button(new Rect(300, 300, 200, 60), "onEvent", myButtonStyle))
         {
@@ -60,7 +60,7 @@ public class TapDBScene : MonoBehaviour
         }
         if (GUI.Button(new Rect(300, 400, 200, 60), "返回", myButtonStyle))
         {
-            TapSDK.TDSTapDB.OnEvent("eventCode", "properties");
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(0);
         }
 
     }

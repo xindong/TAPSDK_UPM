@@ -37,7 +37,7 @@ namespace TapSDK
             TDSTapDBImpl.GetInstance().SetServer(server);
         }
 
-        public static void OnCharge(string orderId, string productId, string amount, string currencyType, string payment)
+        public static void OnCharge(string orderId, string productId, long amount, string currencyType, string payment)
         {
             TDSTapDBImpl.GetInstance().OnCharge(orderId, productId, amount, currencyType, payment);
         }

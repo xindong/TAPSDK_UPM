@@ -26,9 +26,9 @@ namespace TapSDK
         void GetCurrentProfile(Action<TDSLoginProfile> profile);
 
         void FetchProfileForCurrentAccessToken(Action<TDSLoginProfile> profileCallback,Action<string> errorCallback);
-
+        
         void Logout();
-
+        
     }
 
     public class TDSLoginConstants

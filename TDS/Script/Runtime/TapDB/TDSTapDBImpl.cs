@@ -80,7 +80,7 @@ namespace TapSDK
             EngineBridge.GetInstance().CallHandler(command);
         }
 
-        public void OnCharge(string orderId, string product, string amount, string currencyType, string payment)
+        public void OnCharge(string orderId, string product, long amount, string currencyType, string payment)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("orderId", orderId);

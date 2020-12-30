@@ -28,7 +28,7 @@ typedef NS_ENUM (NSInteger, TDSMomentOrientation) {
 
 @optional
 
-- (void)didChangeResultCode:(NSInteger)code msg:(NSString *)msg;
+- (void)onMomentCallbackWithCode:(NSInteger)code msg:(NSString *)msg;
 
 @end
 
@@ -69,7 +69,7 @@ typedef NS_ENUM (NSInteger, TDSMomentOrientation) {
 + (void)closeMoment;
 
 /// 获取新动态数量
-/// @warning 结果在 `Delegate` 下的 `didChangeResultCode:msg:`, code == TM_RESULT_CODE_NEW_MSG_SUCCEED时，`msg` 即为消息数量
+/// @warning 结果在 `Delegate` 下的 `onMomentCallbackWithCode:msg:`, code == TM_RESULT_CODE_NEW_MSG_SUCCEED时，`msg` 即为消息数量
 + (void)fetchNewMessage;
 
 /// 发布动态

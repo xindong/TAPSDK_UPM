@@ -90,8 +90,14 @@ public class LoginScene : MonoBehaviour, LoginCallback
         {
             TapSDK.TDSLogin.GetCurrentAccessToken((accessToken) =>
             {
-                Debug.Log("accessToken:" + accessToken.ToJSON());
-                this.label = accessToken.ToJSON();
+                if(accessToken !=null){
+                    Debug.Log("accessToken:" + accessToken.ToJSON());
+                    this.label = accessToken.ToJSON();
+                }else
+                {
+                    this.label = "accessToken is Null,Please login first!";
+                }
+                
             });
         }
 
@@ -105,8 +111,13 @@ public class LoginScene : MonoBehaviour, LoginCallback
         {
             TapSDK.TDSLogin.GetCurrentProfile((profile) =>
             {
-                Debug.Log("profile:" + profile.ToJSON());
-                this.label = profile.ToJSON();
+                if(profile!=null){
+                    Debug.Log("profile:" + profile.ToJSON());
+                    this.label = profile.ToJSON();
+                }else
+                {
+                    this.label = "profile is null,Please login first";
+                }
             });
         }
 

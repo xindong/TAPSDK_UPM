@@ -40,7 +40,6 @@
      <Compile Include="Assets\Scenes\TapDBScene.cs" />
      <Compile Include="Assets\Scenes\MainScene.cs" />
      <Compile Include="Assets\Scenes\LoginScene.cs" />
-     <Compile Include="Assets\Scenes\CoreScene.cs" />
      <None Include="Assets\Main.asmdef" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <Reference Include="UnityEngine">

@@ -22,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 相等约束相等布局
 /// @param view1 view1
 /// @param view2 view2
-/// @param attr 约束
 + (void)layoutViewEqual:(UIView *)view1 toView:(UIView *)view2;
 + (NSLayoutConstraint *)layoutViewEqual:(UIView *)view1 toView:(UIView *)view2 attribute:(NSLayoutAttribute)attr;
 + (NSLayoutConstraint *)layoutViewEqual:(UIView *)view1 toView:(UIView *)view2 attribute:(NSLayoutAttribute)attr offset:(CGFloat)offset;
