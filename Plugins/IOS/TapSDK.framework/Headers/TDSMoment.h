@@ -1,22 +1,21 @@
 //
 //  TDSMoment.h
-//  TDSMomentSource
+//  TDSMoment
 //
-//  Created by Insomnia on 2020/12/3.
+//  Created by Bottle K on 2020/12/24.
 //
 
 #import <Foundation/Foundation.h>
 
-
+//! Project version number for TDSMoment.
 FOUNDATION_EXPORT double TDSMomentVersionNumber;
+
+//! Project version string for TDSMoment.
 FOUNDATION_EXPORT const unsigned char TDSMomentVersionString[];
 
-#if __has_include(<TDSMoment/TDSMoment.h>)
+// In this header, you should import all the public headers of your framework using statements like #import <TDSMoment/PublicHeader.h>
+
 
 #import <TDSMoment/TDSMomentSdk.h>
-
-#else
-
-#import "TDSMomentSdk.h"
-
-#endif
+#import <TDSMoment/TDSMomentResultCode.h>
+#import <TDSMoment/TDSPostMomentData.h>

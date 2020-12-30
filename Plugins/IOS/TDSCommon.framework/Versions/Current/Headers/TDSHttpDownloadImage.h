@@ -6,7 +6,7 @@
 //  Copyright © 2018 JiangJiahao. All rights reserved.
 //
 
-#import "TDSHttpDownloadBase.h"
+#import <TDSCommon/TDSHttpDownloadBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

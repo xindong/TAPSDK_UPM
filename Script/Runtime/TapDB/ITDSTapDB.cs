@@ -19,7 +19,7 @@ namespace TapSDK
 
         void SetServer(string server);
 
-        void OnCharge(string orderId, string product, string amount, string currencyType, string payment);
+        void OnCharge(string orderId, string product, long amount, string currencyType, string payment);
 
         void OnEvent(string eventCode, string properties);
 

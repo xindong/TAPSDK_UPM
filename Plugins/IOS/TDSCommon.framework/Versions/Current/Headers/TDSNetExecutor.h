@@ -1,12 +1,12 @@
 //
 //  TDSNetExecutor.h
-//  TDSCommonSource
+//  TDSCommon
 //
 //  Created by Insomnia on 2020/10/21.
 //
 
 #import <Foundation/Foundation.h>
-#import "TDSNetSubscriber.h"
+#import <TDSCommon/TDSNetSubscriber.h>
 
 typedef NS_ENUM(NSUInteger, TDSNetMethod) {
     TDSNetMethodGet = 1,
