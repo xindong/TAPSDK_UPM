@@ -2,7 +2,7 @@
     "name": "com.tds.sdk",
     "displayName": "TDSSDK",
     "description": "TapTap Develop Service!",
-    "version": "0.1.9",
+    "version": "0.1.9-rnd",
     "unity": "2020.1",
     "license": "MIT"
 }

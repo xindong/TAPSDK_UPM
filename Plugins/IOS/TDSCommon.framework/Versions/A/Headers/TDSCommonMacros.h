@@ -6,4 +6,4 @@
 //
 
 
-#define isRND false
+#define isRND true
