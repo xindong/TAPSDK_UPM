@@ -1,0 +1,19 @@
+{
+    "name": "TDSMoment",
+    "references": [
+        "TDSCommon"
+    ],
+    "includePlatforms": [
+        "Android",
+        "iOS",
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

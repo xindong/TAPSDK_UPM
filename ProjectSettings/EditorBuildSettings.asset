@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/AchievementScene.unity
-    guid: aab6dd32099aa48eeb26c1ec5fb90f00
+    path: Assets/Scenes/MomentScene.unity
+    guid: b47e5c74b6cbc4f729f1bdfd96b9bc7a
+  - enabled: 1
+    path: Assets/Scenes/LoginScene.unity
+    guid: e1d61f2b9ac5746cca77bfa936ba7e0b
+  - enabled: 1
+    path: Assets/Scenes/TapDBScene.unity
+    guid: 2bcc41d7d153f4339b48a054ad7402a0
   m_configObjects: {}
