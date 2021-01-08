@@ -2,8 +2,17 @@
 //  TDSCommonMacros.h
 //  TDSCommon
 //
-//  Created by Bottle K on 2021/1/5.
+//  Created by Bottle K on 2021/1/7.
 //
 
+# define isRND false
+#import <Foundation/Foundation.h>
 
-#define isRND true
+NS_ASSUME_NONNULL_BEGIN
+
+@interface TDSCommonMacros : NSObject
+
++ (bool)isCurrentRND;
+@end
+
+NS_ASSUME_NONNULL_END

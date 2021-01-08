@@ -6,6 +6,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <TDSCommon/TDSCommonMacros.h>
+
+#if isRND
+
+#define TAP_IS_RND true
+
+#else
+
+#define TAP_IS_RND false
+
+#endif
 
 //! Project version number for TapSDK.
 FOUNDATION_EXPORT double TapSDKVersionNumber;
