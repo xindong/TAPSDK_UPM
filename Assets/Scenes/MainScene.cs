@@ -9,7 +9,7 @@ public class MainScene : MonoBehaviour,LoginCallback
     // Start is called before the first frame update
     void Start()
     {
-        TapSDK.TDSCore.Init("FwFdCIr6u71WQDQwQN");
+        TapSDK.TDSCore.Init("0RiAlMny7jiz086FaU");
         TapSDK.TDSLogin.RegisterLoginCallback(this);
     }
 
@@ -50,6 +50,7 @@ public class MainScene : MonoBehaviour,LoginCallback
 
         if (GUI.Button(new Rect(50, 300, 200, 60), "动态", myButtonStyle))
         {
+            TapSDK.TDSCore.EnableMoment();
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);
         }
 
