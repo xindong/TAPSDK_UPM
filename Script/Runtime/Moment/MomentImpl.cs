@@ -160,21 +160,22 @@ namespace TapSDK
             {
                 setRequestOrientation(false);
                 IsAppear = true;
+                return true;
             }
-            else if (code == (int)CallbackCode.CALLBACK_CODE_MOMENT_DISAPPEAR)
+             if (code == (int)CallbackCode.CALLBACK_CODE_MOMENT_DISAPPEAR)
             {
                 setOriginOrientation();
                 IsAppear = false;
+                return true;
             }
-            else if (code == (int)CallbackCode.CALLBACK_CODE_ON_RESUME)
+             if (code == (int)CallbackCode.CALLBACK_CODE_ON_RESUME)
             {
                 if(IsAppear)
                 {
                     setRequestOrientation(false);
                 }
-                return false;
             }
-            return true;
+            return false;
         }
 
         private void InitOrientationSetting(int config)
@@ -218,9 +219,9 @@ namespace TapSDK
 
         private void setRequestOrientation(bool isFromBackground)
 		{
-            ScreenOrientation orientation = requestOrientation;
-            ScreenOrientation innerOriginOrientation = originOrientation;
-            if(orientation == ScreenOrientation.LandscapeLeft && (innerOriginOrientation == ScreenOrientation.LandscapeLeft || innerOriginOrientation == ScreenOrientation.LandscapeRight))
+            ScreenOrientation orientation = this.requestOrientation;
+            ScreenOrientation originOrientation = this.originOrientation;
+            if(orientation == ScreenOrientation.LandscapeLeft && (originOrientation == ScreenOrientation.LandscapeLeft || originOrientation == ScreenOrientation.LandscapeRight))
             {
                 return;
             }
@@ -247,6 +248,7 @@ namespace TapSDK
                 Screen.autorotateToLandscapeRight = true;
                 Screen.autorotateToPortrait = (orientation != ScreenOrientation.LandscapeLeft);
                 Screen.autorotateToPortraitUpsideDown = false;
+                Debug.Log("Set Request Orientation:" + Screen.orientation);
             }
             
           
@@ -254,23 +256,23 @@ namespace TapSDK
 
         private void setOriginOrientation()
 		{
-            ScreenOrientation orientation = originOrientation;
-            ScreenOrientation innerRequestOrientation = requestOrientation;
-            if (innerRequestOrientation == ScreenOrientation.LandscapeLeft && (orientation == ScreenOrientation.LandscapeLeft || orientation == ScreenOrientation.LandscapeRight))
+            ScreenOrientation orientation = this.originOrientation;
+            ScreenOrientation requestOrientation = this.requestOrientation;
+            if (requestOrientation == ScreenOrientation.LandscapeLeft && (orientation == ScreenOrientation.LandscapeLeft || orientation == ScreenOrientation.LandscapeRight))
             {
                 return;
             }
 
             Debug.Log("APPERAR SET ORIGIN ORIENTATION = " + orientation);
-            if (orientation == ScreenOrientation.AutoRotation || useAutoRotate)
+            if (orientation == ScreenOrientation.AutoRotation || this.useAutoRotate)
             {
                 ScreenOrientation current = GetDeviceOrientation(orientation);
                 Screen.orientation = current;//返回初始方向
                 Screen.orientation = ScreenOrientation.AutoRotation;
-                Screen.autorotateToLandscapeLeft = autorotateToLandscapeLeft > 0;
-                Screen.autorotateToLandscapeRight = autorotateToLandscapeRight > 0;
-                Screen.autorotateToPortrait = autorotateToPortrait > 0;
-                Screen.autorotateToPortraitUpsideDown = autorotateToPortraitUpsideDown > 0;
+                Screen.autorotateToLandscapeLeft = this.autorotateToLandscapeLeft > 0;
+                Screen.autorotateToLandscapeRight = this.autorotateToLandscapeRight > 0;
+                Screen.autorotateToPortrait = this.autorotateToPortrait > 0;
+                Screen.autorotateToPortraitUpsideDown = this.autorotateToPortraitUpsideDown > 0;
             }
             else
             {
