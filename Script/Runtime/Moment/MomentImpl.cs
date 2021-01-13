@@ -252,6 +252,11 @@ namespace TapSDK
 
             Debug.Log("APPERAR SET REQUEST ORIENTATION = " + orientation);
 
+            if (isResume)
+            {   
+                SetAndroidRequestOrientation(nativeOrientation);
+            }
+
             ScreenOrientation currentOrientation;
             if (orientation == ScreenOrientation.AutoRotation || orientation == ScreenOrientation.LandscapeLeft)
             {
@@ -267,19 +272,12 @@ namespace TapSDK
 
             if (IsAutoRotate())
             {   
-                if (isResume)
-                {
-                    SetAndroidRequestOrientation(nativeOrientation);
-                    return;
-                }
-
                 Screen.orientation = ScreenOrientation.AutoRotation;
                 Screen.autorotateToLandscapeLeft = true;
                 Screen.autorotateToLandscapeRight = true;
                 Screen.autorotateToPortrait = (orientation != ScreenOrientation.LandscapeLeft);
                 Screen.autorotateToPortraitUpsideDown = false;
                 Debug.Log("Set Request Orientation:" + Screen.orientation);
-                
             }
 
         }
