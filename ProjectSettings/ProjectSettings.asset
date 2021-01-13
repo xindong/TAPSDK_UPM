@@ -254,7 +254,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: /Users/xiaoyi/Documents/taptap/xdsdk-android/sign_password_111111.keystore
+  AndroidKeystoreName: '{inproject}: sign_password_111111.keystore'
   AndroidKeyaliasName: wxlogin
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
