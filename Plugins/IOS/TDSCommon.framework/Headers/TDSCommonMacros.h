@@ -5,7 +5,7 @@
 //  Created by Bottle K on 2021/1/7.
 //
 
-# define isRND true
+# define isRND false
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
