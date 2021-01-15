@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppIDName</key>
+	<string>Everything</string>
+	<key>ApplicationIdentifierPrefix</key>
+	<array>
+	<string>UE5H8B62F9</string>
+	</array>
+	<key>CreationDate</key>
+	<date>2020-09-10T04:37:17Z</date>
+	<key>Platform</key>
+	<array>
+		<string>iOS</string>
+	</array>
+	<key>IsXcodeManaged</key>
+	<false/>
+	<key>DeveloperCertificates</key>
+	<array>
+		<data>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</data>
+	</array>
+
+										
+	<key>Entitlements</key>
+	<dict>
+				
+				<key>com.apple.developer.pass-type-identifiers</key>
+		<array>
+				<string>UE5H8B62F9.*</string>
+		</array>
+				
+				<key>com.apple.developer.default-data-protection</key>
+		<string>NSFileProtectionComplete</string>
+				
+				<key>inter-app-audio</key>
+		<true/>
+				
+				<key>application-identifier</key>
+		<string>UE5H8B62F9.*</string>
+				
+				<key>com.apple.developer.networking.networkextension</key>
+		<array>
+				<string>app-proxy-provider</string>
+				<string>content-filter-provider</string>
+				<string>packet-tunnel-provider</string>
+				<string>dns-proxy</string>
+				<string>dns-settings</string>
+		</array>
+				
+				<key>keychain-access-groups</key>
+		<array>
+				<string>UE5H8B62F9.*</string>
+				<string>com.apple.token</string>
+		</array>
+				
+				<key>get-task-allow</key>
+		<false/>
+				
+				<key>com.apple.developer.team-identifier</key>
+		<string>UE5H8B62F9</string>
+				
+				<key>com.apple.developer.ubiquity-kvstore-identifier</key>
+		<string>UE5H8B62F9.*</string>
+				
+				<key>com.apple.developer.ubiquity-container-identifiers</key>
+		<array>
+				<string>UE5H8B62F9.*</string>
+		</array>
+				
+				<key>com.apple.developer.siri</key>
+		<true/>
+
+	</dict>
+	<key>ExpirationDate</key>
+	<date>2021-09-10T04:37:17Z</date>
+	<key>Name</key>
+	<string>Everything 2020</string>
+	<key>ProvisionsAllDevices</key>
+	<true/>
+	<key>TeamIdentifier</key>
+	<array>
+		<string>UE5H8B62F9</string>
+	</array>
+	<key>TeamName</key>
+	<string>Shanghai Xindong Enterprise Development Co., Ltd.</string>
+	<key>TimeToLive</key>
+	<integer>365</integer>
+	<key>UUID</key>
+	<string>6a542e15-b177-4e10-a884-31e7c51c4857</string>
+	<key>Version</key>
+	<integer>1</integer>
+</dict>
+</plist>%        

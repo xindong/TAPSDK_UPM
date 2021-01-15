@@ -22,7 +22,10 @@ class ProjectBuild : Editor
     }
 
     static void BuildForAndroid()
-    {
+    {   
+
+        float time = Time.realtimeSinceStartup;
+
         // 签名文件配置，若不配置，则使用Unity默认签名
         PlayerSettings.Android.keyaliasName = "wxlogin";
         PlayerSettings.Android.keyaliasPass = "111111";
@@ -31,7 +34,35 @@ class ProjectBuild : Editor
 
         // APK路径、名字配置
         string apkName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-        string path = Application.dataPath + "/" + "TapSDKUnity_" + apkName + ".apk";
-        BuildPipeline.BuildPlayer(GetBuildScenes(), path, BuildTarget.Android, BuildOptions.None);
+        string path = Application.dataPath.Replace("/Assets", "") + "/" + "TapSDKUnity_" + apkName + ".apk";
+        try{
+            BuildPipeline.BuildPlayer(GetBuildScenes(), path, BuildTarget.Android, BuildOptions.None);
+        }catch(System.Exception e)
+        {
+            Debug.LogError(e.Message);
+        }
+        time = Time.realtimeSinceStartup - time;
+        Debug.Log("Android打包完成，共计耗时" + time);
     }
+
+    static void BuildForIOS()
+    {
+        
+        string path = Application.dataPath.Replace("/Assets", "") + "/TapSDKUnity";
+
+        float time = Time.realtimeSinceStartup;
+
+        AssetDatabase.Refresh();
+        try
+        {
+            BuildPipeline.BuildPlayer(GetBuildScenes(), path, BuildTarget.iOS, BuildOptions.None);
+        }
+        catch (System.Exception m)
+        {
+            Debug.LogError(m.Message);
+        }
+        time = Time.realtimeSinceStartup - time;
+        Debug.Log("IOS打包完成，共计耗时" + time);
+    }
+
 }
