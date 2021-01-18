@@ -6,17 +6,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <TDSCommon/TDSCommonMacros.h>
-
-#if isRND
-
-#define TAP_IS_RND true
-
-#else
-
-#define TAP_IS_RND false
-
-#endif
 
 //! Project version number for TapSDK.
 FOUNDATION_EXPORT double TapSDKVersionNumber;
@@ -31,3 +20,15 @@ FOUNDATION_EXPORT const unsigned char TapSDKVersionString[];
 #import <TapSDK/TDSErrorDelegate.h>
 #import <TapSDK/TDSErrorModel.h>
 #import <TapSDK/TDSConfig.h>
+
+#if __has_include(<TapDB/TapDB.h>)
+#import <TapDB/TapDB.h>
+#import <TDSMoment/TDSMomentSdk.h>
+#import <TapLogin/TapLoginHelper.h>
+#import <TapLogin/IscTapLoginService.h>
+#else
+#import "TapDB.h"
+#import "TDSMomentSdk.h"
+#import "TapLoginHelper.h"
+#import "IscTapLoginService.h"
+#endif
