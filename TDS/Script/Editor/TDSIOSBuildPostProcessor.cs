@@ -69,7 +69,7 @@ namespace TDSEditor
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AdSupport.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AssetsLibrary.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AVKit.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "AuthenticationServices.framework", false);
+                proj.AddFrameworkToProject(unityFrameworkTarget, "AuthenticationServices.framework", true);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "LocalAuthentication.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "SystemConfiguration.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "Accelerate.framework", false);

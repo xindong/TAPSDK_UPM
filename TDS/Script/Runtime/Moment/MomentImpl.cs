@@ -23,6 +23,8 @@ namespace TapSDK
         public bool useAutoRotate = true; //游戏是否旋转
         public bool IsAppear = false;
 
+        public int nativeOrientation = -1;
+
         private MomentImpl()
         {
             TDSCommon.EngineBridge.GetInstance().Register(CLZ_NAME, IMP_NAME);
@@ -63,12 +65,12 @@ namespace TapSDK
                   MomentCallbackBean bean = new MomentCallbackBean(result.content);
 
                   if (bean != null)
-                  { 
+                  {
                       if (TDSCommon.Platform.isAndroid())
-                      { 
-                          if(AndroidOrientationInterceptor(bean.code))
+                      {
+                          if (AndroidOrientationInterceptor(bean.code))
                           {
-                            callback(bean.code, bean.message);
+                              callback(bean.code, bean.message);
                           }
                       }
                       else
@@ -146,6 +148,13 @@ namespace TapSDK
             TDSCommon.EngineBridge.GetInstance().CallHandler(ConstructorCommand("closeMomentWithArgs", dic, true));
         }
 
+        public void SetAndroidRequestOrientation(int orientation)
+        {   
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("orientation", orientation);
+            TDSCommon.EngineBridge.GetInstance().CallHandler(ConstructorCommand("setRequestOrientation", dic, false));
+        }
+
         public void SetUseAutoRotate(bool useAuto)
         {
             if (TDSCommon.Platform.isAndroid())
@@ -160,17 +169,28 @@ namespace TapSDK
             {
                 setRequestOrientation(false);
                 IsAppear = true;
+                return true;
             }
-            else if (code == (int)CallbackCode.CALLBACK_CODE_MOMENT_DISAPPEAR)
+            if (code == (int)CallbackCode.CALLBACK_CODE_MOMENT_DISAPPEAR)
             {
                 setOriginOrientation();
                 IsAppear = false;
+                return true;
             }
-            else if (code == (int)CallbackCode.CALLBACK_CODE_ON_RESUME)
+
+            if (code == (int)CallbackCode.CALLBACK_CODE_ON_RESUME)
             {
-                if(IsAppear)
+                if (IsAppear)
                 {
-                    setRequestOrientation(false);
+                    setRequestOrientation(true);
+                }
+                return false;
+            }
+            else if (code == (int)CallbackCode.CALLBACK_CODE_ON_STOP)
+            {
+                if (IsAppear)
+                {
+                    setOriginOrientation();
                 }
                 return false;
             }
@@ -179,30 +199,30 @@ namespace TapSDK
 
         private void InitOrientationSetting(int config)
         {
-            if(!Platform.isAndroid())
+            if (!Platform.isAndroid())
             {
                 return;
             }
             originOrientation = Screen.orientation;
-			autorotateToPortraitUpsideDown = Screen.autorotateToPortraitUpsideDown ? 1 : 0;
-			autorotateToPortrait = Screen.autorotateToPortrait ? 1 : 0;
-			autorotateToLandscapeRight = Screen.autorotateToLandscapeRight ? 1 : 0;
-			autorotateToLandscapeLeft = Screen.autorotateToLandscapeLeft ? 1 : 0;
-			GetRequestOrientation(config);
-			Debug.Log("orgin orientation = " + originOrientation);
-			Debug.Log("request orientation = " + requestOrientation);
-			Debug.Log(" autoPd = " + autorotateToPortraitUpsideDown + " autoP = " + autorotateToPortrait +
-				" autoLl = " + autorotateToLandscapeLeft + " autolr = " + autorotateToLandscapeRight);
+            autorotateToPortraitUpsideDown = Screen.autorotateToPortraitUpsideDown ? 1 : 0;
+            autorotateToPortrait = Screen.autorotateToPortrait ? 1 : 0;
+            autorotateToLandscapeRight = Screen.autorotateToLandscapeRight ? 1 : 0;
+            autorotateToLandscapeLeft = Screen.autorotateToLandscapeLeft ? 1 : 0;
+            GetRequestOrientation(config);
+            Debug.Log("orgin orientation = " + originOrientation);
+            Debug.Log("request orientation = " + requestOrientation);
+            Debug.Log(" autoPd = " + autorotateToPortraitUpsideDown + " autoP = " + autorotateToPortrait +
+                " autoLl = " + autorotateToLandscapeLeft + " autolr = " + autorotateToLandscapeRight);
         }
 
         private void GetRequestOrientation(int config)
         {
-            if(!Platform.isAndroid())
+            if (!Platform.isAndroid())
             {
                 return;
             }
-            int orientation = config;
-            switch (orientation)
+            nativeOrientation = config;
+            switch (nativeOrientation)
             {
                 case (int)Orientation.ORIENTATION_DEFAULT:
                     requestOrientation = ScreenOrientation.AutoRotation;
@@ -216,19 +236,29 @@ namespace TapSDK
             }
         }
 
-        private void setRequestOrientation(bool isFromBackground)
-		{
-            ScreenOrientation orientation = requestOrientation;
-            ScreenOrientation innerOriginOrientation = originOrientation;
-            if(orientation == ScreenOrientation.LandscapeLeft && (innerOriginOrientation == ScreenOrientation.LandscapeLeft || innerOriginOrientation == ScreenOrientation.LandscapeRight))
+        private void setRequestOrientation(bool isResume)
+        {   
+            if(!Platform.isAndroid())
+            {
+                return;
+            }
+
+            ScreenOrientation orientation = this.requestOrientation;
+            ScreenOrientation originOrientation = this.originOrientation;
+            if (orientation == ScreenOrientation.LandscapeLeft && (originOrientation == ScreenOrientation.LandscapeLeft || originOrientation == ScreenOrientation.LandscapeRight))
             {
                 return;
             }
 
             Debug.Log("APPERAR SET REQUEST ORIENTATION = " + orientation);
-           
-            ScreenOrientation currentOrientation ;
-            if (!isFromBackground && (orientation == ScreenOrientation.AutoRotation || orientation == ScreenOrientation.LandscapeLeft))
+
+            if (isResume)
+            {   
+                SetAndroidRequestOrientation(nativeOrientation);
+            }
+
+            ScreenOrientation currentOrientation;
+            if (orientation == ScreenOrientation.AutoRotation || orientation == ScreenOrientation.LandscapeLeft)
             {
                 currentOrientation = GetDeviceOrientation(orientation);
             }
@@ -240,42 +270,48 @@ namespace TapSDK
             Screen.orientation = currentOrientation;
             Debug.Log("current device currentOrientation = " + currentOrientation);
 
-            if (orientation == ScreenOrientation.AutoRotation || orientation == ScreenOrientation.LandscapeLeft)
-            {
+            if (IsAutoRotate())
+            {   
                 Screen.orientation = ScreenOrientation.AutoRotation;
                 Screen.autorotateToLandscapeLeft = true;
                 Screen.autorotateToLandscapeRight = true;
                 Screen.autorotateToPortrait = (orientation != ScreenOrientation.LandscapeLeft);
                 Screen.autorotateToPortraitUpsideDown = false;
+                Debug.Log("Set Request Orientation:" + Screen.orientation);
             }
-            
-          
+
         }
 
         private void setOriginOrientation()
-		{
-            ScreenOrientation orientation = originOrientation;
-            ScreenOrientation innerRequestOrientation = requestOrientation;
-            if (innerRequestOrientation == ScreenOrientation.LandscapeLeft && (orientation == ScreenOrientation.LandscapeLeft || orientation == ScreenOrientation.LandscapeRight))
+        {
+            if(!Platform.isAndroid())
+            {
+                return;
+            }
+            ScreenOrientation orientation = this.originOrientation;
+            ScreenOrientation requestOrientation = this.requestOrientation;
+            if (requestOrientation == ScreenOrientation.LandscapeLeft && (orientation == ScreenOrientation.LandscapeLeft || orientation == ScreenOrientation.LandscapeRight))
             {
                 return;
             }
 
-            Debug.Log("APPERAR SET ORIGIN ORIENTATION = " + orientation);
-            if (orientation == ScreenOrientation.AutoRotation || useAutoRotate)
+            Debug.Log("设置成原始方向");
+            Screen.orientation = this.originOrientation;
+
+            Screen.autorotateToLandscapeLeft = this.autorotateToLandscapeLeft > 0;
+            Screen.autorotateToLandscapeRight = this.autorotateToLandscapeRight > 0;
+            Screen.autorotateToPortrait = this.autorotateToPortrait > 0;
+            Screen.autorotateToPortraitUpsideDown = this.autorotateToPortraitUpsideDown > 0;
+
+            if(IsAutoRotate())
             {
-                ScreenOrientation current = GetDeviceOrientation(orientation);
-                Screen.orientation = current;//返回初始方向
+                Debug.Log("恢复自动旋转");
                 Screen.orientation = ScreenOrientation.AutoRotation;
-                Screen.autorotateToLandscapeLeft = autorotateToLandscapeLeft > 0;
-                Screen.autorotateToLandscapeRight = autorotateToLandscapeRight > 0;
-                Screen.autorotateToPortrait = autorotateToPortrait > 0;
-                Screen.autorotateToPortraitUpsideDown = autorotateToPortraitUpsideDown > 0;
             }
-            else
-            {
-                Screen.orientation = orientation;
-            }
+        }
+
+        private bool IsAutoRotate(){
+            return this.autorotateToLandscapeLeft > 0 || this.autorotateToLandscapeRight > 0 || this.autorotateToPortrait > 0 || this.autorotateToPortraitUpsideDown > 0;
         }
 
         private ScreenOrientation GetDeviceOrientation(ScreenOrientation orientation)
