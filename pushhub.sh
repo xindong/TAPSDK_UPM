@@ -16,6 +16,7 @@ else
   git subtree split --prefix=TDS --branch upm
   git checkout upm
   git tag $1
+  git remote set-url upm git@github.com:xindong/TAPSDK_UPM.git
   git push upm upm --tags 
   git checkout $currBranch --force 
   
