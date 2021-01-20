@@ -1,9 +1,10 @@
 #!/bin/sh
 remoteUPM=0
 
-checkBranchExist() {
+checkRepoExist() {
   for repo in $(git remote -v); do
-    if [ "$repo"="upm" ]; then
+    echo $repo
+    if [ $repo=upm ]; then
       remoteUPM=1
     fi
   done
@@ -18,20 +19,24 @@ else
   branch=$(git branch | grep "*")
   # 截取分支名
   currBranch=${branch:2}
+  
   echo $currBranch
+  
   git subtree split --prefix=TDS --branch upm
 
   git checkout upm
 
-  checkBranchExist
+  checkRepoExist
 
-  if [ $remoteUPM=1 ]; then
-    echo "Github remove upm repo"
-    git remote rm upm
+  if [ $remoteUPM=0 ]; then
+    git remote add upm git@github.com:xindong/TAPSDK_UPM.git
   fi
-  git remote add upm git@github.com:xindong/TAPSDK_UPM.git
-  git fetch upm
-  echo "Github add upm repo"
+  
+  echo "currentBranch: $(git branch | grep "*")"
+
+  git tag $1
+  
   git push upm upm --tags
+  
   git checkout $currBranch --force
 fi
