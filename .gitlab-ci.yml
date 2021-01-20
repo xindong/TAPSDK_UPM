@@ -1,0 +1,23 @@
+stages:
+  - merge
+  - build
+
+merge:
+  stage: merge
+  script:
+    - ./.ci/merge.sh
+  tags:
+    - ios-builder
+  only:
+    - merge_requests
+
+build:
+  stage: build
+  script:
+  - ./.ci/build.sh
+  tags:
+    - ios-builder
+  only:
+    - tags
+  except:
+    - /^nb-.*$/
