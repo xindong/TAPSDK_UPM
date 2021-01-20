@@ -34,6 +34,6 @@ uploadToGithub() {
 uploadToGithub
 
 judgeResult "UPM push failed!"
-java -jar ./.ci/release.jar message --title="TapSDK UPM Push Success" --body="<https://github.com/xindong/TAPSDK_UPM#${tag}| UPM地址>"
+java -jar ./.ci/release.jar message --title="TapSDK UPM Push Success" --body="<https://github.com/xindong/TAPSDK_UPM/tree/${tag}| https://github.com/xindong/TAPSDK_UPM#${tag}>"
 judgeResult "UPM push failed!"
 echo "send to slack end"
