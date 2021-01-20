@@ -36,11 +36,10 @@ else
   
   echo "currentBranch: $(git branch | grep "*")"
 
-  git fetch upm
-
   git tag $1
   
-  git push upm upm --tags
+  git push upm upm --tags --force
   
   git checkout $currBranch --force
+
 fi
