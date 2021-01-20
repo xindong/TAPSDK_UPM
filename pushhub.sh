@@ -1,6 +1,5 @@
 
-echo "TapSDK Unity auto push start"
-
+#!/bin/sh
 remoteUPM=0
 for repo in $(git remote -v)
 do
@@ -18,9 +17,7 @@ else
   branch=`git branch | grep "*"`
   # 截取分支名
   currBranch=${branch:2}
-  
   echo $currBranch
-
   git subtree split --prefix=TDS --branch upm
   git checkout upm
   git tag $1
@@ -32,8 +29,5 @@ else
   echo "Github add upm repo"
   git push upm upm --tags
   git checkout $currBranch --force 
-  
 fi
-
-echo "TapSDK Unity auto push finish!"
 
