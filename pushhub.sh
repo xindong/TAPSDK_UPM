@@ -13,10 +13,10 @@ else
 
   git branch -d $currBranch
 
-  git branch -b $currBranch
+  git branch $currBranch $1
 
   git config --local http.postBuffer 524288000  
-
+  
   //强制切换到当前mr分支
   git checkout master --force
   
