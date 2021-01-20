@@ -36,6 +36,8 @@ else
   
   echo "currentBranch: $(git branch | grep "*")"
 
+  git fetch upm
+
   git tag $1
   
   git push upm upm --tags
