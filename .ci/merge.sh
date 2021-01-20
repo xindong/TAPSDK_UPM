@@ -38,13 +38,4 @@ do
   fi;
 done;
 
-# sdkVersion=$(java -jar .ci/release.jar nb-ver)
-
-# # 打 tag 并且推送到远程
-# if [ $? -eq 0 ]; then
-#   echo "开始打 tag nb-$sdkVersion"
-#   git tag nb-$sdkVersion
-#   git push origin nb-$sdkVersion
-# fi;
-
 echo "send to slack end"
