@@ -22,6 +22,8 @@ else
   
   echo $currBranch
   
+  git config --local http.postBuffer 524288000
+
   git subtree split --prefix=TDS --branch upm
 
   git checkout upm
