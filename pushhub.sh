@@ -3,7 +3,6 @@ remoteUPM=0
 
 checkRepoExist() {
   for repo in $(git remote -v); do
-    echo $repo
     if [ $repo=upm ]; then
       remoteUPM=1
     fi
@@ -37,6 +36,8 @@ else
   echo "currentBranch: $(git branch | grep "*")"
 
   git tag $1
+
+  git fetch --unshallow upm
   
   git push upm upm --tags --force
   
