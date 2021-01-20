@@ -16,9 +16,9 @@ else
   git branch $currBranch $1
 
   git config --local http.postBuffer 524288000  
-  
+
   //强制切换到当前mr分支
-  git checkout master --force
+  git checkout $currBranch --force
   
   # 删除gitlab的tag以及本地缓存的Tag
   git tag -d $(git tag)
