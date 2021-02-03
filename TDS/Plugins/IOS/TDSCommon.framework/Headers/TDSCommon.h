@@ -14,7 +14,6 @@ FOUNDATION_EXPORT double TDSCommonVersionNumber;
 FOUNDATION_EXPORT const unsigned char TDSCommonVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <TDSCommon/PublicHeader.h>
-#define TDS_COMMON_VERSION @"1.1.1"
 
 #import <TDSCommon/TDSAccount.h>
 #import <TDSCommon/TDSAccountNotification.h>
