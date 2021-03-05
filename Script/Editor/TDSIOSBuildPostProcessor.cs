@@ -76,7 +76,7 @@ namespace TDSEditor
                 proj.AddFrameworkToProject(unityFrameworkTarget, "SafariServices.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AVFoundation.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "MobileCoreServices.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "AppTrackingTransparency.framework", false);
+                proj.AddFrameworkToProject(unityFrameworkTarget, "AppTrackingTransparency.framework", true);
                 // 动态库
                 Debug.Log("添加framework成功");
 
