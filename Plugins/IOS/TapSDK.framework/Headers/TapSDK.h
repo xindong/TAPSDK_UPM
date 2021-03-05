@@ -18,6 +18,7 @@ FOUNDATION_EXPORT const unsigned char TapSDKVersionString[];
 
 #import <TapSDK/TDSInitializer.h>
 #import <TapSDK/TDSConfig.h>
+#import <TDSCommon/TDSCommon.h>
 
 #if __has_include(<TapDB/TapDB.h>)
 #import <TapDB/TapDB.h>

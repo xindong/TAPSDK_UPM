@@ -40,8 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)tdsLogWithModel:(TDSLogModel * _Nonnull)model tag:(NSString *)tag content:(NSString *)content;
 
-
-
 @end
 
 

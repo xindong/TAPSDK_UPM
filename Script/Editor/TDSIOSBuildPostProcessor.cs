@@ -110,18 +110,17 @@ namespace TDSEditor
                 Debug.Log("tdsResourcePath:" + tdsResourcePath);
 
                 if(Directory.Exists(tdsResourcePath)){
-                    //使用UPM接入
                     TDSFileHelper.CopyAndReplaceDirectory(tdsResourcePath, resourcePath);
                 }
                 // 复制资源文件夹到工程目录
                 // 复制Assets的plist到工程目录
-
                 if(File.Exists(parentFolder + "/Assets/Plugins/IOS/Resource/TDS-Info.plist")){
                     File.Copy(parentFolder + "/Assets/Plugins/IOS/Resource/TDS-Info.plist",resourcePath + "/TDS-Info.plist");
                 }
 
                 List<string> names = new List<string>();    
                 names.Add("TDS-Info.plist");
+                names.Add("TDSCommonResource.bundle");
                 names.Add("TDSMomentResource.bundle");
                 foreach (var name in names)
                 {
@@ -223,9 +222,7 @@ namespace TDSEditor
             string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
             TDSEditor.TDSScriptStreamWriterHelper UnityAppController = new TDSEditor.TDSScriptStreamWriterHelper(unityAppControllerPath);
             UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TapSDK/TapLoginHelper.h>");
-            UnityAppController.WriteBelow(@"id sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey], annotation = options[UIApplicationOpenURLOptionsAnnotationKey];",@"if(url){
-        return [TapLoginHelper handleTapTapOpenURL:url];
-    }");
+            UnityAppController.WriteBelow(@"id sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey], annotation = options[UIApplicationOpenURLOptionsAnnotationKey];",@"if(url){[TapLoginHelper handleTapTapOpenURL:url];}");
             Debug.Log("修改代码成功");
         }
     }

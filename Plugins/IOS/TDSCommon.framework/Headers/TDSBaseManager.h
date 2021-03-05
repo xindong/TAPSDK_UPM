@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <TDSCommon/TDSAccount.h>
 
-#define TDS_COMMON_VERSION @"1.1.2"
+#define TDS_COMMON_VERSION @"1.1.1"
 #define TDS_COMMON_VERSION_NUMBER @"3"
 
 NS_ASSUME_NONNULL_BEGIN
