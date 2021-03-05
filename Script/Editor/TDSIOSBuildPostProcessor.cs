@@ -223,9 +223,7 @@ namespace TDSEditor
             string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
             TDSEditor.TDSScriptStreamWriterHelper UnityAppController = new TDSEditor.TDSScriptStreamWriterHelper(unityAppControllerPath);
             UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TapSDK/TapLoginHelper.h>");
-            UnityAppController.WriteBelow(@"id sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey], annotation = options[UIApplicationOpenURLOptionsAnnotationKey];",@"if(url){
-        return [TapLoginHelper handleTapTapOpenURL:url];
-    }");
+            UnityAppController.WriteBelow(@"id sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey], annotation = options[UIApplicationOpenURLOptionsAnnotationKey];",@"if(url){[TapLoginHelper handleTapTapOpenURL:url];}");
             Debug.Log("修改代码成功");
         }
     }
