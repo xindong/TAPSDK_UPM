@@ -8,8 +8,8 @@
 #import <Foundation/Foundation.h>
 #import <TDSCommon/TDSAccount.h>
 
-#define TDS_COMMON_VERSION @"1.1.1"
-#define TDS_COMMON_VERSION_NUMBER @"3"
+#define TDS_COMMON_VERSION @"1.1.10"
+#define TDS_COMMON_VERSION_NUMBER @"10"
 
 NS_ASSUME_NONNULL_BEGIN
 typedef NSString *TDSLanguage NS_STRING_ENUM;
