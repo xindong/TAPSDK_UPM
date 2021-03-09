@@ -23,11 +23,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param view1 view1
 /// @param view2 view2
 + (void)layoutViewEqual:(UIView *)view1 toView:(UIView *)view2;
-+ (NSLayoutConstraint *)layoutViewEqual:(UIView *)view1 toView:(UIView *)view2 attribute:(NSLayoutAttribute)attr;
-+ (NSLayoutConstraint *)layoutViewEqual:(UIView *)view1 toView:(UIView *)view2 attribute:(NSLayoutAttribute)attr offset:(CGFloat)offset;
 
-+ (NSLayoutConstraint *)layoutViewEqual:(UIView *)view1 attribute:(NSLayoutAttribute)attr1 toView:(UIView *)view2 attribute:(NSLayoutAttribute)attr2;
++ (NSLayoutConstraint *)layoutViewEqual:(UIView *)view1
+                                 toView:(UIView *)view2
+                              attribute:(NSLayoutAttribute)attr;
 
++ (NSLayoutConstraint *)layoutViewEqual:(UIView *)view1
+                                 toView:(UIView *)view2
+                              attribute:(NSLayoutAttribute)attr
+                                 offset:(CGFloat)offset;
+
++ (NSLayoutConstraint *)layoutViewEqual:(UIView *)view1
+                              attribute:(NSLayoutAttribute)attr1
+                                 toView:(UIView *)view2
+                              attribute:(NSLayoutAttribute)attr2;
 
 /// 约束两个view相等
 /// @param view1 view1
@@ -35,8 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param view2 view2
 /// @param attr2 view2约束
 /// @param constant 距离
-+ (NSLayoutConstraint *)layoutViewEqual:(UIView *)view1 attribute:(NSLayoutAttribute)attr1 toView:(UIView *)view2 attribute:(NSLayoutAttribute)attr2 constant:(CGFloat)constant;
-
++ (NSLayoutConstraint *)layoutViewEqual:(UIView *)view1
+                              attribute:(NSLayoutAttribute)attr1
+                                 toView:(UIView *)view2
+                              attribute:(NSLayoutAttribute)attr2
+                               constant:(CGFloat)constant;
 
 /// 约束两个view，更大
 /// @param view1 view1
@@ -44,7 +56,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param view2 view2
 /// @param attr2 view2约束
 /// @param constant 距离
-+ (NSLayoutConstraint *)layoutViewGreater:(UIView *)view1 attribute:(NSLayoutAttribute)attr1 toView:(UIView *)view2 attribute:(NSLayoutAttribute)attr2 constant:(CGFloat)constant;
++ (NSLayoutConstraint *)layoutViewGreater:(UIView *)view1
+                                attribute:(NSLayoutAttribute)attr1
+                                   toView:(UIView *)view2
+                                attribute:(NSLayoutAttribute)attr2
+                                 constant:(CGFloat)constant;
+
+/// 约束两个view，更小
+/// @param view1 view1
+/// @param attr1 view1约束
+/// @param view2 view2
+/// @param attr2 view2约束
+/// @param constant 距离
++ (NSLayoutConstraint *)layoutViewLesser:(UIView *)view1
+                               attribute:(NSLayoutAttribute)attr1
+                                  toView:(UIView *)view2
+                               attribute:(NSLayoutAttribute)attr2
+                                constant:(CGFloat)constant;
 @end
 
 NS_ASSUME_NONNULL_END
