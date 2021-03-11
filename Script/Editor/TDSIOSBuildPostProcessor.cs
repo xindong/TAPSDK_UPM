@@ -101,7 +101,7 @@ namespace TDSEditor
 
                 Directory.CreateDirectory(resourcePath);
 
-                string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.sdk");
+                string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.sdk@");
 
                 string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TapSDK");
 
