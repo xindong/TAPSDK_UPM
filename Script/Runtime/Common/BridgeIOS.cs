@@ -28,6 +28,10 @@ namespace TDSCommon
             return dic;
         }
 
+        public void EditorInterceptor(BridgeCallInterceptor interceptor)
+        {
+        }
+
         private delegate void EngineBridgeDelegate(string result);
         [AOT.MonoPInvokeCallbackAttribute(typeof(EngineBridgeDelegate))]
         static void engineBridgeDelegate(string resultJson)
@@ -66,6 +70,7 @@ namespace TDSCommon
         public void Call(Command command, Action<Result> action)
         {
             #if UNITY_IOS
+
             if (command.callback && !string.IsNullOrEmpty(command.callbackId))
             {
                 if (!dic.ContainsKey(command.callbackId))
@@ -76,6 +81,7 @@ namespace TDSCommon
             registerHandler(command.toJSON(), engineBridgeDelegate);
             #endif
         }
+
     #if UNITY_IOS
     [DllImport("__Internal")]
     private static extern void callHandler(string command);

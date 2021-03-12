@@ -79,8 +79,10 @@ namespace TDSEditor
                 CopyAndReplaceDirectory(dir, Path.Combine(dstPath, Path.GetFileName(dir)));
         }
 
-        public static string FilterFile(string srcPath,string filterName){
-            if(!Directory.Exists(srcPath)){
+        public static string FilterFile(string srcPath,string filterName)
+        {
+            if(!Directory.Exists(srcPath))
+            {
                 return null;
             }          
             foreach(var dir in Directory.GetDirectories(srcPath))
@@ -88,11 +90,39 @@ namespace TDSEditor
                 string fileName = Path.GetFileName(dir);
                 if (fileName.StartsWith(filterName))
                 {   
-                    Debug.Log("筛选到指定文件夹:" + Path.Combine(srcPath,Path.GetFileName(dir)));
                     return Path.Combine(srcPath,Path.GetFileName(dir));
                 }
             } 
             return null; 
+        }
+
+        public static FileInfo RecursionFilterFile(string dir,string fileName)
+        {
+            List<FileInfo> fileInfoList = new List<FileInfo>();
+            Director(dir,fileInfoList);
+            foreach (FileInfo item in fileInfoList)
+            {
+                if(fileName.Equals(item.Name))
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        public static void Director(string dir,List<FileInfo> list)
+        {  
+            DirectoryInfo d = new DirectoryInfo(dir);
+            FileInfo[] files = d.GetFiles();
+            DirectoryInfo[] directs = d.GetDirectories();
+            foreach (FileInfo f in files)
+            {
+                list.Add(f); 
+            }
+            foreach (DirectoryInfo dd in directs)
+            {
+                Director(dd.FullName, list);
+            } 
         }
 
     }

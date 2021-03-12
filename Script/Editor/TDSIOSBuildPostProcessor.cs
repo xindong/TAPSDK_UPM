@@ -17,11 +17,6 @@ namespace TDSEditor
 #if UNITY_IOS
         // 添加标签，unity导出工程后自动执行该函数
         [PostProcessBuild]
-        /* 
-            2020-11-20 Jiang Jiahao
-            该脚本中参数为DEMO参数，项目组根据实际参数修改
-            导出工程后核对配置或依赖是否正确，根据需要修改脚本
-        */
         public static void OnPostprocessBuild(BuildTarget BuildTarget, string path)
         {
             
@@ -58,7 +53,6 @@ namespace TDSEditor
                 proj.SetBuildProperty(unityFrameworkTarget,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","YES");
                 proj.SetBuildProperty(unityFrameworkTarget, "SWIFT_VERSION", "5.0");
                 proj.SetBuildProperty(unityFrameworkTarget, "CLANG_ENABLE_MODULES", "YES");
-
                 // add extra framework(s)
                 // 参数: 目标targetGUID, framework,是否required:fasle->required,true->optional
                 proj.AddFrameworkToProject(unityFrameworkTarget, "CoreTelephony.framework", false);
@@ -85,14 +79,11 @@ namespace TDSEditor
                 proj.AddFileToBuild(unityFrameworkTarget, proj.AddFile("usr/lib/libc++.tbd", "libc++.tbd",PBXSourceTree.Sdk));
                 
                 Debug.Log("添加tbd成功");
-
-
+                
                 // 添加资源文件，注意文件路径
                 var resourcePath = Path.Combine(path, "TDSResource");
-                string parentFolder = Directory.GetParent(Application.dataPath).FullName;
 
-                Debug.Log("resourcePath:" + resourcePath);
-                Debug.Log("parentFolder:" + parentFolder);
+                string parentFolder = Directory.GetParent(Application.dataPath).FullName;
 
                 if (Directory.Exists(resourcePath))
                 {
@@ -105,35 +96,31 @@ namespace TDSEditor
 
                 string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TapSDK");
 
-                string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/Plugins/IOS/Resource" : localPacckagePath + "/Plugins/IOS/Resource";
-
-                Debug.Log("tdsResourcePath:" + tdsResourcePath);
-
+                string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/Plugins/iOS/Resource" : localPacckagePath + "/Plugins/iOS/Resource";
+                
                 if(Directory.Exists(tdsResourcePath)){
                     TDSFileHelper.CopyAndReplaceDirectory(tdsResourcePath, resourcePath);
                 }
-                // 复制资源文件夹到工程目录
-                // 复制Assets的plist到工程目录
-                if(File.Exists(parentFolder + "/Assets/Plugins/IOS/Resource/TDS-Info.plist")){
-                    File.Copy(parentFolder + "/Assets/Plugins/IOS/Resource/TDS-Info.plist",resourcePath + "/TDS-Info.plist");
-                }
 
-                List<string> names = new List<string>();    
-                names.Add("TDS-Info.plist");
+                FileInfo plistFile = TDSFileHelper.RecursionFilterFile(parentFolder + "/Assets/Plugins/","TDS-Info.plist");
+
+                if(plistFile.Exists)
+                {
+                    plistFile.CopyTo(resourcePath + "/TDS-Info.plist");
+                }
+                
+                List<string> names = new List<string>(); 
                 names.Add("TDSCommonResource.bundle");
                 names.Add("TDSMomentResource.bundle");
                 foreach (var name in names)
                 {
                     proj.AddFileToBuild(target, proj.AddFile(Path.Combine(resourcePath,name), Path.Combine(resourcePath,name), PBXSourceTree.Source));
                 }
-
-                Debug.Log("添加resource成功");
-
+                Debug.Log("TapSDK添加resource成功");
                 // rewrite to file  
                 File.WriteAllText(projPath, proj.WriteToString());
                 SetPlist(path,resourcePath + "/TDS-Info.plist");
                 SetScriptClass(path);
-                Debug.Log("测试打包成功");
                 return;
             }
 

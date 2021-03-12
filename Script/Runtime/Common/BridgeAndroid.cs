@@ -44,6 +44,7 @@ namespace TDSCommon
             {
                 return;
             }
+
             AndroidJavaClass serviceClass = new AndroidJavaClass(serviceClzName);
             AndroidJavaObject serviceImpl = new AndroidJavaObject(serviceImplName);
             mAndroidBridge.Call(registerMethod, serviceClass, serviceImpl);
@@ -55,6 +56,7 @@ namespace TDSCommon
             {
                 return;
             }
+
             mAndroidBridge.Call(registerHandlerMethod, command.toJSON(), new BridgeCallback(action));
         }
 
@@ -64,7 +66,13 @@ namespace TDSCommon
             {
                 return;
             }
+
             mAndroidBridge.Call(callHandlerMethod, command.toJSON());
+        }
+
+        public void EditorInterceptor(BridgeCallInterceptor interceptor)
+        {
+
         }
 
     }

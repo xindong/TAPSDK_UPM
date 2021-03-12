@@ -4,7 +4,7 @@
 
 * 安装Unity **Unity 2018.3**或更高版本
 
-* IOS **10**或更高版本
+* iOS **10**或更高版本
 
 * Android 目标为**API21**或更高版本
 
@@ -32,9 +32,11 @@
         android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 ```
 
-#### 2.2 IOS 配置
+#### 2.2 iOS 配置
 
-在Assets/Plugins/IOS/Resource目录下创建TDS-Info.plist文件,复制以下代码并且替换其中的ClientI以及申请权限时的文案。
+在 **Assets/Plugins/iOS/Resource** 目录下创建TDS-Info.plist文件,复制以下代码并且替换其中的ClientI以及申请权限时的文案。
+* tips：文件路径和以及文件名请确认正确且大小写敏感，如果错误可能会导致iOS编译失败。
+* changeLog：**1.0.5** 版本之前iOS目录为大写。
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -57,121 +59,82 @@
 </plist>
 ```
 
-### 3.接口描述
+#### 2.3 编译流程
+
+##### 2.3.1 IOS 编译流程 （详情参考 TapSDK/Plugins/Script/Editor/TDSIOSBuildPostProcessor.cs）
+
+该编译脚本采用默认标签 **[PostProcessBuild]** 来自动执行。如有其他需要，则使用 **[PostProcessBuildAttribute(order)]** 来决定脚本执行顺序。
+* tips：order为执行顺序，从0开始
 
 ```c#
-//命名空间均为
-using TapSDK;
+    [PostProcessBuild]
+    public static void OnPostprocessBuild(BuildTarget BuildTarget, string path)
+    {
+        ...
+    }
 ```
 
-#### 3.1 TapSDK 初始化
+1.添加所需要的framework以及 Build Setting 
 
-##### 3.1.1 在.amsdef中添加引用
+```c#
+    //Build Setting
+    proj.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
+    proj.AddBuildProperty(unityFrameworkTarget, "OTHER_LDFLAGS", "-ObjC");
+    // Swift编译选项
+    proj.SetBuildProperty(target, "ENABLE_BITCODE", "NO"); //bitcode  NO
+    proj.SetBuildProperty(target,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","YES");
+    proj.SetBuildProperty(target, "SWIFT_VERSION", "5.0");
+    proj.SetBuildProperty(target, "CLANG_ENABLE_MODULES", "YES");
+    proj.SetBuildProperty(unityFrameworkTarget, "ENABLE_BITCODE", "NO"); //bitcode  NO
+    proj.SetBuildProperty(unityFrameworkTarget,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","YES");
+    proj.SetBuildProperty(unityFrameworkTarget, "SWIFT_VERSION", "5.0");
+    proj.SetBuildProperty(unityFrameworkTarget, "CLANG_ENABLE_MODULES", "YES");
+    //所需要的Framework
+    proj.AddFrameworkToProject(unityFrameworkTarget, "CoreTelephony.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "QuartzCore.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "Security.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "WebKit.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "Photos.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "AdSupport.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "AssetsLibrary.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "AVKit.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "LocalAuthentication.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "SystemConfiguration.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "Accelerate.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "SafariServices.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "AVFoundation.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "MobileCoreServices.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "AppTrackingTransparency.framework", true);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "AuthenticationServices.framework", true);
+```
 
-```json
-{
-    "name": "YourProject",
-    "references": [
-        "TDSCommon",
-        "TDSMoment",
-        "TDSLogin",
-        "TDSCore",
-        "TDSTapDB"
-    ],
-    "includePlatforms": [
-        "Android",
-        "iOS",
-        "Editor"
-    ],
+2. 资源文件依赖
+* 使用upm方式导入TapSDK,会将 **Library/PacakgeCache/com.tds.sdk@{CommitHashCode}/Plugins/iOS/Resource**下的iOS资源文件Copy到XCode工程目录下的 **TDSResource** 文件夹中，再添加依赖。
+
+```c#
+    List<string> names = new List<string>(); 
+    names.Add("TDSCommonResource.bundle");
+    names.Add("TDSMomentResource.bundle");
+    foreach (var name in names)
+    {
+        proj.AddFileToBuild(target, proj.AddFile(Path.Combine(resourcePath,name), Path.Combine(resourcePath,name), PBXSourceTree.Source));
+    }
+```
+
+3. Plist文件以及UnityAppController.mm文件配置
+
+* 根据上文iOS配置，用户需要在Assets/Plugins/iOS/Resource 文件夹中创建TDS-Info.plist文件。TapSDK会自动配置 **TapTap** 所需要的 **URL Types** 以及 **UnityAppController.mm** 文件中添加相应代码。
+
+```c#
+    // 配置TDS-Info.plist 文件
+    SetPlist(path,resourcePath + "/TDS-Info.plist");
     ...
-}
+    // 修改 UnityAppController 文件
+    string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
+    TDSEditor.TDSScriptStreamWriterHelper UnityAppController = new TDSEditor.TDSScriptStreamWriterHelper(unityAppControllerPath);
+    UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TapSDK/TapLoginHelper.h>");
+    UnityAppController.WriteBelow(@"id sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey], annotation = options[UIApplicationOpenURLOptionsAnnotationKey];",@"if(url){[TapLoginHelper handleTapTapOpenURL:url];}");
 ```
 
-##### 3.1.2 初始化
-```c#
-//TapTap ClientId
-TapSDK.TDSCore.Init(clientId);
-```
-##### 3.1.3 开启TapDB
-```c#
-TapSDK.TDSCore.EnableTapDB(gameVersion,gameChannel);
-```
-##### 3.1.4 开启内嵌动态
-```c#
-TapSDK.TDSCore.EnableMoment();
-```
-#### 3.2 TapSDK 登陆
-```c#
-//命名空间
-using TDSLogin;
-```
-##### 3.2.1 初始化
-```c#
-/**
- *  TDSLogin初始化
- *  @param clientId TapTapId
- */
-TapSDK.TDSLogin.Init(clientId);
-/**
- *  TDSLogin初始化
- *  @param clientId TapTapId
- *  @param isCN true 大陆 false 非大陆
- *  @param isRoundCorner true 开启圆角 false 关闭圆角
- */
-TapSDK.TDSLogin.Init(clientId,isCN,isRoundCorner);
-```
 
-##### 3.2.2 LoginCallback回调
 
-调用 **TDSLogin.RegisterLoginCallback()** 来处理登陆结果回调
-
-如果登陆成功，则会回调 **LoginCallback.LoginSuccess(TDSAccessToken)**,登陆取消以及登陆失败则会相应的回调对应接口。
-
-```c#
-TapSDK.TDSLogin.RegisterLoginCallback(loginCallback);
-```
-
-解绑LoginCallback回调
-
-```c#
-TapSDK.TDSLogin.UnRegisterLoginCallback();
-```
-
-##### 3.2.3 开始登陆
-
-```c#
-/**
- * @params permissions 所需要的权限
- */
-TapSDK.TDSLogin.StartLogin(string[] permissions);
-```
-##### 3.2.4 获取当前Token
-
-```c#
-TapSDK.TDSLogin.GetCurrentAccessToken((accessToken)=>
-{
-    //获取成功返回AccessToken
-});
-```
-
-##### 3.2.5 获取Profile
-
-```c#
-TapSDK.TDSLogin.GetCurrentProfile((profile)=>
-{
-    //获取成功
-});
-
-TapSDK.TDSLogin.FetchProfileForCurrentAccessToken((profile)=>
-{
-    //获取成功
-},(errorMsg)=>{
-    //获取失败
-});
-```
-
-##### 3.2.5 退出登录
-
-```c#
-TapSDK.TDSLogin.Logout();
-```

@@ -36,6 +36,10 @@ namespace TDSCommon
             {
                 bridge = BridgeIOS.GetInstance();
             }
+
+            #if UNITY_EDITOR
+                bridge = BridgeEditor.GetInstance();
+            #endif
         }
 
         public void Register(string serviceClzName, string serviceImplName)
@@ -63,6 +67,15 @@ namespace TDSCommon
                 return;
             }
             bridge.Call(command, action);
+        }
+
+        public void EditorInterceptor(BridgeCallInterceptor interceptor)
+        {
+            if(bridge == null)
+            {
+                return;
+            }
+            bridge.EditorInterceptor(interceptor);
         }
 
     }
