@@ -22,7 +22,7 @@ FOUNDATION_EXPORT TapDBLoginType const TapDBLoginTypeTwitter;
 FOUNDATION_EXPORT TapDBLoginType const TapDBLoginTypePhoneNumber;
 
 //版本号
-static NSString *const version = @"3.0.0";
+static NSString *const version = @"3.0.1";
 
 @interface TapDB : NSObject
 /**
@@ -54,6 +54,9 @@ static NSString *const version = @"3.0.0";
 + (void)onStart:(NSString *)appId channel:(nullable NSString *)channel version:(nullable NSString *)gameVersion properties:(nullable NSDictionary *)properties;
 
 + (void)onStartWithClientId:(NSString *)clientId channel:(nullable NSString *)channel version:(nullable NSString *)gameVersion;
+
+//sm
++ (void)onStartWithClientId:(NSString *)clientId channel:(nullable NSString *)channel version:(nullable NSString *)gameVersion isCN:(BOOL)isCN;
 /**
  * 初始化，尽早调用
  * clientId: TapTap登录sdk后台页面 client id
@@ -168,6 +171,7 @@ static NSString *const version = @"3.0.0";
 /// 添加动态事件属性，每次发送事件会调用dynamicPropertiesCaculator
 /// @param dynamicPropertiesCaculator 动态属性回调，需返回希望上传的属性字典
 + (void)registerDynamicProperties:(NSDictionary* (^)(void))dynamicPropertiesCaculator;
+
 @end
 
 NS_ASSUME_NONNULL_END

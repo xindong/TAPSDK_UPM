@@ -21,7 +21,7 @@
 
 * 本地导入
 
-在YourProject目录下（与Assets同级）创建TapSDK文件夹，导入TapSDK工程。
+在YourProject目录下（与Assets目录同级）创建TapSDK文件夹，导入TapSDK工程。
 ```json
 //在YourProjectPath/Packages/manifest.json中添加以下代码
 "dependencies":{
@@ -71,7 +71,10 @@
 
 ### 2.3 编译流程
 
-#### 2.3.1 IOS 编译流程 （详情参考 TapSDK/Plugins/Script/Editor/TDSIOSBuildPostProcessor.cs）
+#### 2.3.1 IOS 编译流程 
+
+    //编译文件路径
+    TapSDK/Plugins/Script/Editor/TDSIOSBuildPostProcessor.cs
 
 该编译脚本采用默认标签 **[PostProcessBuild]** 来自动执行。如有其他需要，则使用 **[PostProcessBuildAttribute(order)]** 来决定脚本执行顺序。
 * tips：order为执行顺序，从0开始
