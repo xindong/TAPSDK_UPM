@@ -1,6 +1,6 @@
 # TapSDK
 
-### 前提条件
+## 前提条件
 
 * 安装Unity **Unity 2018.3**或更高版本
 
@@ -8,7 +8,7 @@
 
 * Android 目标为**API21**或更高版本
 
-### 1.添加TapSDK
+## 1.添加TapSDK
 
 * 使用Unity Pacakge Manager
 
@@ -19,9 +19,19 @@
     }
 ```
 
-### 2.配置TapSDK
+* 本地导入
 
-#### 2.1 Android 配置
+在YourProject目录下（与Assets同级）创建TapSDK文件夹，导入TapSDK工程。
+```json
+//在YourProjectPath/Packages/manifest.json中添加以下代码
+"dependencies":{
+        "com.tds.sdk":"file:..//TapSDK"
+    }
+```
+
+## 2.配置TapSDK
+
+### 2.1 Android 配置
 
 编辑Assets/Plugins/Android/AndroidManifest.xml文件,在Application Tag下添加以下代码。
 ```xml
@@ -32,7 +42,7 @@
         android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 ```
 
-#### 2.2 iOS 配置
+### 2.2 iOS 配置
 
 在 **Assets/Plugins/iOS/Resource** 目录下创建TDS-Info.plist文件,复制以下代码并且替换其中的ClientI以及申请权限时的文案。
 * tips：文件路径和以及文件名请确认正确且大小写敏感，如果错误可能会导致iOS编译失败。
@@ -59,9 +69,9 @@
 </plist>
 ```
 
-#### 2.3 编译流程
+### 2.3 编译流程
 
-##### 2.3.1 IOS 编译流程 （详情参考 TapSDK/Plugins/Script/Editor/TDSIOSBuildPostProcessor.cs）
+#### 2.3.1 IOS 编译流程 （详情参考 TapSDK/Plugins/Script/Editor/TDSIOSBuildPostProcessor.cs）
 
 该编译脚本采用默认标签 **[PostProcessBuild]** 来自动执行。如有其他需要，则使用 **[PostProcessBuildAttribute(order)]** 来决定脚本执行顺序。
 * tips：order为执行顺序，从0开始
@@ -74,7 +84,7 @@
     }
 ```
 
-1.添加所需要的framework以及 Build Setting 
+##### 1.添加所需要的framework以及 Build Setting 
 
 ```c#
     //Build Setting
@@ -108,20 +118,23 @@
     proj.AddFrameworkToProject(unityFrameworkTarget, "AuthenticationServices.framework", true);
 ```
 
-2. 资源文件依赖
-* 使用upm方式导入TapSDK,会将 **Library/PacakgeCache/com.tds.sdk@{CommitHashCode}/Plugins/iOS/Resource**下的iOS资源文件Copy到XCode工程目录下的 **TDSResource** 文件夹中，再添加依赖。
+##### 2. 资源文件依赖
+
+* 使用upm方式导入TapSDK,会将 **Library/PacakgeCache/com.tds.sdk@{CommitHashCode}/Plugins/iOS/Resource**
+目录中Copy资源文件。
+
+* 使用本地方式导入TapSDK,则会将 **YourProject/TapSDK/Plugins/iOS/Resource** 目录中Copy资源文件。
 
 ```c#
-    List<string> names = new List<string>(); 
-    names.Add("TDSCommonResource.bundle");
-    names.Add("TDSMomentResource.bundle");
-    foreach (var name in names)
-    {
-        proj.AddFileToBuild(target, proj.AddFile(Path.Combine(resourcePath,name), Path.Combine(resourcePath,name), PBXSourceTree.Source));
-    }
+    //从UPM缓存目录中拷贝iOS资源文件
+    string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.sdk@");
+    //从本地目录中拷贝资源为哪
+    string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TapSDK");
 ```
 
-3. Plist文件以及UnityAppController.mm文件配置
+iOS资源文件Copy到XCode工程目录下的 **TDSResource** 文件夹中，再添加依赖到指定Target。
+
+##### 3. Plist文件以及UnityAppController.mm文件配置
 
 * 根据上文iOS配置，用户需要在Assets/Plugins/iOS/Resource 文件夹中创建TDS-Info.plist文件。TapSDK会自动配置 **TapTap** 所需要的 **URL Types** 以及 **UnityAppController.mm** 文件中添加相应代码。
 

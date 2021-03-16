@@ -126,24 +126,6 @@ namespace TDSEditor
 
         }
 
-        // 添加动态库 注意路径
-        public static void AddFramework(string coreFrameworkName, UnityEditor.iOS.Xcode.PBXProject proj, string target)
-        {
-            const string defaultLocationInProj = "Library/";
-            string framework = Path.Combine(defaultLocationInProj, coreFrameworkName);
-            string fileGuid = proj.AddFile(framework, "Frameworks/" + framework, PBXSourceTree.Sdk);
-            PBXProjectExtensions.AddFileToEmbedFrameworks(proj, target, fileGuid);
-            proj.SetBuildProperty(target, "LD_RUNPATH_SEARCH_PATHS", "$(inherited) @executable_path/Frameworks");
-        }
-
-        // 修改Build版本号，使用时间 『年月日时分秒』
-        public static string AddBuildNumber()
-        {
-            string buildNumber = DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.Hour.ToString() +
-            DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
-            return buildNumber;
-        }
-
         // 修改pilist
         private static void SetPlist(string pathToBuildProject,string infoPlistPath)
         {
@@ -163,8 +145,7 @@ namespace TDSEditor
             {
                 _list.AddString(items[i]);
             }
-            
-            
+                        
             if(!string.IsNullOrEmpty(infoPlistPath))
             {   
                 Dictionary<string, object> dic = (Dictionary<string, object>)TDSEditor.Plist.readPlist(infoPlistPath);

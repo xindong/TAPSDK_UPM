@@ -70,7 +70,7 @@ namespace TDSCommon
             mAndroidBridge.Call(callHandlerMethod, command.toJSON());
         }
 
-        public void EditorInterceptor(BridgeCallInterceptor interceptor)
+        public void AddEditorInterceptor(BridgeEditorCallInterceptor interceptor)
         {
 
         }

@@ -1,6 +1,10 @@
 using System;
 using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.InteropServices;
+
 
 namespace TDSCommon
 {
@@ -8,39 +12,59 @@ namespace TDSCommon
     {
         private static BridgeEditor sInstance = new BridgeEditor();
 
-        private BridgeCallInterceptor mInterceptor;
+        private List<BridgeEditorCallInterceptor> mInterceptorList;
+
+        private Dictionary<string, Action<Result>> mMockResultDic;
+
+        private BridgeEditor()
+        {
+            mMockResultDic = new Dictionary<string, Action<Result>>();
+            mInterceptorList = new List<BridgeEditorCallInterceptor>();
+        }
 
         public static BridgeEditor GetInstance()
         {
             return sInstance;
         }
 
-        public void EditorInterceptor(BridgeCallInterceptor interceptor)
+        public void AddEditorInterceptor(BridgeEditorCallInterceptor interceptor)
         {
-            this.mInterceptor = interceptor;
+            if (!mInterceptorList.Contains(interceptor))
+            {
+                mInterceptorList.Add(interceptor);
+            }
         }
 
         public void Register(string serviceClzName, string serviceImplName)
         {
-            Debug.Log($"[TDSSDK-C#]Register serviceClzName: {serviceClzName}, serviceImplName: {serviceImplName}");
+            Debug.Log($"[TapSDK-C#]Register serviceClzName: {serviceClzName}, serviceImplName: {serviceImplName}");
         }
 
         public void Call(Command command)
         {
-            Debug.Log($"[TDSSDK-C#]Call, command: {command.toJSON()}");
-            if (mInterceptor != null)
+            Debug.Log($"[TapSDK-C#]Call, command: {command.toJSON()}");
+
+            if (mInterceptorList != null)
             {
-                mInterceptor.Interceptor(command);
+                foreach (BridgeEditorCallInterceptor interceptor in mInterceptorList)
+                {
+                    interceptor.BridgeInterceptor(command);
+                }
             }
         }
 
         public void Call(Command command, Action<Result> action)
         {
-            Debug.Log($"[TDSSDK-C#]Call with action, command: {command.toJSON()}");
-            if (mInterceptor != null)
+            Debug.Log($"[TapSDK-C#]Call with action, command: {command.toJSON()}");
+
+            if (mInterceptorList != null)
             {
-                mInterceptor.Interceptor(command, action);
+                foreach (BridgeEditorCallInterceptor interceptor in mInterceptorList)
+                {
+                    interceptor.BridgeInterceptor(command, action);
+                }
             }
+
         }
     }
 }

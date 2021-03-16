@@ -28,7 +28,7 @@ namespace TDSCommon
             return dic;
         }
 
-        public void EditorInterceptor(BridgeCallInterceptor interceptor)
+        public void AddEditorInterceptor(BridgeEditorCallInterceptor interceptor)
         {
         }
 

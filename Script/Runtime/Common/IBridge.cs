@@ -14,7 +14,7 @@ namespace TDSCommon
 
         void Call(Command command, Action<Result> action);
 
-        void EditorInterceptor(BridgeCallInterceptor interceptor);
+        void AddEditorInterceptor(BridgeEditorCallInterceptor interceptor);
 
     }
 }
