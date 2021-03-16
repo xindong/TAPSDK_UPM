@@ -33,9 +33,20 @@ namespace TapSDK
 
         public void Init(string clientId)
         {
-            Dictionary<string,object> dic = new Dictionary<string, object>();
-            dic.Add("clientID",clientId);
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("clientID", clientId);
             Command command = new Command(TDSCoreConstants.TDS_CORE_SERVICE, "init", false, dic);
+            EngineBridge.GetInstance().CallHandler(command);
+        }
+
+        public void Init(string clientID, bool isCN)
+        {
+            Command command = new Command.Builder()
+                .Service(TDSCoreConstants.TDS_CORE_SERVICE)
+                .Method("initWithRegion")
+                .Args("clientID", clientID)
+                .Args("regionType", isCN)
+                .CommandBuilder();
             EngineBridge.GetInstance().CallHandler(command);
         }
 

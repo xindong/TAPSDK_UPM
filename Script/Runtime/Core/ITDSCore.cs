@@ -9,6 +9,8 @@ namespace TapSDK
     {
         void Init(string clientID);
 
+        void Init(string clientID, bool isCN);
+
         void EnableMoment();
 
         void EnableTapDB(string gameVersion, string gameChannel);
@@ -21,6 +23,6 @@ namespace TapSDK
         public static string TDS_CORE_CLZ = "com.tds.wrapper.TDSCoreService";
 
         public static string TDS_CORE_IMPL = "com.tds.wrapper.TDSCoreServiceImpl";
-    }   
+    }
 
 }

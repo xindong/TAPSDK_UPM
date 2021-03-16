@@ -33,7 +33,7 @@
 
 ### 2.1 Android 配置
 
-编辑Assets/Plugins/Android/AndroidManifest.xml文件,在Application Tag下添加以下代码。
+* 编辑Assets/Plugins/Android/AndroidManifest.xml文件,在Application Tag下添加以下代码。
 ```xml
     <activity
         android:name="com.taptap.sdk.TapTapActivity"
@@ -45,8 +45,10 @@
 ### 2.2 iOS 配置
 
 在 **Assets/Plugins/iOS/Resource** 目录下创建TDS-Info.plist文件,复制以下代码并且替换其中的ClientI以及申请权限时的文案。
+
 * tips：文件路径和以及文件名请确认正确且大小写敏感，如果错误可能会导致iOS编译失败。
 * changeLog：**1.0.6** 版本之前iOS目录为大写。
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">

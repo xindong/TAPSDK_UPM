@@ -8,6 +8,11 @@ namespace TapSDK
             TDSCoreImpl.GetInstance().Init(clientId);
         }
 
+        public static void Init(string clientID,bool isCN)
+        {
+            TDSCoreImpl.GetInstance().Init(clientID,isCN);
+        }
+
         public static void EnableMoment()
         {
             TDSCoreImpl.GetInstance().EnableMoment();
