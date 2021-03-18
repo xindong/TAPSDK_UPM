@@ -17,6 +17,7 @@ FOUNDATION_EXPORT const unsigned char TDSCommonVersionString[];
 
 #import <TDSCommon/TDSAccount.h>
 #import <TDSCommon/TDSAutoLayout.h>
+#import <TDSCommon/TDSGameUtil.h>
 #import <TDSCommon/EngineBridgeError.h>
 #import <TDSCommon/TDSBridge.h>
 #import <TDSCommon/TDSBridgeCallback.h>
@@ -77,3 +78,5 @@ FOUNDATION_EXPORT const unsigned char TDSCommonVersionString[];
 #import <TDSCommon/TDSCommonUIHelper.h>
 #import <TDSCommon/UIView+Toast.h>
 #import <TDSCommon/TDSLocalizeManager.h>
+#import <TDSCommon/TDSWSSecurity.h>
+#import <TDSCommon/TDSWSWebSocket.h>

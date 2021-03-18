@@ -44,7 +44,13 @@ typedef NS_ENUM (NSInteger, TDSMomentOrientation) {
 
 /// 初始化
 /// @param clientId clienId
+/// 默认国内
 + (void)initSDKWithClientId:(NSString *)clientId;
+
+/// 初始化
+/// @param clientId clientId
+/// @param isCN 是否国内
++ (void)initSDKWithClientId:(NSString *)clientId isCN:(BOOL)isCN;
 
 /// 设置代理
 /// @param delegate 代理
