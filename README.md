@@ -21,7 +21,7 @@
 
 * 本地导入
 
-在YourProject目录下（与Assets目录同级）创建TapSDK文件夹，导入TapSDK工程。
+在工程目录下（与Assets目录同级）创建TapSDK文件夹，导入TapSDK工程。
 ```json
 //在YourProjectPath/Packages/manifest.json中添加以下代码
 "dependencies":{
@@ -44,10 +44,9 @@
 
 ### 2.2 iOS 配置
 
-在 **Assets/Plugins/iOS/Resource** 目录下创建TDS-Info.plist文件,复制以下代码并且替换其中的ClientI以及申请权限时的文案。
+在 **Assets/Plugins/iOS/Resource** 目录下创建 **TDS-Info.plist** 文件,复制以下代码并且替换其中的 **client_Id** 以及申请权限时的文案。
 
-* tips：文件路径和以及文件名请确认正确且大小写敏感，如果错误可能会导致iOS编译失败。
-* changeLog：**1.0.6** 版本之前iOS目录为大写。
+* 注意事项：文件路径和文件名请确认正确且大小写敏感，如果错误会导致iOS编译失败。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -75,11 +74,7 @@
 
 #### 2.3.1 IOS 编译流程 
 
-    //编译文件路径
-    TapSDK/Plugins/Script/Editor/TDSIOSBuildPostProcessor.cs
-
-该编译脚本采用默认标签 **[PostProcessBuild]** 来自动执行。如有其他需要，则使用 **[PostProcessBuildAttribute(order)]** 来决定脚本执行顺序。
-* tips：order为执行顺序，从0开始
+编译脚本( **Plugins/Script/Editor/TDSIOSBuildPostProcessor.cs** ) 采用默认标签 **[PostProcessBuild]** 来自动执行。如有其他需要，则使用 **[PostProcessBuildAttribute(order)]** 来决定脚本执行顺序。
 
 ```c#
     [PostProcessBuild]
@@ -90,6 +85,8 @@
 ```
 
 ##### 1.添加所需要的framework以及 Build Setting 
+
+TapSDK 会给iOS工程自动添加以下配置
 
 ```c#
     //Build Setting
@@ -131,9 +128,9 @@
 * 使用本地方式导入TapSDK,则会将 **YourProject/TapSDK/Plugins/iOS/Resource** 目录中Copy资源文件。
 
 ```c#
-    //从UPM缓存目录中拷贝iOS资源文件
+    //从UPM缓存目录中拷贝
     string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.sdk@");
-    //从本地目录中拷贝资源为哪
+    //从本地目录中拷贝
     string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TapSDK");
 ```
 
