@@ -58,6 +58,13 @@
  */
 -(void)websocket:(nonnull TDSWSWebSocket*)socket didReceiveData:(nullable NSData*)data;
 
+/**
+ The websocket got a pong.
+ @param socket is the current socket object.
+ @param data   is the binary based data that has been returned.
+ */
+-(void)websocket:(nonnull TDSWSWebSocket*)socket didReceivePong:(nullable NSDate*)data;
+
 @end
 
 @interface TDSWSWebSocket : NSObject
@@ -176,4 +183,8 @@
  */
 @property(nonatomic, strong, nullable)void (^onText)(NSString*_Nullable);
 
+/**
+ Block property to use on receiving pong.
+ */
+@property(nonatomic, strong, nullable)void (^onPong)(NSData*_Nullable);
 @end
