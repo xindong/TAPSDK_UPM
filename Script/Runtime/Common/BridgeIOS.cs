@@ -12,7 +12,7 @@ namespace TDSCommon
     {
         private static BridgeIOS sInstance = new BridgeIOS();
 
-        private ConcurrentDictionary<string, Action<Result>> dic;
+        private Dictionary<string, Action<Result>> dic;
 
         public static BridgeIOS GetInstance()
         {
@@ -21,10 +21,10 @@ namespace TDSCommon
 
         private BridgeIOS()
         {
-            dic = new ConcurrentDictionary<string, Action<Result>>();
+            dic = new Dictionary<string, Action<Result>>();
         }
 
-        public ConcurrentDictionary<string, Action<Result>> GetConcurrentDictionary()
+        public Dictionary<string, Action<Result>> GetDictionary()
         {
             return dic;
         }
@@ -41,7 +41,7 @@ namespace TDSCommon
 
             Result result = new Result(resultJson);
 
-            ConcurrentDictionary<string, Action<Result>> actionDic = BridgeIOS.GetInstance().GetConcurrentDictionary();
+            Dictionary<string, Action<Result>> actionDic = BridgeIOS.GetInstance().GetDictionary();
 
             Action<Result> action = null;
 
@@ -55,7 +55,7 @@ namespace TDSCommon
                 action(result);
                 if (result.onceTime)
                 {
-                    BridgeIOS.GetInstance().GetConcurrentDictionary().TryRemove(result.callbackId, out Action<Result> outAction);
+                    BridgeIOS.GetInstance().GetDictionary().Remove(result.callbackId);
                 }
             }
         }
@@ -80,7 +80,7 @@ namespace TDSCommon
             {
                 if (!dic.ContainsKey(command.callbackId))
                 {
-                    dic.GetOrAdd(command.callbackId, action);
+                    dic.Add(command.callbackId, action);
                 }
             }
             registerHandler(command.toJSON(), engineBridgeDelegate);
