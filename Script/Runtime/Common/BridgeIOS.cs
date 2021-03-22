@@ -12,7 +12,7 @@ namespace TDSCommon
     {
         private static BridgeIOS sInstance = new BridgeIOS();
 
-        private Dictionary<string, Action<Result>> dic;
+        private ConcurrentDictionary<string, Action<Result>> dic;
 
         public static BridgeIOS GetInstance()
         {
@@ -21,10 +21,10 @@ namespace TDSCommon
 
         private BridgeIOS()
         {
-            dic = new Dictionary<string, Action<Result>>();
+            dic = new ConcurrentDictionary<string, Action<Result>>();
         }
 
-        public Dictionary<string, Action<Result>> GetDictionary()
+        public ConcurrentDictionary<string, Action<Result>> GetConcurrentDictionary()
         {
             return dic;
         }
@@ -41,7 +41,7 @@ namespace TDSCommon
 
             Result result = new Result(resultJson);
 
-            Dictionary<string, Action<Result>> actionDic = BridgeIOS.GetInstance().GetDictionary();
+            ConcurrentDictionary<string, Action<Result>> actionDic = BridgeIOS.GetInstance().GetConcurrentDictionary();
 
             Action<Result> action = null;
 
@@ -53,11 +53,12 @@ namespace TDSCommon
             if (action != null)
             {
                 action(result);
-                if (result.onceTime)
+                if (result.onceTime && BridgeIOS.GetInstance().GetConcurrentDictionary().TryRemove(result.callbackId, out Action<Result> outAction))
                 {
-                    BridgeIOS.GetInstance().GetDictionary().Remove(result.callbackId);
+                    Debug.Log($"TapSDK resolved current Action:{result.callbackId}");
                 }
             }
+            Debug.Log($"TapSDK iOS BridgeAction last Count:{BridgeIOS.GetInstance().GetConcurrentDictionary().Count}");
         }
 
         public void Register(string serviceClz, string serviceImp)
@@ -80,7 +81,7 @@ namespace TDSCommon
             {
                 if (!dic.ContainsKey(command.callbackId))
                 {
-                    dic.Add(command.callbackId, action);
+                    dic.GetOrAdd(command.callbackId, action);
                 }
             }
             registerHandler(command.toJSON(), engineBridgeDelegate);
