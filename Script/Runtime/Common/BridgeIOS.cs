@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Runtime.InteropServices;
+using System.Collections.Concurrent;
 
 namespace TDSCommon
 {
@@ -11,7 +12,7 @@ namespace TDSCommon
     {
         private static BridgeIOS sInstance = new BridgeIOS();
 
-        private Dictionary<string, Action<Result>> dic;
+        private ConcurrentDictionary<string, Action<Result>> dic;
 
         public static BridgeIOS GetInstance()
         {
@@ -20,27 +21,26 @@ namespace TDSCommon
 
         private BridgeIOS()
         {
-            dic = new Dictionary<string, Action<Result>>();
+            dic = new ConcurrentDictionary<string, Action<Result>>();
         }
 
-        public Dictionary<string, Action<Result>> GetDictionary()
+        public ConcurrentDictionary<string, Action<Result>> GetConcurrentDictionary()
         {
             return dic;
         }
 
         public void AddEditorInterceptor(BridgeEditorCallInterceptor interceptor)
         {
+
         }
 
         private delegate void EngineBridgeDelegate(string result);
         [AOT.MonoPInvokeCallbackAttribute(typeof(EngineBridgeDelegate))]
         static void engineBridgeDelegate(string resultJson)
         {
-            Debug.Log("resultJson From IOS:" + resultJson);
-
             Result result = new Result(resultJson);
 
-            Dictionary<string, Action<Result>> actionDic = BridgeIOS.GetInstance().GetDictionary();
+            ConcurrentDictionary<string, Action<Result>> actionDic = BridgeIOS.GetInstance().GetConcurrentDictionary();
 
             Action<Result> action = null;
 
@@ -52,6 +52,10 @@ namespace TDSCommon
             if (action != null)
             {
                 action(result);
+                if(result.onceTime)
+                {
+                    BridgeIOS.GetInstance().GetConcurrentDictionary().TryRemove(result.callbackId,out Action<Result> outAction);
+                }
             }
         }
 
@@ -75,7 +79,7 @@ namespace TDSCommon
             {
                 if (!dic.ContainsKey(command.callbackId))
                 {
-                    dic.Add(command.callbackId, action);
+                    dic.GetOrAdd(command.callbackId, action);
                 }
             }
             registerHandler(command.toJSON(), engineBridgeDelegate);

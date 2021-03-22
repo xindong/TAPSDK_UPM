@@ -26,6 +26,9 @@ namespace TDSCommon
         [SerializeField]
         public string callbackId;
 
+        [SerializeField]
+        public bool onceTime;
+
         public Result()
         {
 

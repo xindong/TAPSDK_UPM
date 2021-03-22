@@ -19,6 +19,8 @@ namespace TDSCommon
         public bool callback;
         [SerializeField]
         public string callbackId;
+        [SerializeField]
+        public bool onceTime;
 
         public Command()
         {
@@ -43,6 +45,16 @@ namespace TDSCommon
             this.callback = callback;
             this.callbackId = this.callback ? TDSUUID.UUID():null;
         }
+
+        public Command(string service, string method, bool callback, bool onceTime,Dictionary<string, object> dic)
+        {
+            this.args = dic == null ? null : Json.Serialize(dic);
+            this.service = service;
+            this.method = method;
+            this.callback = callback;
+            this.callbackId = this.callback ? TDSUUID.UUID():null;
+            this.onceTime = onceTime;
+        }
         
         public class Builder
         {
@@ -53,6 +65,8 @@ namespace TDSCommon
             public bool callback;
 
             public string callbackId;
+
+            public bool onceTime;
 
             public Dictionary<string,object> args;
 
@@ -70,6 +84,12 @@ namespace TDSCommon
             public Builder Method(string method)
             {
                 this.method = method;
+                return this;
+            }
+
+            public Builder OnceTime(bool onceTime)
+            {
+                this.onceTime = onceTime;
                 return this;
             }
 
@@ -97,7 +117,7 @@ namespace TDSCommon
             }
 
             public Command CommandBuilder(){
-                return new Command(this.service,this.method,this.callback,this.args);
+                return new Command(this.service,this.method,this.onceTime,this.callback,this.args);
             }
         }
 
