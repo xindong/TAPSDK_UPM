@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy) NSString* args;
 @property (nonatomic,copy) NSString* callbackId;
 @property (nonatomic,assign) BOOL callback;
+@property (nonatomic,assign) BOOL onceTime;
 
 + (TDSCommand*)constructorCommand:(NSString*)commandJSON;
 

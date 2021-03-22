@@ -77,6 +77,8 @@ FOUNDATION_EXPORT const unsigned char TDSCommonVersionString[];
 #import <TDSCommon/TDSCommonConfirmDialog.h>
 #import <TDSCommon/TDSCommonUIHelper.h>
 #import <TDSCommon/UIView+Toast.h>
+#import <TDSCommon/TDSThrottle.h>
+#import <TDSCommon/TDSDebounce.h>
 #import <TDSCommon/TDSLocalizeManager.h>
 #import <TDSCommon/TDSWSSecurity.h>
 #import <TDSCommon/TDSWSWebSocket.h>
