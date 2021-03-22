@@ -38,6 +38,7 @@ namespace TDSCommon
         [AOT.MonoPInvokeCallbackAttribute(typeof(EngineBridgeDelegate))]
         static void engineBridgeDelegate(string resultJson)
         {
+
             Result result = new Result(resultJson);
 
             ConcurrentDictionary<string, Action<Result>> actionDic = BridgeIOS.GetInstance().GetConcurrentDictionary();
@@ -52,9 +53,9 @@ namespace TDSCommon
             if (action != null)
             {
                 action(result);
-                if(result.onceTime)
+                if (result.onceTime)
                 {
-                    BridgeIOS.GetInstance().GetConcurrentDictionary().TryRemove(result.callbackId,out Action<Result> outAction);
+                    BridgeIOS.GetInstance().GetConcurrentDictionary().TryRemove(result.callbackId, out Action<Result> outAction);
                 }
             }
         }
@@ -65,15 +66,15 @@ namespace TDSCommon
         }
 
         public void Call(Command command)
-        {   
-            #if UNITY_IOS
+        {
+#if UNITY_IOS
             callHandler(command.toJSON());
-            #endif
+#endif
         }
 
         public void Call(Command command, Action<Result> action)
         {
-            #if UNITY_IOS
+#if UNITY_IOS
 
             if (command.callback && !string.IsNullOrEmpty(command.callbackId))
             {
@@ -83,15 +84,15 @@ namespace TDSCommon
                 }
             }
             registerHandler(command.toJSON(), engineBridgeDelegate);
-            #endif
+#endif
         }
 
-    #if UNITY_IOS
+#if UNITY_IOS
     [DllImport("__Internal")]
     private static extern void callHandler(string command);
 
     [DllImport("__Internal")]
     private static extern void registerHandler(string command,EngineBridgeDelegate engineBridgeDelegate);
-    #endif
+#endif
     }
 }
