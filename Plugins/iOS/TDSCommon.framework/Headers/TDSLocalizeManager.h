@@ -10,9 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM (NSInteger, TDSLang) {
-    TDSLang_Auto,// 自动
+    TDSLang_Auto = 0,// 自动
     TDSLang_zh_Hans,// 简中
-    TDSLang_zh_Hant,// 繁中
     TDSLang_en,// 英文
 };
 
