@@ -68,6 +68,7 @@ static NSString *const version = @"3.0.1";
 
 + (void)setUser:(NSString *)userId;
 
++ (void)setUser:(NSString *)userId properties:(nullable NSDictionary *)properties;
 /// 对外隐藏接口
 + (void)setUser:(NSString *)userId loginType:(TapDBLoginType)loginType;
 /// 记录一个用户（不是游戏角色！！！！），需要保证唯一性
@@ -140,7 +141,7 @@ static NSString *const version = @"3.0.1";
 + (void)deviceUpdate:(NSDictionary *)properties;
 
 /// 设备属性增加操作
-/// @param properties 属性字典
+/// @param properties 属性字典 暂时只支持数字属性
 + (void)deviceAdd:(NSDictionary *)properties;
 
 /// 初始化用户属性操作
@@ -152,7 +153,7 @@ static NSString *const version = @"3.0.1";
 + (void)userUpdate:(NSDictionary *)properties;
 
 /// 用户属性增加操作
-/// @param properties 属性字典
+/// @param properties 属性字典 暂时只支持数字属性
 + (void)userAdd:(NSDictionary *)properties;
 
 
