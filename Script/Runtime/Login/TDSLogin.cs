@@ -52,11 +52,9 @@ namespace TapSDK
             TDSLoginImpl.GetInstance().FetchProfileForCurrentAccessToken(callback, errorCallback);
         }
 
-        public static void ChangeConfig(bool isCN, bool isRoundCorner)
+        public static void ChangeConfig(bool roundCorner, bool isPortrait)
         {
-            TDSLoginImpl.GetInstance().ChangeConfig(isCN, isRoundCorner);
+            TDSLoginImpl.GetInstance().ChangeConfig(roundCorner, isPortrait);
         }
-
-
     }
 }

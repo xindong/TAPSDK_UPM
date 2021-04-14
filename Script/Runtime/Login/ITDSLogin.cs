@@ -13,7 +13,7 @@ namespace TapSDK
 
         void Init(string clientId, bool regionType, bool roundCorner);
 
-        void ChangeConfig(bool regionType, bool roundCorner);
+        void ChangeConfig(bool roundCorner, bool isPortrait);
 
         void StartLogin(string[] permissions);
 

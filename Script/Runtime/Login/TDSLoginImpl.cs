@@ -48,11 +48,11 @@ namespace TapSDK
             EngineBridge.GetInstance().CallHandler(command);
         }
 
-        public void ChangeConfig(bool isCN, bool roundCorner)
+        public void ChangeConfig(bool roundCorner, bool isPortrait)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("regionType", isCN);
             dic.Add("roundCorner", roundCorner);
+            dic.Add("isPortrait", isPortrait);
             Command command = new Command(TDSLoginConstants.TDS_LOGIN_SERVICE, "changeConfig", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
