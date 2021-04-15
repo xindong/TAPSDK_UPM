@@ -72,6 +72,9 @@ FOUNDATION_EXPORT const unsigned char TDSCommonVersionString[];
 #import <TDSCommon/TDSWKCookieWebview.h>
 #import <TDSCommon/WKCookieWebview+CookiesHandle.h>
 #import <TDSCommon/TDSCommonService.h>
+#import <TDSCommon/TDSTrackerManager.h>
+#import <TDSCommon/TDSTrackerConfig.h>
+#import <TDSCommon/TDSTrackerManager+Ext.h>
 #import <TDSCommon/TDSCommonMacros.h>
 #import <TDSCommon/TDSNetInterceptor.h>
 #import <TDSCommon/TDSCommonConfirmDialog.h>
@@ -79,6 +82,7 @@ FOUNDATION_EXPORT const unsigned char TDSCommonVersionString[];
 #import <TDSCommon/UIView+Toast.h>
 #import <TDSCommon/TDSThrottle.h>
 #import <TDSCommon/TDSDebounce.h>
+#import <TDSCommon/UIButton+TDSThrottle.h>
 #import <TDSCommon/TDSLocalizeManager.h>
 #import <TDSCommon/TDSWSSecurity.h>
 #import <TDSCommon/TDSWSWebSocket.h>

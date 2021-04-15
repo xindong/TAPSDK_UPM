@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, TDSReachabilityStatus) {
     TDSReachabilityStatusNone  = 0, ///< Not Reachable
-    TDSReachabilityStatusWWAN  = 1, ///< Reachable via WWAN (2G/3G/4G)
+    TDSReachabilityStatusWWAN  = 1, ///< Reachable via WWAN (2G/3G/4G/5G)
     TDSReachabilityStatusWiFi  = 2, ///< Reachable via WiFi
 };
 

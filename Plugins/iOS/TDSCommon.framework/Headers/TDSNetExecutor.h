@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) id args;
 
+@property (nonatomic, strong) NSData *data;
+
 @property (nonatomic, assign) BOOL auth;
 
 @property (nonatomic) Class resCls;
