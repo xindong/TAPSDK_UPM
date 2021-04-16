@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+### BugFix
+
+- 修复 Android 网络日志上报可能导致的Crash
+
 ## 1.1.0
 
 - 海外动态
