@@ -133,8 +133,8 @@
 ```c#
     //从UPM缓存目录中拷贝iOS资源文件
     string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.sdk@");
-    //从本地目录中拷贝资源为哪
-    string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TapSDK");
+    //从本地目录中拷贝资源
+    string localPackagePath = TDSFileHelper.FilterFile(parentFolder,"TapSDK");
 ```
 
 iOS资源文件Copy到XCode工程目录下的 **TDSResource** 文件夹中，再添加依赖到指定Target。

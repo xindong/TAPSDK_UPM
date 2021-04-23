@@ -12,16 +12,16 @@ using UnityEditor.iOS.Xcode.Extensions;
 using UnityEngine;
 namespace TDSEditor
 {
- public class TDSIOSPostBuildProcessor : MonoBehaviour
+    public class TDSIOSPostBuildProcessor : MonoBehaviour
     {
 #if UNITY_IOS
         // 添加标签，unity导出工程后自动执行该函数
-        [PostProcessBuild]
+        [PostProcessBuild(90)]
         public static void OnPostprocessBuild(BuildTarget BuildTarget, string path)
         {
-            
+
             if (BuildTarget == BuildTarget.iOS)
-            {   
+            {
                 // 获得工程路径
                 string projPath = PBXProject.GetPBXProjectPath(path);
                 UnityEditor.iOS.Xcode.PBXProject proj = new PBXProject();
@@ -46,11 +46,11 @@ namespace TDSEditor
                 proj.AddBuildProperty(unityFrameworkTarget, "OTHER_LDFLAGS", "-ObjC");
                 // Swift编译选项
                 proj.SetBuildProperty(target, "ENABLE_BITCODE", "NO"); //bitcode  NO
-                proj.SetBuildProperty(target,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","YES");
+                proj.SetBuildProperty(target, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
                 proj.SetBuildProperty(target, "SWIFT_VERSION", "5.0");
                 proj.SetBuildProperty(target, "CLANG_ENABLE_MODULES", "YES");
                 proj.SetBuildProperty(unityFrameworkTarget, "ENABLE_BITCODE", "NO"); //bitcode  NO
-                proj.SetBuildProperty(unityFrameworkTarget,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","YES");
+                proj.SetBuildProperty(unityFrameworkTarget, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
                 proj.SetBuildProperty(unityFrameworkTarget, "SWIFT_VERSION", "5.0");
                 proj.SetBuildProperty(unityFrameworkTarget, "CLANG_ENABLE_MODULES", "YES");
                 // add extra framework(s)
@@ -76,10 +76,10 @@ namespace TDSEditor
 
                 // 添加 tbd
                 // 参数: 目标targetGUID, tdbGUID
-                proj.AddFileToBuild(unityFrameworkTarget, proj.AddFile("usr/lib/libc++.tbd", "libc++.tbd",PBXSourceTree.Sdk));
-                
+                proj.AddFileToBuild(unityFrameworkTarget, proj.AddFile("usr/lib/libc++.tbd", "libc++.tbd", PBXSourceTree.Sdk));
+
                 Debug.Log("添加tbd成功");
-                
+
                 // 添加资源文件，注意文件路径
                 var resourcePath = Path.Combine(path, "TDSResource");
 
@@ -87,39 +87,40 @@ namespace TDSEditor
 
                 if (Directory.Exists(resourcePath))
                 {
-                    Directory.Delete(resourcePath,true);
+                    Directory.Delete(resourcePath, true);
                 }
 
                 Directory.CreateDirectory(resourcePath);
 
-                string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.sdk@");
+                string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/", "com.tds.sdk@");
 
-                string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TapSDK");
+                string localPackagePath = TDSFileHelper.FilterFile(parentFolder, "TapSDK");
 
-                string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/Plugins/iOS/Resource" : localPacckagePath + "/Plugins/iOS/Resource";
-                
-                if(Directory.Exists(tdsResourcePath)){
+                string tdsResourcePath = remotePackagePath != null ? remotePackagePath + "/Plugins/iOS/Resource" : localPackagePath + "/Plugins/iOS/Resource";
+
+                if (Directory.Exists(tdsResourcePath))
+                {
                     TDSFileHelper.CopyAndReplaceDirectory(tdsResourcePath, resourcePath);
                 }
 
-                FileInfo plistFile = TDSFileHelper.RecursionFilterFile(parentFolder + "/Assets/Plugins/","TDS-Info.plist");
+                FileInfo plistFile = TDSFileHelper.RecursionFilterFile(parentFolder + "/Assets/Plugins/", "TDS-Info.plist");
 
-                if(plistFile.Exists)
+                if (plistFile.Exists)
                 {
                     plistFile.CopyTo(resourcePath + "/TDS-Info.plist");
                 }
-                
-                List<string> names = new List<string>(); 
+
+                List<string> names = new List<string>();
                 names.Add("TDSCommonResource.bundle");
                 names.Add("TDSMomentResource.bundle");
                 foreach (var name in names)
                 {
-                    proj.AddFileToBuild(target, proj.AddFile(Path.Combine(resourcePath,name), Path.Combine(resourcePath,name), PBXSourceTree.Source));
+                    proj.AddFileToBuild(target, proj.AddFile(Path.Combine(resourcePath, name), Path.Combine(resourcePath, name), PBXSourceTree.Source));
                 }
                 Debug.Log("TapSDK添加resource成功");
                 // rewrite to file  
                 File.WriteAllText(projPath, proj.WriteToString());
-                SetPlist(path,resourcePath + "/TDS-Info.plist");
+                SetPlist(path, resourcePath + "/TDS-Info.plist");
                 SetScriptClass(path);
                 return;
             }
@@ -127,7 +128,7 @@ namespace TDSEditor
         }
 
         // 修改pilist
-        private static void SetPlist(string pathToBuildProject,string infoPlistPath)
+        private static void SetPlist(string pathToBuildProject, string infoPlistPath)
         {
             //添加info
             string _plistPath = pathToBuildProject + "/Info.plist";
@@ -145,38 +146,42 @@ namespace TDSEditor
             {
                 _list.AddString(items[i]);
             }
-                        
-            if(!string.IsNullOrEmpty(infoPlistPath))
-            {   
+
+            if (!string.IsNullOrEmpty(infoPlistPath))
+            {
                 Dictionary<string, object> dic = (Dictionary<string, object>)TDSEditor.Plist.readPlist(infoPlistPath);
-                string taptapId = null; 
+                string taptapId = null;
 
                 foreach (var item in dic)
                 {
-                    if(item.Key.Equals("taptap")){
-                        Dictionary<string,object> taptapDic = (Dictionary<string,object>) item.Value;
+                    if (item.Key.Equals("taptap"))
+                    {
+                        Dictionary<string, object> taptapDic = (Dictionary<string, object>)item.Value;
                         foreach (var taptapItem in taptapDic)
                         {
-                            if(taptapItem.Key.Equals("client_id")){
-                                taptapId = "tt" + (string) taptapItem.Value;
+                            if (taptapItem.Key.Equals("client_id"))
+                            {
+                                taptapId = "tt" + (string)taptapItem.Value;
                             }
                         }
-                    } else {
+                    }
+                    else
+                    {
                         //Copy TDS-Info.plist中的数据
-                        _rootDic.SetString(item.Key.ToString(),item.Value.ToString());
+                        _rootDic.SetString(item.Key.ToString(), item.Value.ToString());
                     }
                 }
                 //添加url
                 PlistElementDict dict = _plist.root.AsDict();
                 PlistElementArray array = dict.CreateArray("CFBundleURLTypes");
                 PlistElementDict dict2 = array.AddDict();
-                if(taptapId!=null)
+                if (taptapId != null)
                 {
                     Debug.Log("修改TapTapClientId:" + taptapId + " 成功");
                     dict2.SetString("CFBundleURLName", "TapTap");
                     PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
                     array2.AddString(taptapId);
-                }    
+                }
             }
 
             File.WriteAllText(_plistPath, _plist.WriteToString());
@@ -190,11 +195,11 @@ namespace TDSEditor
             string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
             TDSEditor.TDSScriptStreamWriterHelper UnityAppController = new TDSEditor.TDSScriptStreamWriterHelper(unityAppControllerPath);
             UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TapSDK/TapLoginHelper.h>");
-            UnityAppController.WriteBelow(@"id sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey], annotation = options[UIApplicationOpenURLOptionsAnnotationKey];",@"if(url){[TapLoginHelper handleTapTapOpenURL:url];}");
+            UnityAppController.WriteBelow(@"id sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey], annotation = options[UIApplicationOpenURLOptionsAnnotationKey];", @"if(url){[TapLoginHelper handleTapTapOpenURL:url];}");
             Debug.Log("修改代码成功");
         }
     }
 
-}    
+}
 #endif
 #endif
