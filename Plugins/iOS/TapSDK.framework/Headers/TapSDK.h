@@ -13,7 +13,7 @@ FOUNDATION_EXPORT double TapSDKVersionNumber;
 //! Project version string for TapSDK.
 FOUNDATION_EXPORT const unsigned char TapSDKVersionString[];
 
-#define Tap_SDK_VERSION @"0.1.27"
+#define Tap_SDK_VERSION @"1.0.8.6d91db4e"
 
 
 #import <TapSDK/TDSInitializer.h>
