@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.4
+
+### BugFix
+
+- 修复 Android TapDB 兼容性问题
+
 ## 1.1.2
 
 ### BugFix
