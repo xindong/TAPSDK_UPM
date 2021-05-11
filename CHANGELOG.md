@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.5
+
+### optimization
+
+- iOS TapDB 兼容性修改
+
 ## 1.1.4
 
 ### BugFix
