@@ -111,5 +111,10 @@ namespace TapSDK
         {
             TDSTapDBImpl.GetInstance().ClearUser();
         }
+    
+        public static void AdvertiserIDCollectionEnabled(bool enable)
+        {
+            TDSTapDBImpl.GetInstance().AdvertiserIDCollectionEnabled(enable);
+        }
     }
 }

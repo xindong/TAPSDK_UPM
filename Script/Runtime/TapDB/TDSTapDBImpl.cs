@@ -43,17 +43,17 @@ namespace TapSDK
 
         public void RegisterStaticProperties(string superProperties)
         {
-            Dictionary<string,object> dic = new Dictionary<string,object>();
-            dic.Add("registerStaticProperties",superProperties);
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE,"registerStaticProperties",false,dic);
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("registerStaticProperties", superProperties);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "registerStaticProperties", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void UnregisterStaticProperty(string propertyName)
         {
-            Dictionary<string,object> dic = new Dictionary<string,object>();
-            dic.Add("unregisterStaticProperty",propertyName);
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE,"unregisterStaticProperty",false,dic);
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("unregisterStaticProperty", propertyName);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "unregisterStaticProperty", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -61,15 +61,15 @@ namespace TapSDK
         {
             this.dynamicSuperProperties = properties;
         }
-        
+
         public void ClearStaticProperties()
         {
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE,"clearStaticProperties",false,null);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "clearStaticProperties", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
-        public void ClearUser() 
+        public void ClearUser()
         {
-            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE,"clearUser",false,null);
+            Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "clearUser", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -130,7 +130,7 @@ namespace TapSDK
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("eventCode", eventCode);
-            Dictionary<string,object> deserializeProperties = Json.Deserialize(properties) as Dictionary<string,object>;
+            Dictionary<string, object> deserializeProperties = Json.Deserialize(properties) as Dictionary<string, object>;
             dic.Add("properties", GetFinalEventProperties(deserializeProperties));
             Command command = new Command(TDSTapDBConstants.TDS_TAPDB_SERVICE, "onEvent", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
@@ -146,22 +146,35 @@ namespace TapSDK
             EngineBridge.GetInstance().CallHandler(command);
         }
 
+        public void AdvertiserIDCollectionEnabled(bool enable)
+        {
+            if (Platform.isIOS())
+            {
+                EngineBridge.GetInstance().CallHandler(new Command.Builder()
+                    .Service(TDSTapDBConstants.TDS_TAPDB_SERVICE)
+                    .Method("advertiserIDCollectionEnabled")
+                    .Args("advertiserIDCollectionEnabled", enable)
+                    .CommandBuilder());
+            }
+
+        }
+
         public void DeviceInitialize(string properties)
         {
             EngineBridge.GetInstance().CallHandler(new Command.Builder()
                                         .Service(TDSTapDBConstants.TDS_TAPDB_SERVICE)
                                         .Method("deviceInitialize")
-                                        .Args("deviceInitialize",properties)
+                                        .Args("deviceInitialize", properties)
                                         .Callback(true)
                                         .CommandBuilder());
         }
 
         public void DeviceUpdate(string properties)
-        {   
+        {
             EngineBridge.GetInstance().CallHandler(new Command.Builder()
                                         .Service(TDSTapDBConstants.TDS_TAPDB_SERVICE)
                                         .Method("deviceUpdate")
-                                        .Args("deviceUpdate",properties)
+                                        .Args("deviceUpdate", properties)
                                         .CommandBuilder());
         }
 
@@ -170,7 +183,7 @@ namespace TapSDK
             EngineBridge.GetInstance().CallHandler(new Command.Builder()
                                         .Service(TDSTapDBConstants.TDS_TAPDB_SERVICE)
                                         .Method("deviceAdd")
-                                        .Args("deviceAdd",properties)
+                                        .Args("deviceAdd", properties)
                                         .CommandBuilder());
         }
 
@@ -179,16 +192,16 @@ namespace TapSDK
             EngineBridge.GetInstance().CallHandler(new Command.Builder()
                                         .Service(TDSTapDBConstants.TDS_TAPDB_SERVICE)
                                         .Method("userInitialize")
-                                        .Args("userInitialize",properties)
+                                        .Args("userInitialize", properties)
                                         .CommandBuilder());
         }
 
-        public  void UserUpdate(string properties)
+        public void UserUpdate(string properties)
         {
             EngineBridge.GetInstance().CallHandler(new Command.Builder()
                                         .Service(TDSTapDBConstants.TDS_TAPDB_SERVICE)
                                         .Method("userUpdate")
-                                        .Args("userUpdate",properties)
+                                        .Args("userUpdate", properties)
                                         .CommandBuilder());
         }
 
@@ -197,7 +210,7 @@ namespace TapSDK
             EngineBridge.GetInstance().CallHandler(new Command.Builder()
                                         .Service(TDSTapDBConstants.TDS_TAPDB_SERVICE)
                                         .Method("userAdd")
-                                        .Args("userAdd",properties)
+                                        .Args("userAdd", properties)
                                         .CommandBuilder());
         }
 
@@ -206,16 +219,16 @@ namespace TapSDK
             EngineBridge.GetInstance().CallHandler(new Command.Builder()
                                         .Service(TDSTapDBConstants.TDS_TAPDB_SERVICE)
                                         .Method("enableLog")
-                                        .Args("enableLog",enable)
+                                        .Args("enableLog", enable)
                                         .CommandBuilder());
         }
 
-        private string GetFinalEventProperties(Dictionary<string,object> properties)
+        private string GetFinalEventProperties(Dictionary<string, object> properties)
         {
-            if(dynamicSuperProperties!=null)
+            if (dynamicSuperProperties != null)
             {
-                Dictionary<string,object> finalProperties = new Dictionary<string,object>();
-                TDSPropertiesChecker.MergeProperties(dynamicSuperProperties.GetDynamicSuperProperties(),properties);
+                Dictionary<string, object> finalProperties = new Dictionary<string, object>();
+                TDSPropertiesChecker.MergeProperties(dynamicSuperProperties.GetDynamicSuperProperties(), properties);
                 TDSPropertiesChecker.MergeProperties(properties, finalProperties);
                 return Json.Serialize(finalProperties);
             }

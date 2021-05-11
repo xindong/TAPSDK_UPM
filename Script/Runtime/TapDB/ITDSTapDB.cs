@@ -31,6 +31,8 @@ namespace TapSDK
 
         void RegisterDynamicProperties(IDynamicSuperProperties properties);
 
+        void AdvertiserIDCollectionEnabled(bool enable);
+
         void ClearStaticProperties();
 
         void DeviceInitialize(string properties);

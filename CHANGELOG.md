@@ -5,6 +5,7 @@
 ### optimization
 
 - iOS TapDB 兼容性修改
+- iOS TapDB 新增 IDFA 开关
 
 ## 1.1.4
 
