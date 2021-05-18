@@ -98,7 +98,7 @@ TapSDK 会给iOS工程自动添加以下配置
     proj.SetBuildProperty(target, "SWIFT_VERSION", "5.0");
     proj.SetBuildProperty(target, "CLANG_ENABLE_MODULES", "YES");
     proj.SetBuildProperty(unityFrameworkTarget, "ENABLE_BITCODE", "NO"); //bitcode  NO
-    proj.SetBuildProperty(unityFrameworkTarget,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","YES");
+    proj.SetBuildProperty(unityFrameworkTarget,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","NO");
     proj.SetBuildProperty(unityFrameworkTarget, "SWIFT_VERSION", "5.0");
     proj.SetBuildProperty(unityFrameworkTarget, "CLANG_ENABLE_MODULES", "YES");
     //所需要的Framework
@@ -131,7 +131,7 @@ TapSDK 会给iOS工程自动添加以下配置
     //从UPM缓存目录中拷贝
     string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.sdk@");
     //从本地目录中拷贝
-    string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TapSDK");
+    string localPackagePath = TDSFileHelper.FilterFile(parentFolder,"TapSDK");
 ```
 
 iOS资源文件Copy到XCode工程目录下的 **TDSResource** 文件夹中，再添加依赖到指定Target。

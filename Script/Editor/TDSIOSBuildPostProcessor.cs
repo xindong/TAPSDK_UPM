@@ -50,7 +50,7 @@ namespace TDSEditor
                 proj.SetBuildProperty(target, "SWIFT_VERSION", "5.0");
                 proj.SetBuildProperty(target, "CLANG_ENABLE_MODULES", "YES");
                 proj.SetBuildProperty(unityFrameworkTarget, "ENABLE_BITCODE", "NO"); //bitcode  NO
-                proj.SetBuildProperty(unityFrameworkTarget,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","YES");
+                proj.SetBuildProperty(unityFrameworkTarget,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","NO");
                 proj.SetBuildProperty(unityFrameworkTarget, "SWIFT_VERSION", "5.0");
                 proj.SetBuildProperty(unityFrameworkTarget, "CLANG_ENABLE_MODULES", "YES");
                 // add extra framework(s)
@@ -94,9 +94,9 @@ namespace TDSEditor
 
                 string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.sdk@");
 
-                string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TapSDK");
+                string localPackagePath = TDSFileHelper.FilterFile(parentFolder,"TapSDK");
 
-                string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/Plugins/iOS/Resource" : localPacckagePath + "/Plugins/iOS/Resource";
+                string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/Plugins/iOS/Resource" : localPackagePath + "/Plugins/iOS/Resource";
                 
                 if(Directory.Exists(tdsResourcePath)){
                     TDSFileHelper.CopyAndReplaceDirectory(tdsResourcePath, resourcePath);

@@ -1,4 +1,9 @@
 # Changelog
+## 1.1.6
+
+### BugFix
+
+* 修复 iOS ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES 设置问题可能导致的 AppStore 审核无法通过
 
 ## 1.1.5
 
