@@ -1,4 +1,11 @@
 # Changelog
+
+## 1.1.7
+
+### BugFix
+
+* 修复 Android Bridge 方法匹配错误
+
 ## 1.1.6
 
 ### BugFix
