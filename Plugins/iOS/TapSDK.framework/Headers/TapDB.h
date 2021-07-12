@@ -22,7 +22,7 @@ FOUNDATION_EXPORT TapDBLoginType const TapDBLoginTypeTwitter;
 FOUNDATION_EXPORT TapDBLoginType const TapDBLoginTypePhoneNumber;
 
 //版本号
-static NSString *const version = @"3.0.3";
+static NSString *const TAPDB_VERSION = @"3.0.5";
 
 @interface TapDB : NSObject
 /**

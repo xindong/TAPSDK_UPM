@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.8
+
+### New Feature
+
 ## 1.1.7
 
 ### BugFix

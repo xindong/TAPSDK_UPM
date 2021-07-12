@@ -16,6 +16,12 @@ FOUNDATION_EXPORT const unsigned char TDSMomentVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <TDSMoment/PublicHeader.h>
 
 
+#if __has_include(<TDSMoment/TDSMomentSdk.h>)
 #import <TDSMoment/TDSMomentSdk.h>
 #import <TDSMoment/TDSMomentResultCode.h>
 #import <TDSMoment/TDSPostMomentData.h>
+#else
+#import "TDSMomentSdk.h"
+#import "TDSMomentResultCode.h"
+#import "TDSPostMomentData.h"
+#endif
