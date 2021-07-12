@@ -4,6 +4,12 @@
 
 ### New Feature
 
+* android 修改 TapDB 事件发送方式串行化
+
+### BugFix
+
+* IOS 修复升级 TapDB 版本时设备 ID 不一致问题
+
 ## 1.1.7
 
 ### BugFix
@@ -59,24 +65,24 @@
 
 ## 1.0.5 (Abandoned)
 
- - 修复同时集成TapSDK和TDSSDK时iOS编译错误
+- 修复同时集成TapSDK和TDSSDK时iOS编译错误
 
- ## 1.0.4 (Abandoned)
+## 1.0.4 (Abandoned)
 
- - 常规更新已支持拓展版功能
+- 常规更新已支持拓展版功能
 
- ## 1.0.3 (Abandoned)
+## 1.0.3 (Abandoned)
 
- - TapSDK拓展版新增的支持性改动
- - TapTap内嵌动态新增场景化入口
- - TapDB 3.0
+- TapSDK拓展版新增的支持性改动
+- TapTap内嵌动态新增场景化入口
+- TapDB 3.0
 
- ## 1.0.1 (Abandoned)
+## 1.0.1 (Abandoned)
 
- - Android修复多线程情况下调用SDK方法偶现的崩溃。
+- Android修复多线程情况下调用SDK方法偶现的崩溃。
 
- ## 1.0.0 (Abandoned)
+## 1.0.0 (Abandoned)
 
- - TapTap 登陆
- - 内嵌动态
- - TapDB
+- TapTap 登陆
+- 内嵌动态
+- TapDB
