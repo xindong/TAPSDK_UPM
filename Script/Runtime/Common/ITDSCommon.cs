@@ -20,7 +20,13 @@ namespace TDSCommon
         public CommonRegionWrapper(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.isMainland = SafeDictionary.GetValue<bool>(dic,"isMainland");
+            if (Platform.isAndroid())
+            {
+                this.isMainland = SafeDictionary.GetValue<bool>(dic,"isMainland");
+            }else if (Platform.isIOS())
+            {
+                this.isMainland = SafeDictionary.GetValue<int>(dic, "isMainland") == 1;
+            }
         }
 
     }

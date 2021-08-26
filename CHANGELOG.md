@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.9 
+
+### BugFix
+
+*  iOS 修复`TDSCommon.GetRegionCode`返回错误问题
+
 ## 1.1.8
 
 ### New Feature
