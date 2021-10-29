@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0
+
+### BugFix
+
+* 修复 Android TapLogin 刘海屏适配
+
 ## 1.1.9 
 
 ### BugFix
