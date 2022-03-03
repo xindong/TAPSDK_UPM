@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.1
+
+### New Feature
+
+* 添加政策合规与漏洞风险处理
+
+
 ## 1.2.0
 
 ### BugFix
