@@ -60,7 +60,6 @@ namespace TDSEditor
                 proj.AddFrameworkToProject(unityFrameworkTarget, "Security.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "WebKit.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "Photos.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "AdSupport.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AssetsLibrary.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AVKit.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AuthenticationServices.framework", true);
@@ -71,6 +70,9 @@ namespace TDSEditor
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AVFoundation.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "MobileCoreServices.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AppTrackingTransparency.framework", true);
+                proj.AddFrameworkToProject(unityFrameworkTarget, "AdSupport.framework", false);
+                proj.AddFrameworkToProject(unityFrameworkTarget, "iAd.framework", true);
+                proj.AddFrameworkToProject(unityFrameworkTarget, "AdServices.framework", true);
                 // 动态库
                 Debug.Log("添加framework成功");
 

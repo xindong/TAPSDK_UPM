@@ -89,7 +89,7 @@
 TapSDK 会给iOS工程自动添加以下配置
 
 ```c#
-    //Build Setting
+    // 编译配置
     proj.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
     proj.AddBuildProperty(unityFrameworkTarget, "OTHER_LDFLAGS", "-ObjC");
     // Swift编译选项
@@ -101,15 +101,16 @@ TapSDK 会给iOS工程自动添加以下配置
     proj.SetBuildProperty(unityFrameworkTarget,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","NO");
     proj.SetBuildProperty(unityFrameworkTarget, "SWIFT_VERSION", "5.0");
     proj.SetBuildProperty(unityFrameworkTarget, "CLANG_ENABLE_MODULES", "YES");
-    //所需要的Framework
+    // add extra framework(s)
+    // 参数: 目标targetGUID, framework,是否required:fasle->required,true->optional
     proj.AddFrameworkToProject(unityFrameworkTarget, "CoreTelephony.framework", false);
     proj.AddFrameworkToProject(unityFrameworkTarget, "QuartzCore.framework", false);
     proj.AddFrameworkToProject(unityFrameworkTarget, "Security.framework", false);
     proj.AddFrameworkToProject(unityFrameworkTarget, "WebKit.framework", false);
     proj.AddFrameworkToProject(unityFrameworkTarget, "Photos.framework", false);
-    proj.AddFrameworkToProject(unityFrameworkTarget, "AdSupport.framework", false);
     proj.AddFrameworkToProject(unityFrameworkTarget, "AssetsLibrary.framework", false);
     proj.AddFrameworkToProject(unityFrameworkTarget, "AVKit.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "AuthenticationServices.framework", true);
     proj.AddFrameworkToProject(unityFrameworkTarget, "LocalAuthentication.framework", false);
     proj.AddFrameworkToProject(unityFrameworkTarget, "SystemConfiguration.framework", false);
     proj.AddFrameworkToProject(unityFrameworkTarget, "Accelerate.framework", false);
@@ -117,7 +118,9 @@ TapSDK 会给iOS工程自动添加以下配置
     proj.AddFrameworkToProject(unityFrameworkTarget, "AVFoundation.framework", false);
     proj.AddFrameworkToProject(unityFrameworkTarget, "MobileCoreServices.framework", false);
     proj.AddFrameworkToProject(unityFrameworkTarget, "AppTrackingTransparency.framework", true);
-    proj.AddFrameworkToProject(unityFrameworkTarget, "AuthenticationServices.framework", true);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "AdSupport.framework", false);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "iAd.framework", true);
+    proj.AddFrameworkToProject(unityFrameworkTarget, "AdServices.framework", true);
 ```
 
 ##### 2. 资源文件依赖
