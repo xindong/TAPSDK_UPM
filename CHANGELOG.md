@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.2.3
+
+### BugFix
+
+* Android 修复部分请求返回网络域名验证异常
+
+
+## 1.2.2
+
+### New Feature
+
+* iOS 添加获取 Apple ASA 数据
+
+
 ## 1.2.1
 
 ### New Feature
