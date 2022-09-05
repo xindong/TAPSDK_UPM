@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.4
+
+### BugFix
+
+* Android Tap 登录修复部分可能出现异常的代码
+
 ## 1.2.3
 
 ### BugFix
