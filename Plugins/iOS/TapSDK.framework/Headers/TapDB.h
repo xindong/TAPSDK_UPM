@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 typedef struct LoginType{
     NSString *loginType;
 }TapDBLoginType;
+
 
 /*
 自定义登录方式：
@@ -21,8 +21,17 @@ FOUNDATION_EXPORT TapDBLoginType const TapDBLoginTypeGoogle;
 FOUNDATION_EXPORT TapDBLoginType const TapDBLoginTypeTwitter;
 FOUNDATION_EXPORT TapDBLoginType const TapDBLoginTypePhoneNumber;
 
+#define TapDBSDK               @"TapDB"
+#define TapDBSDK_VERSION_NUMBER @"31800001"
+#define TapDBSDK_VERSION        @"3.18.0"
 //版本号
-static NSString *const TAPDB_VERSION = @"3.0.5";
+static NSString *const TAPDB_VERSION = @"3.0.10";
+
+typedef NS_ENUM(NSInteger, TapDBRegion)
+{
+    TapDBRegionTypeCN ,
+    TapDBRegionTypeIO
+};
 
 @interface TapDB : NSObject
 /**
@@ -62,7 +71,8 @@ static NSString *const TAPDB_VERSION = @"3.0.5";
 + (void)onStartWithClientId:(NSString *)clientId channel:(nullable NSString *)channel version:(nullable NSString *)gameVersion;
 
 //sm
-+ (void)onStartWithClientId:(NSString *)clientId channel:(nullable NSString *)channel version:(nullable NSString *)gameVersion isCN:(BOOL)isCN;
++ (void)onStartWithClientId:(NSString *)clientId channel:(nullable NSString *)channel version:(nullable NSString *)gameVersion isCN:(BOOL)isCN DEPRECATED_MSG_ATTRIBUTE("use onStartWithClientId:channel:version:region:properties");
+
 /**
  * 初始化，尽早调用
  * clientId: TapTap登录sdk后台页面 client id
@@ -72,17 +82,27 @@ static NSString *const TAPDB_VERSION = @"3.0.5";
  */
 + (void)onStartWithClientId:(NSString *)clientId channel:(nullable NSString *)channel version:(nullable NSString *)gameVersion properties:(nullable NSDictionary *)properties;
 
+/**
+ * 初始化，尽早调用
+ * clientId: TapTap登录sdk后台页面 client id
+ * channel: 分包渠道名称，可为空
+ * gameVersion: 游戏版本，可为空，为空时，自动获取游戏安装包的版本（Xcode配置中的Version）
+ * region: 区域
+ * properties: 自定义属性
+ */
++ (void)onStartWithClientId:(NSString *)clientId channel:(nullable NSString *)channel version:(nullable NSString *)gameVersion region:(TapDBRegion) region properties:(nullable NSDictionary *)properties;
+
 + (void)setUser:(NSString *)userId;
 
 + (void)setUser:(NSString *)userId properties:(nullable NSDictionary *)properties;
 /// 对外隐藏接口
 + (void)setUser:(NSString *)userId loginType:(TapDBLoginType)loginType;
+
 /// 记录一个用户（不是游戏角色！！！！），需要保证唯一性
 /// @param userId 用户ID。不同用户需要保证ID的唯一性
 /// @param loginType 登录方式
 /// @param properties 自定义属性
 + (void)setUser:(NSString *)userId loginType:(TapDBLoginType)loginType properties:(nullable NSDictionary *)properties;
-
 
 /**
  登出清理用户
@@ -113,6 +133,8 @@ static NSString *const TAPDB_VERSION = @"3.0.5";
 /// @param name 必传，长度大于0并小于等于256，用户名
 + (void)setName:(NSString *)name;
 
++ (void)onChargeSuccess:(nullable NSString *)orderId product:(nullable NSString *)product amount:(NSInteger)amount currencyType:(nullable NSString *)currencyType payment:(nullable NSString *)payment;
+
 /**
  * 充值成功时调用
  * orderId: 订单ID，可为空
@@ -120,9 +142,9 @@ static NSString *const TAPDB_VERSION = @"3.0.5";
  * amount: 充值金额（单位分，即无论什么币种，都需要乘以100）
  * currencyType: 货币类型，可为空，参考：人民币 CNY，美元 USD；欧元 EUR
  * payment: 支付方式，可为空，如：支付宝
+ * properties: 事件属性，需要在控制后台预先进行配置,值为长度大于0并小于等于256的字符串或绝对值小于1E11的浮点数
  */
-+ (void)onChargeSuccess:(nullable NSString *)orderId product:(nullable NSString *)product amount:(NSInteger)amount currencyType:(nullable NSString *)currencyType payment:(nullable NSString *)payment;
-
++ (void)onChargeSuccess:(nullable NSString *)orderId product:(nullable NSString *)product amount:(NSInteger)amount currencyType:(nullable NSString *)currencyType payment:(nullable NSString *)payment properties:(nullable NSDictionary *)properties;
 /**
  * 自定义事件
  * eventName: 事件代码，需要在控制后台预先进行配置

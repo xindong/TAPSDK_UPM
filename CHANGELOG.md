@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.5
+
+### New Feature
+
+* iOS 支持 CAID
+
 ## 1.2.4
 
 ### BugFix
