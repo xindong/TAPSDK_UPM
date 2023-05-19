@@ -116,5 +116,9 @@ namespace TapSDK
         {
             TDSTapDBImpl.GetInstance().AdvertiserIDCollectionEnabled(enable);
         }
+
+        public static void SetOAIDCert(string cert){
+            TDSTapDBImpl.GetInstance().SetOAIDCert(cert);
+        }
     }
 }

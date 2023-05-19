@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.6
+
+### New Feature
+
+* 更新 Android TapDB 获取 OAID 接口
+
 ## 1.2.5
 
 ### New Feature

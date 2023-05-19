@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:TapSDK/Plugins/Android/libs/TDSCommon_1.1.14.1.aar.meta
 guid: 489668c412719491f9e358972f01d3f9
+=======
+guid: 57351b3923cd5479cbda01f4d6f0b73b
+>>>>>>> Stashed changes:TapSDK/Plugins/Android/libs/TDSCommon_1.1.11.aar.meta
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -50,6 +50,9 @@ namespace TapSDK
         void EnableLog(bool enable);
 
         void ClearUser();
+
+        void SetOAIDCert(string cert);
+    
     }
 
     public interface IDynamicSuperProperties

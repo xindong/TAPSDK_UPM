@@ -223,6 +223,15 @@ namespace TapSDK
                                         .CommandBuilder());
         }
 
+        public void SetOAIDCert(string cert)
+        {
+            EngineBridge.GetInstance().CallHandler(new Command.Builder()
+                                        .Service(TDSTapDBConstants.TDS_TAPDB_SERVICE)
+                                        .Method("setOAIDCert")
+                                        .Args("setOAIDCert", cert)
+                                        .CommandBuilder());
+        }
+
         private string GetFinalEventProperties(Dictionary<string, object> properties)
         {
             if (dynamicSuperProperties != null)
@@ -234,5 +243,6 @@ namespace TapSDK
             }
             return Json.Serialize(properties);
         }
+
     }
 }
