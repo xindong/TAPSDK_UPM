@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.7
+
+### Optimization
+
+* 优化 Android TapDB 因 OAID 架构 so 库缺失抛出异常的问题
+
+
 ## 1.2.6
 
 ### New Feature

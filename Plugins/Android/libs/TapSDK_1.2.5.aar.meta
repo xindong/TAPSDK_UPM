@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream:TapSDK/Plugins/Android/libs/TapSDK_1.2.3.aar.meta
-guid: 4b0bb8043dbba48de82c5a387ad55ad5
-=======
-guid: 9e6bac770a1084233907621e9465852a
->>>>>>> Stashed changes:TapSDK/Plugins/Android/libs/TapSDK_1.2.4.aar.meta
+guid: 876185b4edee948388cb31d03c847bcd
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
